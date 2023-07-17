@@ -61,7 +61,7 @@ public class Employee {
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<Customer> customerList;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ReportsTo", referencedColumnName = "EmployeeId", foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo"))
     private Employee manager;
 }
