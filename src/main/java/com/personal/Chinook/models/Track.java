@@ -16,36 +16,83 @@ import java.util.List;
 public class Track {
 
     @Id
-    @Column(name = "TrackId", nullable = false)
+    @Column(
+            name = "TrackId",
+            nullable = false
+    )
     private Integer trackId;
 
-    @Column(name = "Name", nullable = false, length = 200)
+    @Column(
+            name = "Name",
+            nullable = false,
+            length = 200
+    )
     private String name;
 
-    @Column(name = "Milliseconds", nullable = false)
+    @Column(
+            name = "Composer",
+            length = 220
+    )
+    private String composer;
+
+    @Column(
+            name = "Milliseconds",
+            nullable = false
+    )
     private Integer milliseconds;
 
-    @Column(name = "Bytes")
+    @Column(
+            name = "Bytes"
+    )
     private Integer bytes;
 
-    @Column(name = "UnitPrice", nullable = false)
+    @Column(
+            name = "UnitPrice",
+            nullable = false,
+            precision = 10,
+            scale = 2
+    )
     private BigDecimal unitPrice;
 
-    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "track",
+            fetch = FetchType.LAZY
+    )
     private List<InvoiceLine> invoiceLineList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AlbumId", referencedColumnName = "AlbumId", foreignKey = @ForeignKey(name = "FK_TrackAlbumId"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "AlbumId",
+            referencedColumnName = "AlbumId",
+            foreignKey = @ForeignKey(name = "FK_TrackAlbumId")
+    )
     private Album album;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GenreId", referencedColumnName = "GenreId", foreignKey = @ForeignKey(name = "FK_TrackGenreId"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "GenreId",
+            referencedColumnName = "GenreId",
+            foreignKey = @ForeignKey(name = "FK_TrackGenreId")
+    )
     private Genre genre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MediTypeId", referencedColumnName = "MediaTypeId", foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "MediTypeId",
+            referencedColumnName = "MediaTypeId",
+            foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId")
+    )
     private MediaType mediaType;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "trackList")
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "trackList"
+    )
     private List<Playlist> playlistList;
 }

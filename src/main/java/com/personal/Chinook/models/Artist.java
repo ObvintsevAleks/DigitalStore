@@ -15,13 +15,27 @@ import java.util.List;
 @EqualsAndHashCode
 public class Artist {
 
-    @Id
-    @Column(name = "ArtistId", nullable = false)
-    private Integer artistId;
+    public Artist(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-    @Column(name = "Name", length = 120)
+    @Id
+    @Column(
+            name = "ArtistId",
+            nullable = false
+    )
+    private Integer id;
+
+    @Column(
+            name = "Name",
+            length = 120
+    )
     private String name;
 
-    @OneToMany(mappedBy = "artist", fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "artist",
+            fetch = FetchType.EAGER
+    )
     private List<Album> albumList;
 }

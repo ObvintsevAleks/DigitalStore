@@ -15,12 +15,21 @@ import java.util.List;
 public class MediaType {
 
     @Id
-    @Column(name = "MediaTypeId", nullable = false)
+    @Column(
+            name = "MediaTypeId",
+            nullable = false
+    )
     private Integer mediaTypeId;
 
-    @Column(name = "Name", length = 120)
+    @Column(
+            name = "Name",
+            length = 120
+    )
     private String name;
 
-    @OneToMany(mappedBy = "mediaType", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "mediaType",
+            fetch = FetchType.LAZY
+    )
     private List<Track> trackList;
 }

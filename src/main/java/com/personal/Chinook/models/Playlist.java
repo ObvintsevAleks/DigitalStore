@@ -15,17 +15,31 @@ import java.util.List;
 public class Playlist {
 
     @Id
-    @Column(name = "PlaylistId", nullable = false)
+    @Column(
+            name = "PlaylistId",
+            nullable = false
+    )
     private Integer playlistId;
 
-    @Column(name = "Name", length = 120)
+    @Column(
+            name = "Name",
+            length = 120
+    )
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(
+            fetch = FetchType.LAZY
+    )
     @JoinTable(
             name = "PlaylistTrack",
-            joinColumns = @JoinColumn(name = "PlaylistId", foreignKey = @ForeignKey(name = "FK_PLT_PlaylistId")),
-            inverseJoinColumns = @JoinColumn(name = "TrackId", foreignKey = @ForeignKey(name = "FK_PLT_TrackId"))
+            joinColumns = @JoinColumn(
+                    name = "PlaylistId",
+                    foreignKey = @ForeignKey(name = "FK_PLT_PlaylistId")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "TrackId",
+                    foreignKey = @ForeignKey(name = "FK_PLT_TrackId")
+            )
     )
     private List<Track> trackList;
 }

@@ -15,16 +15,32 @@ import java.util.List;
 public class Album {
 
     @Id
-    @Column(name = "AlbumId", nullable = false)
+    @Column(
+            name = "AlbumId",
+            nullable = false
+    )
     private Integer albumId;
 
-    @Column(name = "Title", length = 160, nullable = false)
+    @Column(
+            name = "Title",
+            length = 160,
+            nullable = false
+    )
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ArtistId", referencedColumnName = "ArtistId",foreignKey = @ForeignKey(name = "FK_AlbumArtistId"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "ArtistId",
+            referencedColumnName = "ArtistId",
+            foreignKey = @ForeignKey(name = "FK_AlbumArtistId")
+    )
     private Artist artist;
 
-    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "album",
+            fetch = FetchType.LAZY
+    )
     private List<Track> trackList;
 }

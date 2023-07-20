@@ -15,12 +15,22 @@ import java.util.List;
 public class Genre {
 
     @Id
-    @Column(name = "GenreId", nullable = false)
+    @Column(
+            name = "GenreId",
+            nullable = false
+    )
     private Integer genreId;
 
-    @Column(name = "Name", nullable = false, length = 120)
+    @Column(
+            name = "Name",
+            nullable = false,
+            length = 120
+    )
     private String name;
 
-    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "genre",
+            fetch = FetchType.LAZY
+    )
     private List<Track> trackList;
 }

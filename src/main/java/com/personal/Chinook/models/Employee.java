@@ -16,52 +16,103 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @Column(name = "EmployeeId", nullable = false)
+    @Column(
+            name = "EmployeeId",
+            nullable = false
+    )
     private Integer employeeId;
 
-    @Column(name = "FirstName", nullable = false, length = 20)
+    @Column(
+            name = "FirstName",
+            nullable = false,
+            length = 20
+    )
     private String firstName;
 
-    @Column(name = "LastName", nullable = false, length = 20)
+    @Column(
+            name = "LastName",
+            nullable = false,
+            length = 20
+    )
     private String lastName;
 
-    @Column(name = "Title", length = 30)
+    @Column(
+            name = "Title",
+            length = 30
+    )
     private String title;
 
-    @Column(name = "BirthDate")
+    @Column(
+            name = "BirthDate"
+    )
     private Timestamp birthDate;
 
-    @Column(name = "HireDate")
+    @Column(
+            name = "HireDate"
+    )
     private Timestamp hireDate;
 
-    @Column(name = "Address", length = 70)
+    @Column(
+            name = "Address",
+            length = 70
+    )
     private String address;
 
-    @Column(name = "City", length = 40)
+    @Column(
+            name = "City",
+            length = 40
+    )
     private String city;
 
-    @Column(name = "State", length = 40)
+    @Column(
+            name = "State",
+            length = 40
+    )
     private String state;
 
-    @Column(name = "Country", length = 40)
+    @Column(
+            name = "Country",
+            length = 40
+    )
     private String country;
 
-    @Column(name = "PostalCode", length = 10)
+    @Column(
+            name = "PostalCode",
+            length = 10
+    )
     private String postalCode;
 
-    @Column(name = "Phone", length = 24)
+    @Column(
+            name = "Phone",
+            length = 24
+    )
     private String phone;
 
-    @Column(name = "Fax", length = 24)
+    @Column(
+            name = "Fax",
+            length = 24
+    )
     private String fax;
 
-    @Column(name = "Email", length = 60)
+    @Column(
+            name = "Email",
+            length = 60
+    )
     private String email;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "employee",
+            fetch = FetchType.LAZY
+    )
     private List<Customer> customerList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ReportsTo", referencedColumnName = "EmployeeId", foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo"))
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name = "ReportsTo",
+            referencedColumnName = "EmployeeId",
+            foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo")
+    )
     private Employee manager;
 }
