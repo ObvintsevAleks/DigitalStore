@@ -21,6 +21,7 @@ public class ArtistController {
 
     @Autowired
     public ArtistController(@Qualifier("ArtistService") ArtistService service) {
+
         this.service = service;
     }
 
@@ -32,21 +33,29 @@ public class ArtistController {
     }
 
     @GetMapping("/listall")
-    @SneakyThrows
-    public List<Artist> getAll() {
-        /*HttpHeaders customHeader = new HttpHeaders();
-        customHeader.add("custom-header", "customer-value");
-        return new ResponseEntity<>(service.getAll(), customHeader, 200); */
+    public ResponseEntity<?> getAll() {
+        List<Artist> responseArtistList = service.getAll();
 
-        //throw new ApiRequestException("couldn't find list custom");
-
-        return service.getAll();
+        return new ResponseEntity<>(responseArtistList, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{artistId}")
+    @GetMapping("/searchid/{artistId}")
     public ResponseEntity<?> getById(@PathVariable("artistId") Integer artistId) {
         Optional<Artist> responseArtist = service.getById(artistId);
 
         return new ResponseEntity<>(responseArtist, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchname/{artistName}")
+    public ResponseEntity<?> getByName(@PathVariable("artistName") String artistName) {
+        List<Artist> responseArtistList = service.getByName(artistName);
+
+        return new ResponseEntity<>(responseArtistList, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/remove/{artistId}")
+    public ResponseEntity<?> deleteById(@PathVariable("artistId") Integer artistId) {
+        service.delete(artistId);
+        return new ResponseEntity<>("The artist was successfully deleted", HttpStatus.NO_CONTENT);
     }
 }

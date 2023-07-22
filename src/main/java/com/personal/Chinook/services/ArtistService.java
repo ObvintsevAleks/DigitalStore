@@ -38,15 +38,18 @@ public class ArtistService implements IArtistService {
         if (authorId < 0)
             throw new InvalidFieldException("ERROR, ID cannot be negative");
 
-        if (!repoArtist.existsById(authorId))
-            throw new NotFoundInDBException("ERROR, author not found in database");
-
         return repoArtist.findById(authorId);
     }
 
     @Override
     public List<Artist> getByName(String artistName) {
-        return null;
+        if (artistName == null || artistName.length() == 0)
+            throw new InvalidFieldException("ERROR, found empty fields");
+
+        if ( !(Pattern.matches("[a-zA-Z -]+", artistName)) )
+            throw new InvalidFieldException("ERROR, name cannot contain special characters");
+
+        return repoArtist.searchByName(artistName);
     }
 
     @Override
@@ -70,5 +73,19 @@ public class ArtistService implements IArtistService {
                         artistDTO.getName()
                 )
         );
+    }
+
+    @Override
+    public void delete(Integer artistId) {
+        if (artistId == null)
+            throw new InvalidFieldException("ERROR, found empty fields");
+
+        if (artistId < 0)
+            throw new InvalidFieldException("ERROR, ID cannot be negative");
+
+        if (!repoArtist.existsById(artistId))
+            throw new NotFoundInDBException("ERROR, artist not found in database");
+
+        repoArtist.deleteById(artistId);
     }
 }
