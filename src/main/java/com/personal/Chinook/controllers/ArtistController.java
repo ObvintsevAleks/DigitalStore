@@ -2,14 +2,12 @@ package com.personal.Chinook.controllers;
 
 import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.models.Artist;
-import com.personal.Chinook.services.ArtistService;
-import lombok.SneakyThrows;
+import com.personal.Chinook.services.entity_services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +25,16 @@ public class ArtistController {
 
     @PostMapping("/save")
     public ResponseEntity<?> insertArtist(@RequestBody ArtistDTO artistDTO) {
-        Artist savedArtist = service.save(artistDTO);
+        service.persist(artistDTO);
 
-        return new ResponseEntity<>(savedArtist, HttpStatus.CREATED);
+        return new ResponseEntity<>("The artist was successfully saved!", HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateArtist(@RequestBody ArtistDTO artistDTO) {
+        service.update(artistDTO);
+
+        return new ResponseEntity<>("The artist has been updated!", HttpStatus.OK);
     }
 
     @GetMapping("/listall")
@@ -37,6 +42,11 @@ public class ArtistController {
         List<Artist> responseArtistList = service.getAll();
 
         return new ResponseEntity<>(responseArtistList, HttpStatus.OK);
+    }
+
+    @GetMapping("/allcount")
+    public ResponseEntity<?> getCount() {
+        return new ResponseEntity<>(service.getAll().size(), HttpStatus.OK);
     }
 
     @GetMapping("/searchid/{artistId}")
@@ -55,7 +65,7 @@ public class ArtistController {
 
     @DeleteMapping("/remove/{artistId}")
     public ResponseEntity<?> deleteById(@PathVariable("artistId") Integer artistId) {
-        service.delete(artistId);
+        service.deleteById(artistId);
         return new ResponseEntity<>("The artist was successfully deleted", HttpStatus.NO_CONTENT);
     }
 }

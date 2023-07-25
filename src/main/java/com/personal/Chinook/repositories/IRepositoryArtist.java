@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("ArtistRepository")
+@Repository("ArtistRepo")
 public interface IRepositoryArtist extends JpaRepository<Artist, Integer> {
 
     @Query("select e from Artist e where e.name like %:name% ")
     List<Artist> searchByName(@Param("name") String name);
 
-    //boolean existsByName(String artistName);
+    long count();
 }

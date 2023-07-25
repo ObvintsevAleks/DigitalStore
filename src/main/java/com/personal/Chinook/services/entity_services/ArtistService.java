@@ -1,26 +1,29 @@
-package com.personal.Chinook.services;
+package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.exceptions.custom.InvalidFieldException;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.repositories.IRepositoryArtist;
-import lombok.SneakyThrows;
+import com.personal.Chinook.services.custom_functions.INameQuery;
+import com.personal.Chinook.services.db_functions.IDBCrud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service("ArtistService")
-public class ArtistService implements IArtistService {
+public class ArtistService implements IDBCrud<Artist, ArtistDTO>, INameQuery<Artist> {
 
     private final IRepositoryArtist repoArtist;
 
     @Autowired
-    public ArtistService(@Qualifier("ArtistRepository") IRepositoryArtist repoArtist) {
+    public ArtistService(
+            @Qualifier("ArtistRepo") IRepositoryArtist repoArtist
+    ) {
+
         this.repoArtist = repoArtist;
     }
 
@@ -42,18 +45,7 @@ public class ArtistService implements IArtistService {
     }
 
     @Override
-    public List<Artist> getByName(String artistName) {
-        if (artistName == null || artistName.length() == 0)
-            throw new InvalidFieldException("ERROR, found empty fields");
-
-        if ( !(Pattern.matches("[a-zA-Z -]+", artistName)) )
-            throw new InvalidFieldException("ERROR, name cannot contain special characters");
-
-        return repoArtist.searchByName(artistName);
-    }
-
-    @Override
-    public Artist save(ArtistDTO artistDTO) {
+    public void persist(ArtistDTO artistDTO) {
         if (
                 artistDTO.getId() == null ||
                 artistDTO.getName() == null ||
@@ -67,7 +59,7 @@ public class ArtistService implements IArtistService {
         if ( !(Pattern.matches("[a-zA-Z -]+", artistDTO.getName())) )
             throw new InvalidFieldException("ERROR, name cannot contain special characters");
 
-        return repoArtist.save(
+        repoArtist.save(
                 new Artist(
                         artistDTO.getId(),
                         artistDTO.getName()
@@ -76,7 +68,7 @@ public class ArtistService implements IArtistService {
     }
 
     @Override
-    public void delete(Integer artistId) {
+    public void deleteById(Integer artistId) {
         if (artistId == null)
             throw new InvalidFieldException("ERROR, found empty fields");
 
@@ -87,5 +79,24 @@ public class ArtistService implements IArtistService {
             throw new NotFoundInDBException("ERROR, artist not found in database");
 
         repoArtist.deleteById(artistId);
+    }
+
+    @Override
+    public void update(ArtistDTO artistDTO) {
+        if ( !repoArtist.existsById(artistDTO.getId()) )
+            throw new NotFoundInDBException("ERROR, artist does not exist in database");
+
+        this.persist(artistDTO);
+    }
+
+    @Override
+    public List<Artist> getByName(String artistName) {
+        if (artistName == null || artistName.length() == 0)
+            throw new InvalidFieldException("ERROR, found empty fields");
+
+        if ( !(Pattern.matches("[a-zA-Z -]+", artistName)) )
+            throw new InvalidFieldException("ERROR, name cannot contain special characters");
+
+        return repoArtist.searchByName(artistName);
     }
 }

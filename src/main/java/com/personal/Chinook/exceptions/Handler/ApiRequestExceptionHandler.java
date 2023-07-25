@@ -2,10 +2,7 @@ package com.personal.Chinook.exceptions.Handler;
 
 import com.personal.Chinook.exceptions.custom.ApiRequestException;
 import com.personal.Chinook.exceptions.Payload.ErrorResponse;
-import com.personal.Chinook.exceptions.custom.InvalidFieldException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
