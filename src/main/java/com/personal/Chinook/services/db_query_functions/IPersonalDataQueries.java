@@ -1,4 +1,4 @@
-package com.personal.Chinook.services.custom_functions;
+package com.personal.Chinook.services.db_query_functions;
 
 import java.util.List;
 

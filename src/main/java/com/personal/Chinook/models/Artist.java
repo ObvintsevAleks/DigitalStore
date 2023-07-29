@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class Artist {
 
+    //DTO constructor
     public Artist(Integer id, String name) {
         this.id = id;
         this.name = name;
@@ -33,6 +35,7 @@ public class Artist {
     )
     private String name;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "artist",
             fetch = FetchType.EAGER

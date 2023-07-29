@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -101,6 +102,7 @@ public class Customer {
     )
     private Employee employee;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "customer",
             fetch = FetchType.LAZY

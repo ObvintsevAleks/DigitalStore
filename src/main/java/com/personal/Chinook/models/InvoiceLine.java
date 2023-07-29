@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class InvoiceLine {
     )
     private Integer quantity;
 
+    @JsonIgnore
     @ManyToOne(
             fetch = FetchType.LAZY
     )

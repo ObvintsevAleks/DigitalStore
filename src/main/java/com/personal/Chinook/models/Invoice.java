@@ -21,7 +21,7 @@ public class Invoice {
             name = "InvoiceId",
             nullable = false
     )
-    private Integer invoiceId;
+    private Integer id;
 
     @Column(
             name = "InvoiceDate",
@@ -61,7 +61,9 @@ public class Invoice {
 
     @Column(
             name = "Total",
-            nullable = false
+            nullable = false,
+            precision = 10,
+            scale = 2
     )
     private BigDecimal total;
 

@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,12 +15,18 @@ import java.util.List;
 @EqualsAndHashCode
 public class MediaType {
 
+    //DTO constructor
+    public MediaType(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(
             name = "MediaTypeId",
             nullable = false
     )
-    private Integer mediaTypeId;
+    private Integer id;
 
     @Column(
             name = "Name",
@@ -27,6 +34,7 @@ public class MediaType {
     )
     private String name;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "mediaType",
             fetch = FetchType.LAZY

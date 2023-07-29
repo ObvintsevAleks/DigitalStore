@@ -1,4 +1,4 @@
-package com.personal.Chinook.services.db_functions;
+package com.personal.Chinook.services.db_query_functions;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ public interface IDBCrud<EntityType, EntityDTO> {
 
     Optional<EntityType> getById(Integer id);
 
-    void persist(EntityDTO dto);
+    EntityType persist(EntityDTO dto);
 
     void update(EntityDTO dto);
 

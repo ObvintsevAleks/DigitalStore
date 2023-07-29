@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ArtistDTO {
+public class GenreDTO {
     @JsonProperty("ID")
     private Integer id;
 

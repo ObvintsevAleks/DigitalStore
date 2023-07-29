@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,12 +55,14 @@ public class Track {
     )
     private BigDecimal unitPrice;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "track",
             fetch = FetchType.LAZY
     )
     private List<InvoiceLine> invoiceLineList;
 
+    @JsonIgnore
     @ManyToOne(
             fetch = FetchType.LAZY
     )
@@ -84,12 +87,13 @@ public class Track {
             fetch = FetchType.LAZY
     )
     @JoinColumn(
-            name = "MediTypeId",
+            name = "MediaTypeId",
             referencedColumnName = "MediaTypeId",
             foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId")
     )
     private MediaType mediaType;
 
+    @JsonIgnore
     @ManyToMany(
             fetch = FetchType.LAZY,
             mappedBy = "trackList"

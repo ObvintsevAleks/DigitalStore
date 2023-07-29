@@ -19,7 +19,7 @@ public class Album {
             name = "AlbumId",
             nullable = false
     )
-    private Integer albumId;
+    private Integer id;
 
     @Column(
             name = "Title",
