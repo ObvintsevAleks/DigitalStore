@@ -9,8 +9,8 @@ import com.personal.Chinook.models.Track;
 import com.personal.Chinook.repositories.IRepositoryAlbum;
 import com.personal.Chinook.repositories.IRepositoryArtist;
 import com.personal.Chinook.repositories.IRepositoryTrack;
-import com.personal.Chinook.services.db_query_functions.INameQuery;
-import com.personal.Chinook.services.db_query_functions.IDBCrud;
+import com.personal.Chinook.services.common_query_functions.INameQuery;
+import com.personal.Chinook.services.common_query_functions.IDBCrud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,9 +31,9 @@ public class AlbumService implements IDBCrud<Album, AlbumDTO> , INameQuery<Album
             @Qualifier("ArtistRepo") IRepositoryArtist artistRepo,
             @Qualifier("TrackRepo") IRepositoryTrack trackRepo
     ) {
-        this.repoAlbum = albumRepo;
-        this.repoArtist = artistRepo;
-        this.repoTrack = trackRepo;
+        repoAlbum = albumRepo;
+        repoArtist = artistRepo;
+        repoTrack = trackRepo;
     }
 
     @Override

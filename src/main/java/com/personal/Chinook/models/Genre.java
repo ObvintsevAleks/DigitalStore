@@ -14,13 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Genre {
-
-    //DTO constructor
-    public Genre(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     @Id
     @Column(
             name = "GenreId",
@@ -35,10 +28,12 @@ public class Genre {
     )
     private String name;
 
+    /*
     @JsonIgnore
     @OneToMany(
             mappedBy = "genre",
             fetch = FetchType.LAZY
     )
     private List<Track> trackList;
+     */
 }

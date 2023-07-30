@@ -101,6 +101,8 @@ public class Employee {
     )
     private String email;
 
+    // jsonignore property to not display it as part of request/response body
+    // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @OneToMany(
             mappedBy = "employee",

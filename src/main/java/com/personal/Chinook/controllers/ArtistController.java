@@ -23,7 +23,7 @@ public class ArtistController {
         this.service = service;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     public ResponseEntity<?> createArtist(@RequestBody ArtistDTO artistDTO) {
         Artist responseArtist = service.persist(artistDTO);
 

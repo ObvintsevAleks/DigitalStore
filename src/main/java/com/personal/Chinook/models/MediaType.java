@@ -14,13 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class MediaType {
-
-    //DTO constructor
-    public MediaType(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     @Id
     @Column(
             name = "MediaTypeId",
@@ -34,10 +27,10 @@ public class MediaType {
     )
     private String name;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(
             mappedBy = "mediaType",
             fetch = FetchType.LAZY
     )
-    private List<Track> trackList;
+    private List<Track> trackList;*/
 }

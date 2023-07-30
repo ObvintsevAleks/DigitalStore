@@ -55,6 +55,8 @@ public class Track {
     )
     private BigDecimal unitPrice;
 
+    // jsonignore property to not display it as part of request/response body
+    // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @OneToMany(
             mappedBy = "track",
@@ -62,6 +64,8 @@ public class Track {
     )
     private List<InvoiceLine> invoiceLineList;
 
+    // jsonignore property to not display it as part of request/response body
+    // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @ManyToOne(
             fetch = FetchType.LAZY
