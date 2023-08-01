@@ -38,9 +38,6 @@ public class ArtistService implements IDBCrud<Artist, ArtistDTO>, INameQuery<Art
         if (authorId == null)
             throw new InvalidFieldException("ERROR, found empty fields");
 
-        if (authorId < 0)
-            throw new InvalidFieldException("ERROR, Author ID cannot be negative");
-
         return repoArtist.findById(authorId);
     }
 

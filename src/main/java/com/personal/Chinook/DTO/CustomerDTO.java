@@ -8,41 +8,41 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CustomerDTO {
     @JsonProperty("ID")
-    private Integer id;
+    private final Integer id;
 
     @JsonProperty("First Name")
-    private String firstName;
+    private final String firstName;
 
     @JsonProperty("Last Name")
-    private String lastName;
+    private final String lastName;
 
     @JsonProperty("Company")
-    private String company;
+    private final String company;
 
     @JsonProperty("Address")
-    private String address;
+    private final String address;
 
     @JsonProperty("City")
-    private String city;
+    private final String city;
 
     @JsonProperty("State")
-    private String state;
+    private final String state;
 
     @JsonProperty("Country")
-    private String country;
+    private final String country;
 
     @JsonProperty("Postal Code")
-    private String postalCode;
+    private final String postalCode;
 
     @JsonProperty("Phone")
-    private String phone;
+    private final String phone;
 
     @JsonProperty("Fax")
-    private String fax;
+    private final String fax;
 
     @JsonProperty("Email")
-    private String email;
+    private final String email;
 
     @JsonProperty("Support Representative ID")
-    private Integer supportRepId;
+    private final Integer supportRepId;
 }
