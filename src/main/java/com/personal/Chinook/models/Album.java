@@ -1,36 +1,26 @@
 package com.personal.Chinook.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
 @Data
+@ToString(exclude = "trackList")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "trackList")
 public class Album {
 
     @Id
-    @Column(
-            name = "AlbumId",
-            nullable = false
-    )
+    @Column(name = "AlbumId", nullable = false)
     private Integer id;
 
-    @Column(
-            name = "Title",
-            length = 160,
-            nullable = false
-    )
+    @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "ArtistId",
             referencedColumnName = "ArtistId",
@@ -38,9 +28,6 @@ public class Album {
     )
     private Artist artist;
 
-    @OneToMany(
-            mappedBy = "album",
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
     private List<Track> trackList;
 }

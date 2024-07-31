@@ -17,59 +17,31 @@ import java.util.List;
 public class Invoice {
 
     @Id
-    @Column(
-            name = "InvoiceId",
-            nullable = false
-    )
+    @Column(name = "InvoiceId", nullable = false)
     private Integer id;
 
-    @Column(
-            name = "InvoiceDate",
-            nullable = false
-    )
+    @Column(name = "InvoiceDate", nullable = false)
     private Timestamp invoiceDate;
 
-    @Column(
-            name = "BillingAddress",
-            length = 70
-    )
+    @Column(name = "BillingAddress", length = 70)
     private String billingAddress;
 
-    @Column(
-            name = "BillingCity",
-            length = 40
-    )
+    @Column(name = "BillingCity", length = 40)
     private String billingCity;
 
-    @Column(
-            name = "BillingState",
-            length = 40
-    )
+    @Column(name = "BillingState", length = 40)
     private String billingState;
 
-    @Column(
-            name = "BillingCountry",
-            length = 40
-    )
+    @Column(name = "BillingCountry", length = 40)
     private String billingCountry;
 
-    @Column(
-            name = "BillingPostalCode",
-            length = 10
-    )
+    @Column(name = "BillingPostalCode", length = 10)
     private String billingPostalCode;
 
-    @Column(
-            name = "Total",
-            nullable = false,
-            precision = 10,
-            scale = 2
-    )
+    @Column(name = "Total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "customerId",
             referencedColumnName = "customerId",
@@ -77,9 +49,6 @@ public class Invoice {
     )
     private Customer customer;
 
-    @OneToMany(
-            mappedBy = "invoice",
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
     private List<InvoiceLine> invoiceLineList;
 }

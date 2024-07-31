@@ -18,16 +18,13 @@ import java.util.List;
 public class Playlist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PlaylistId", nullable = false)
     private Integer id;
 
     @Column(name = "Name", length = 120)
     private String name;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY
-    )
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "PlaylistTrack",
             joinColumns = @JoinColumn(

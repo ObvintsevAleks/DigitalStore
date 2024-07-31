@@ -16,29 +16,17 @@ import java.math.BigDecimal;
 public class InvoiceLine {
 
     @Id
-    @Column(
-            name = "InvoiceLineId",
-            nullable = false
-    )
+    @Column(name = "InvoiceLineId", nullable = false)
     private Integer invoiceLineId;
 
-    @Column(
-            name = "UnitPrice",
-            nullable = false,
-            precision = 10, scale = 2
-    )
+    @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
 
-    @Column(
-            name = "Quantity",
-            nullable = false
-    )
+    @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
     @JsonIgnore
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "InvoiceId",
             referencedColumnName = "InvoiceId",
@@ -46,9 +34,7 @@ public class InvoiceLine {
     )
     private Invoice invoice;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "TrackId",
             referencedColumnName = "TrackId",
