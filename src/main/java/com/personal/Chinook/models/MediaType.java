@@ -2,35 +2,27 @@ package com.personal.Chinook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
 @Data
+@ToString(exclude = "trackList")
+@EqualsAndHashCode(exclude = "trackList")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
 public class MediaType {
+
     @Id
-    @Column(
-            name = "MediaTypeId",
-            nullable = false
-    )
+    @Column(name = "MediaTypeId", nullable = false)
     private Integer id;
 
-    @Column(
-            name = "Name",
-            length = 120
-    )
+    @Column(name = "Name", length = 120)
     private String name;
 
-    /*@JsonIgnore
-    @OneToMany(
-            mappedBy = "mediaType",
-            fetch = FetchType.LAZY
-    )
-    private List<Track> trackList;*/
+    @JsonIgnore
+    @OneToMany(mappedBy = "mediaType", fetch = FetchType.LAZY)
+    private List<Track> trackList;
 }

@@ -2,74 +2,50 @@ package com.personal.Chinook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
+@Builder
+@Table(name = "track")
 public class Track {
 
     @Id
-    @Column(
-            name = "TrackId",
-            nullable = false
-    )
-    private Integer trackId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TrackId", nullable = false)
+    private Integer id;
 
-    @Column(
-            name = "Name",
-            nullable = false,
-            length = 200
-    )
+    @Column(name = "Name", nullable = false, length = 200)
     private String name;
 
-    @Column(
-            name = "Composer",
-            length = 220
-    )
+
+    @Column(name = "Composer", length = 220)
     private String composer;
 
-    @Column(
-            name = "Milliseconds",
-            nullable = false
-    )
+    @NotNull
     private Integer milliseconds;
 
-    @Column(
-            name = "Bytes"
-    )
+    @Column(name = "Bytes")
     private Integer bytes;
 
-    @Column(
-            name = "UnitPrice",
-            nullable = false,
-            precision = 10,
-            scale = 2
-    )
+    @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
 
-    // jsonignore property to not display it as part of request/response body
-    // relationship left untouched for jpql benefit for queries
+
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "track",
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
     private List<InvoiceLine> invoiceLineList;
 
-    // jsonignore property to not display it as part of request/response body
-    // relationship left untouched for jpql benefit for queries
     @JsonIgnore
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "AlbumId",
             referencedColumnName = "AlbumId",
@@ -77,9 +53,7 @@ public class Track {
     )
     private Album album;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "GenreId",
             referencedColumnName = "GenreId",
@@ -87,9 +61,7 @@ public class Track {
     )
     private Genre genre;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "MediaTypeId",
             referencedColumnName = "MediaTypeId",

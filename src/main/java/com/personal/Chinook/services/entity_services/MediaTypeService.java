@@ -51,17 +51,17 @@ public class MediaTypeService implements IDBCrud<MediaType, MediaTypeDTO>, IName
         if (mediaTypeDTO.getId() < 0)
             throw new InvalidFieldException("ERROR, ID cannot be negative");
 
-        if ( !(Pattern.matches("[a-zA-Z -]+", mediaTypeDTO.getName())) )
+        if (!(Pattern.matches("[a-zA-Z -]+", mediaTypeDTO.getName())) )
             throw new InvalidFieldException("ERROR, name cannot contain special characters");
 
         if (mediaTypeDTO.getName().length() > 120)
             throw new InvalidFieldException("ERROR, name exceeds character limit (120)");
 
         return repoMediaType.save(
-                new MediaType(
-                        mediaTypeDTO.getId(),
-                        mediaTypeDTO.getName().trim()
-                )
+                 MediaType.builder()
+                         .id(mediaTypeDTO.getId())
+                         .name(mediaTypeDTO.getName().trim())
+                         .build()
         );
     }
 

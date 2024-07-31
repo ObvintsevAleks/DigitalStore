@@ -8,12 +8,11 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class PlaylistDTO {
+
     @JsonProperty("ID")
     private Integer id;
 
     @JsonProperty("Name")
     private String name;
 
-    @JsonProperty("Track ID List")
-    private List<Integer> trackList;
 }
