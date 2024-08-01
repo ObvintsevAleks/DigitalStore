@@ -1,5 +1,6 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,10 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = "trackList")
+@ToString(exclude = "tracks")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "trackList")
+@EqualsAndHashCode(exclude = "tracks")
 public class Album {
 
     @Id
@@ -20,6 +21,9 @@ public class Album {
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
+    @Column(name = "IsSingle", length = 160, nullable = false)
+    private Boolean isSingle;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "ArtistId",
@@ -28,6 +32,7 @@ public class Album {
     )
     private Artist artist;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
-    private List<Track> trackList;
+    private List<Track> tracks;
 }

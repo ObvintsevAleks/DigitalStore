@@ -7,7 +7,7 @@ import com.personal.Chinook.models.Album;
 import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.models.Track;
 import com.personal.Chinook.repositories.IRepositoryAlbum;
-import com.personal.Chinook.repositories.IRepositoryArtist;
+import com.personal.Chinook.repositories.ArtistRepository;
 import com.personal.Chinook.repositories.IRepositoryTrack;
 import com.personal.Chinook.services.common_query_functions.INameQuery;
 import com.personal.Chinook.services.common_query_functions.IDBCrud;
@@ -22,13 +22,13 @@ import java.util.Optional;
 public class AlbumService implements IDBCrud<Album, AlbumDTO> , INameQuery<Album> {
 
     private final IRepositoryAlbum repoAlbum;
-    private final IRepositoryArtist repoArtist;
+    private final ArtistRepository repoArtist;
     private final IRepositoryTrack repoTrack;
 
     @Autowired
     public AlbumService(
             @Qualifier("AlbumRepo") IRepositoryAlbum albumRepo,
-            @Qualifier("ArtistRepo") IRepositoryArtist artistRepo,
+            @Qualifier("ArtistRepo") ArtistRepository artistRepo,
             @Qualifier("TrackRepo") IRepositoryTrack trackRepo
     ) {
         repoAlbum = albumRepo;
@@ -60,7 +60,7 @@ public class AlbumService implements IDBCrud<Album, AlbumDTO> , INameQuery<Album
                 albumDTO.getTitle() == null ||
                 albumDTO.getTitle().isEmpty() ||
                 albumDTO.getTitle().isBlank() ||
-                albumDTO.getArtistId() == null
+                albumDTO.getArtist() == null
         )
             throw new InvalidFieldException("ERROR, found empty fields on request");
 
@@ -72,15 +72,15 @@ public class AlbumService implements IDBCrud<Album, AlbumDTO> , INameQuery<Album
         List<Track> assignedTrackList = new ArrayList<>();
 
         //artist existence validation
-        if (!repoArtist.existsById(albumDTO.getArtistId()))
+        if (!repoArtist.existsById(albumDTO.getArtist()))
             throw new NotFoundInDBException("ERROR, album artist not found in database");
 
         //retrieves values from non-empty-guaranteed Optional instance after possible exception handling
-        assignedArtist = repoArtist.findById(albumDTO.getArtistId()).get();
+        assignedArtist = repoArtist.findById(albumDTO.getArtist()).get();
 
         //track existence validation
-        if (albumDTO.getTrackList() != null && !albumDTO.getTrackList().isEmpty()) {
-            for (Integer trackId : albumDTO.getTrackList()) {
+        if (albumDTO.getTracks() != null && !albumDTO.getTracks().isEmpty()) {
+            for (Integer trackId : albumDTO.getTracks()) {
                 if (!repoTrack.existsById(trackId))
                     throw new NotFoundInDBException("ERROR, track not found in database");
 
@@ -94,6 +94,7 @@ public class AlbumService implements IDBCrud<Album, AlbumDTO> , INameQuery<Album
                 new Album(
                         albumDTO.getId(),
                         albumDTO.getTitle(),
+                        true,
                         assignedArtist,
                         assignedTrackList
                 )

@@ -1,15 +1,15 @@
 package com.personal.Chinook.controllers;
 
 import com.personal.Chinook.DTO.ArtistDTO;
+import com.personal.Chinook.mapper.ArtistMapper;
 import com.personal.Chinook.models.Artist;
-import com.personal.Chinook.services.entity_services.ArtistService;
+import com.personal.Chinook.services.entity_services.ArtistServiceImpl;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;
 import com.personal.Chinook.utils.swagger.ApiUpdate;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,16 +20,13 @@ import java.util.Optional;
 
 @Tag(name = "Artists controller")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/artists")
 public class ArtistController {
 
-    private final ArtistService service;
+    private final ArtistMapper artistMapper;
+    private final ArtistServiceImpl service;
 
-    @Autowired
-    public ArtistController(@Qualifier("ArtistService") ArtistService service) {
-
-        this.service = service;
-    }
 
     @PostMapping("/create")
     @ApiCreate
@@ -42,7 +39,7 @@ public class ArtistController {
     @PutMapping("/update")
     @ApiUpdate
     public ResponseEntity<?> updateArtist(@RequestBody ArtistDTO artistDTO) {
-        service.update(artistDTO);
+        service.updateArtist(artistDTO);
 
         return new ResponseEntity<>("The artist has been successfully updated!", HttpStatus.OK);
     }
@@ -65,7 +62,7 @@ public class ArtistController {
     @ApiGet
     @GetMapping("/searchid/{artistId}")
     public ResponseEntity<?> getArtistById(@PathVariable("artistId") Integer artistId) {
-        Optional<Artist> responseArtist = service.getById(artistId);
+        Optional<Artist> responseArtist = service.getArtistById(artistId);
 
         return new ResponseEntity<>(responseArtist, HttpStatus.OK);
     }

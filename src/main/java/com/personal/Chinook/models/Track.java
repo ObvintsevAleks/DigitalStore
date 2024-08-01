@@ -44,7 +44,7 @@ public class Track {
     @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
     private List<InvoiceLine> invoiceLineList;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "AlbumId",

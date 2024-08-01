@@ -8,10 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = "albumList")
+@ToString(exclude = "albums")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "albumList")
+@EqualsAndHashCode(exclude = "albums")
 public class Artist {
 
     @Id
@@ -21,9 +21,12 @@ public class Artist {
     @Column(name = "Name", length = 120)
     private String name;
 
+    @Column(name = "Surname", length = 120)
+    private String surname;
+
     // jsonignore property to not display it as part of request/response body
     // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @OneToMany(mappedBy = "artist", fetch = FetchType.LAZY)
-    private List<Album> albumList;
+    private List<Album> albums;
 }

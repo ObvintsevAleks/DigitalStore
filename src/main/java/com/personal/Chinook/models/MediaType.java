@@ -8,8 +8,8 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude = "trackList")
-@EqualsAndHashCode(exclude = "trackList")
+@ToString(exclude = "tracks")
+@EqualsAndHashCode(exclude = "tracks")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -24,5 +24,5 @@ public class MediaType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "mediaType", fetch = FetchType.LAZY)
-    private List<Track> trackList;
+    private List<Track> tracks;
 }

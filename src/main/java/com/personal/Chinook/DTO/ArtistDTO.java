@@ -17,4 +17,8 @@ public class ArtistDTO {
     @Schema(description = "наименоване", example = "некий вася")
     @JsonProperty("Name")
     private String name;
+
+    @Schema(description = "наименоване", example = "некий вася")
+    @JsonProperty("Surname")
+    private String surname;
 }
