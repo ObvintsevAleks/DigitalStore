@@ -1,94 +1,60 @@
 package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.MediaTypeDTO;
-import com.personal.Chinook.exceptions.custom.InvalidFieldException;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
+import com.personal.Chinook.mapper.MediaTypeMapper;
 import com.personal.Chinook.models.MediaType;
-import com.personal.Chinook.repositories.IRepositoryMediaType;
-import com.personal.Chinook.services.common_query_functions.IDBCrud;
-import com.personal.Chinook.services.common_query_functions.INameQuery;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.personal.Chinook.repositories.MediaTypeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
-import java.util.Optional;
-import java.util.regex.Pattern;
 
-@Service("MediaTypeService")
-public class MediaTypeService implements IDBCrud<MediaType, MediaTypeDTO>, INameQuery<MediaType> {
+@Service
+@RequiredArgsConstructor
+public class MediaTypeService {
 
-    private final IRepositoryMediaType repoMediaType;
+    private final MediaTypeRepository mediaTypeRepository;
+    private final MediaTypeMapper mediaTypeMapper;
 
-    @Autowired
-    public MediaTypeService(@Qualifier("MediaTypeRepo") IRepositoryMediaType mediaTypeRepo) {
-        this.repoMediaType = mediaTypeRepo;
+
+    @Transactional
+    public MediaTypeDTO createMediaType(MediaTypeDTO MediaTypeDTO) {
+        MediaType MediaType = mediaTypeMapper.toMediaType(MediaTypeDTO);
+        mediaTypeRepository.save(MediaType);
+        return mediaTypeMapper.toMediaTypeDTO(MediaType);
     }
 
-    @Override
-    public List<MediaType> getAll() {
 
-        return repoMediaType.findAll();
+    @Transactional(readOnly = true)
+    public MediaTypeDTO getMediaTypeById(Integer id) throws NotFoundInDBException {
+        MediaType MediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        return mediaTypeMapper.toMediaTypeDTO(MediaType);
     }
 
-    @Override
-    public Optional<MediaType> getById(Integer mediaTypeId) {
-        if (mediaTypeId == null)
-            throw new InvalidFieldException("ERROR, found empty fields");
-
-        return repoMediaType.findById(mediaTypeId);
+    @Transactional(readOnly = true)
+    public List<MediaTypeDTO> getAll() {
+        List<MediaType> genres = mediaTypeRepository.findAll();
+        return mediaTypeMapper.toMediaTypeDTOs(genres);
     }
 
-    @Override
-    public MediaType persist(MediaTypeDTO mediaTypeDTO) {
-        if (
-                mediaTypeDTO.getId() == null ||
-                mediaTypeDTO.getName() == null ||
-                mediaTypeDTO.getName().isEmpty() ||
-                mediaTypeDTO.getName().isBlank()
-        )
-            throw new InvalidFieldException("ERROR, found empty fields");
-
-        if (mediaTypeDTO.getId() < 0)
-            throw new InvalidFieldException("ERROR, ID cannot be negative");
-
-        if (!(Pattern.matches("[a-zA-Z -]+", mediaTypeDTO.getName())) )
-            throw new InvalidFieldException("ERROR, name cannot contain special characters");
-
-        if (mediaTypeDTO.getName().length() > 120)
-            throw new InvalidFieldException("ERROR, name exceeds character limit (120)");
-
-        return repoMediaType.save(
-                 MediaType.builder()
-                         .id(mediaTypeDTO.getId())
-                         .name(mediaTypeDTO.getName().trim())
-                         .build()
-        );
+    @Transactional
+    public MediaTypeDTO updateMediaType(Integer id, MediaTypeDTO mediaTypeDTO) throws NotFoundInDBException {
+        MediaType mediaTypeEntity = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        if (mediaTypeMapper.toMediaTypeDTO(mediaTypeEntity).equals(mediaTypeDTO)) {
+            return mediaTypeMapper.toMediaTypeDTO(mediaTypeEntity);
+        }
+        mediaTypeMapper.updateMediaType(mediaTypeEntity, mediaTypeDTO);
+        mediaTypeRepository.save(mediaTypeEntity);
+        return mediaTypeMapper.toMediaTypeDTO(mediaTypeEntity);
     }
 
-    @Override
-    public void update(MediaTypeDTO mediaTypeDTO) {
-        if ( !repoMediaType.existsById(mediaTypeDTO.getId()) )
-            throw new NotFoundInDBException("ERROR, media type does not exist in database");
-
-        persist(mediaTypeDTO);
+    @Transactional
+    public MediaTypeDTO deleteMediaTypeById(Integer id) throws NotFoundInDBException {
+        MediaType MediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        mediaTypeRepository.deleteById(id);
+        return mediaTypeMapper.toMediaTypeDTO(MediaType);
     }
 
-    @Override
-    public void deleteById(Integer id) {
-        if ( !(repoMediaType.existsById(id)) )
-            throw new NotFoundInDBException("ERROR, media type does not exist in database");
-
-        repoMediaType.deleteById(id);
-    }
-
-    @Override
-    public List<MediaType> getByName(String name) {
-        if (name == null || name.isEmpty() || name.isBlank())
-            throw new InvalidFieldException("ERROR, found empty fields");
-
-        if ( !(Pattern.matches("[a-zA-Z -]+", name)) )
-            throw new InvalidFieldException("ERROR, name cannot contain special characters");
-
-        return repoMediaType.searchByName(name);
-    }
 }

@@ -1,7 +1,6 @@
 package com.personal.Chinook.controllers;
 
 import com.personal.Chinook.DTO.ArtistDTO;
-import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.services.entity_services.ArtistService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
@@ -26,20 +25,21 @@ public class ArtistController {
 
     @ApiGet
     @GetMapping("/searchid/{artistId}")
-    public ArtistDTO getArtistById(@PathVariable("artistId") Integer artistId) throws NotFoundInDBException {
+    public ArtistDTO getArtistById(@PathVariable("artistId") Integer artistId) {
         log.info("Request to display a artist with ID {}", artistId);
         return service.getArtistById(artistId);
     }
 
     @ApiUpdate
     @PutMapping("/update/{artistId}")
-    public ResponseEntity<?> updateArtistById(@PathVariable("artistId") Integer id, @RequestBody ArtistDTO artistDTO) throws NotFoundInDBException {
+    public ResponseEntity<?> updateArtistById(@PathVariable("artistId") Integer id,
+                                              @RequestBody ArtistDTO artistDTO) {
         return new ResponseEntity<>(service.updateArtist(id, artistDTO), HttpStatus.OK);
     }
 
     @ApiDelete
     @DeleteMapping("/remove/{artistId}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") Integer artistId) throws NotFoundInDBException {
+    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") Integer artistId) {
         return new ResponseEntity<>(service.deleteArtistById(artistId), HttpStatus.NO_CONTENT);
     }
 
@@ -52,7 +52,7 @@ public class ArtistController {
 
     @ApiGet
     @GetMapping("/searchname/{artistName}")
-    public ResponseEntity<?> getArtistByName(@PathVariable("artistName") String artistName) throws NotFoundInDBException {
+    public ResponseEntity<?> getArtistByName(@PathVariable("artistName") String artistName) {
         return new ResponseEntity<>(service.getArtistsByName(artistName), HttpStatus.OK);
     }
 

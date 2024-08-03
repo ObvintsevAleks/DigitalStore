@@ -1,15 +1,15 @@
 package com.personal.Chinook.repositories;
 
-import com.personal.Chinook.models.MediaType;
+import com.personal.Chinook.models.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-@Repository("MediaTypeRepo")
-public interface IRepositoryMediaType extends JpaRepository<MediaType, Integer> {
+@Repository
+public interface GenreRepository extends JpaRepository<Genre, Integer> {
 
-    @Query("select e from MediaType e where e.name like %:name% ")
-    List<MediaType> searchByName(@Param("name") String name);
+    @Query("select e from Genre e where e.name like %:name%")
+    List<Genre> searchByName(@Param("name") String name);
 }
