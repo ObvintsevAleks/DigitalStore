@@ -15,6 +15,7 @@ import java.util.List;
 public class Artist {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ArtistId", nullable = false)
     private Integer id;
 

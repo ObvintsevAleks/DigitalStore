@@ -59,7 +59,8 @@ public class GenreService implements IDBCrud<Genre, GenreDTO>, INameQuery<Genre>
         return repoGenre.save(
                 new Genre(
                         genreDTO.getId(),
-                        genreDTO.getName().trim()
+                        genreDTO.getName().trim(),
+                        null
                 )
         );
     }

@@ -21,7 +21,7 @@ public class Album {
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
-    @Column(name = "IsSingle", length = 160, nullable = false)
+    @Column(name = "IsSingle", nullable = false)
     private Boolean isSingle;
 
     @ManyToOne(fetch = FetchType.LAZY)

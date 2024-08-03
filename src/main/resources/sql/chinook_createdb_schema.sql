@@ -1,17 +1,21 @@
-CREATE TABLE Album
-(
-    AlbumId INT NOT NULL,
-    Title VARCHAR(160) NOT NULL,
-    ArtistId INT NOT NULL,
-    CONSTRAINT PK_Album PRIMARY KEY (AlbumId)
-);
-
 CREATE TABLE Artist
 (
     ArtistId INT NOT NULL,
     Name VARCHAR(120),
+    Surname VARCHAR(120),
     CONSTRAINT PK_Artist PRIMARY KEY (ArtistId)
 );
+
+CREATE TABLE Album
+(
+    AlbumId INT NOT NULL,
+    Title VARCHAR(160) NOT NULL,
+    IsSingle BOOLEAN NOT NULL,
+    ArtistId INT NOT NULL,
+    CONSTRAINT PK_Album PRIMARY KEY (AlbumId)
+);
+
+
 
 CREATE TABLE Customer
 (
@@ -129,7 +133,7 @@ CREATE TABLE Track
 ALTER TABLE Album ADD CONSTRAINT FK_AlbumArtistId
     FOREIGN KEY (ArtistId) REFERENCES Artist (ArtistId) 
 		ON DELETE NO ACTION
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE;
 
 CREATE INDEX IFK_AlbumArtistId ON Album (ArtistId);
 
@@ -200,3 +204,22 @@ ALTER TABLE Track ADD CONSTRAINT FK_TrackMediaTypeId
 		ON UPDATE CASCADE
 
 CREATE INDEX IFK_TrackMediaTypeId ON Track (MediaTypeId);
+
+
+
+
+
+-- sequence first
+
+create sequence artist_seq
+    increment by 50;
+
+alter sequence artist_seq owner to postgres;
+
+-- sequence second
+create sequence track_trackid_seq
+    as integer;
+
+alter sequence track_trackid_seq owner to postgres;
+
+alter sequence track_trackid_seq owned by track.trackid;

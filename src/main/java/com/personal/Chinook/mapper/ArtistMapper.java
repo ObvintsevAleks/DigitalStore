@@ -5,16 +5,21 @@ import com.personal.Chinook.models.Artist;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ArtistMapper {
 
-    ArtistDTO artistToArtistDto(Artist artist);
+    ArtistDTO toArtistDTO(Artist artist);
 
+    Artist toArtist(ArtistDTO artist);
+
+    List<ArtistDTO> toArtistDTOs(List<Artist> artists);
+
+    @Mapping(target = "id", ignore = true) //bc we dont want to override id
     @Mapping(target = "albums", ignore = true)
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "surname", source = "surname")
-    Artist artistDtoToArtist(ArtistDTO artist);
+    void updateArtist(@MappingTarget Artist artist, ArtistDTO artistDTO);
 
 }
