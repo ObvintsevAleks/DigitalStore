@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 
-@Tag(name = "MediaType controller")
+@Tag(name = "mediaTypes")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mediatypes")
@@ -25,33 +25,33 @@ public class MediaTypeController {
     private final MediaTypeService service;
 
     @ApiGet
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllMediaTypes() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @ApiGet
-    @GetMapping("/searchid/{mediaTypeId}")
-    public ResponseEntity<?> getMediaTypeById(@PathVariable("mediaTypeId") UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMediaTypeById(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.getMediaTypeById(id), HttpStatus.OK);
     }
 
 
     @ApiCreate
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> createMediaType(@RequestBody MediaTypeSaveDTO mediaTypeSaveDTO) {
         return new ResponseEntity<>(service.createMediaType(mediaTypeSaveDTO), HttpStatus.CREATED);
     }
 
     @ApiUpdate
-    @PutMapping("/update/{mediaTypeId}")
+    @PutMapping
     public ResponseEntity<?> updateMediaType(@RequestBody MediaTypeDTO mediaTypeDTO) {
         return new ResponseEntity<>(service.updateMediaType(mediaTypeDTO), HttpStatus.OK);
     }
 
     @ApiDelete
-    @DeleteMapping("/remove/{mediaTypeId}")
-    public ResponseEntity<?> deleteMediaType(@PathVariable("mediaTypeId") UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMediaType(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteMediaTypeById(id), HttpStatus.NO_CONTENT);
     }
 }

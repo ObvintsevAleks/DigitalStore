@@ -18,7 +18,7 @@ import java.util.UUID;
 
 
 @Slf4j
-@Tag(name = "Artists controller")
+@Tag(name = "artists")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/artists")
@@ -27,34 +27,34 @@ public class ArtistController {
     private final ArtistService service;
 
     @ApiGet
-    @GetMapping("/searchid/{artistId}")
-    public ArtistDTO getArtistById(@PathVariable("artistId") UUID artistId) {
+    @GetMapping("/{id}")
+    public ArtistDTO getArtistById(@PathVariable("id") UUID artistId) {
         log.info("Request to display a artist with ID {}", artistId);
         return service.getArtistById(artistId);
     }
 
     @ApiUpdate
-    @PutMapping("/update/{artistId}")
-    public ResponseEntity<?> updateArtistById(@RequestBody ArtistDTO artistDTO) {
+    @PutMapping
+    public ResponseEntity<?> updateArtistByDto(@RequestBody ArtistDTO artistDTO) {
         return new ResponseEntity<>(service.updateArtist(artistDTO), HttpStatus.OK);
     }
 
     @ApiDelete
-    @DeleteMapping("/remove/{artistId}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") UUID artistId) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteArtistById(@PathVariable("id") UUID artistId) {
         return new ResponseEntity<>(service.deleteArtistById(artistId), HttpStatus.NO_CONTENT);
     }
 
 
-    @PostMapping("/create")
+    @PostMapping
     @ApiCreate
     public ResponseEntity<?> createArtist(@RequestBody ArtistSaveDTO artistSaveDTO) {
         return new ResponseEntity<>(service.createArtist(artistSaveDTO), HttpStatus.CREATED);
     }
 
     @ApiGet
-    @GetMapping("/searchname/{artistName}")
-    public ResponseEntity<?> getArtistByName(@PathVariable("artistName") String artistName) {
+    @GetMapping("/{byName}")
+    public ResponseEntity<?> getArtistByName(@PathVariable("byName") String artistName) {
         return new ResponseEntity<>(service.getArtistsByName(artistName), HttpStatus.OK);
     }
 

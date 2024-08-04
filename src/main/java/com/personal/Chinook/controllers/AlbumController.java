@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "Album controller")
+@Tag(name = "albums")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/albums")
@@ -30,41 +30,41 @@ public class AlbumController {
 
 
     @ApiGet
-    @GetMapping("/searchid/{albumId}")
-    public AlbumDTO getArtistById(@PathVariable("albumId") UUID albumId) {
+    @GetMapping("/{id}")
+    public AlbumDTO getArtistById(@PathVariable("id") UUID albumId) {
         log.info("Request to display a album with ID {}", albumId);
         return service.getAlbumById(albumId);
     }
 
     @ApiGet
-    @GetMapping("/searchByArtistId/{artistId}")
-    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("artistId") UUID artistId) {
+    @GetMapping("/{byArtistId}")
+    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("byArtistId") UUID artistId) {
         log.info("Request to display all albums by artistID {}", artistId);
         return service.getAllAlbumsByArtistId(artistId);
     }
 
     @ApiUpdate
-    @PutMapping("/update/{albumId}")
+    @PutMapping
     public ResponseEntity<?> updateArtistById(@RequestBody AlbumDTO albumDTO) {
         return new ResponseEntity<>(service.updateAlbum(albumDTO), HttpStatus.OK);
     }
 
     @ApiDelete
-    @DeleteMapping("/remove/{artistId}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") UUID albumId) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteArtistById(@PathVariable("id") UUID albumId) {
         return new ResponseEntity<>(service.deleteAlbumById(albumId), HttpStatus.NO_CONTENT);
     }
 
 
-    @PostMapping("/create")
+    @PostMapping
     @ApiCreate
     public ResponseEntity<?> createArtist(@RequestBody AlbumSaveDto albumSaveDto) {
         return new ResponseEntity<>(service.createAlbum(albumSaveDto), HttpStatus.CREATED);
     }
 
     @ApiGet
-    @GetMapping("/searchname/{albumTitle}")
-    public ResponseEntity<?> getAlbumByTitle(@PathVariable("albumTitle") String albumTitle) {
+    @GetMapping("/{byTitle}")
+    public ResponseEntity<?> getAlbumByTitle(@PathVariable("byTitle") String albumTitle) {
         return new ResponseEntity<>(service.getArtistsByTitle(albumTitle), HttpStatus.OK);
     }
 

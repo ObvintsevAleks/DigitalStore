@@ -21,9 +21,7 @@ import java.util.UUID;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
-//    private final ArtistRepository artistRepository;
     private final AlbumMapper albumMapper;
-
 
     @Transactional(readOnly = true)
     public AlbumDTO getAlbumById(UUID id) throws NotFoundInDBException {
@@ -34,7 +32,6 @@ public class AlbumService {
     @Transactional(readOnly = true)
     public List<AlbumDTO> getAllAlbumsByArtistId(UUID id) throws NotFoundInDBException {
         List<Album> albums = albumRepository.searchByArtistId(id);
-
         return albumMapper.toAlbumDTOs(albums);
     }
 
@@ -51,7 +48,6 @@ public class AlbumService {
         if (albumMapper.toAlbumDTO(albumEntity).equals(albumDTO)) {
             return albumMapper.toAlbumDTO(albumEntity);
         }
-        //toDO что делать с id артиста??
         albumMapper.updateAlbum(albumEntity, albumDTO);
         albumRepository.save(albumEntity);
         return albumMapper.toAlbumDTO(albumEntity);
@@ -72,6 +68,5 @@ public class AlbumService {
         }
         return albumMapper.toAlbumDTOs(albums);
     }
-
 
 }

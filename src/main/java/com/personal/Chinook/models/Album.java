@@ -23,14 +23,16 @@ public class Album {
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
-    @Column(name = "IsSingle", nullable = false)
-    private Boolean isSingle;
+    @Column(name = "albumType", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AlbumType albumType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "ArtistId",
             referencedColumnName = "ArtistId",
-            foreignKey = @ForeignKey(name = "FK_AlbumArtistId")
+            foreignKey = @ForeignKey(name = "FK_AlbumArtistId"),
+            nullable = false
     )
     private Artist artist;
 

@@ -23,11 +23,9 @@ public class Genre {
     @Column(name = "Name", nullable = false, length = 120)
     private String name;
 
-    @Column(name = "Area", nullable = false, length = 120)
-    private String area;
-
-    @Column(name = "IsOnlyInstrumental", nullable = false)
-    private Boolean isOnlyInstrumental;
+    @Column(name = "GenreDirection", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GenreDirection genreDirection;
 
     @JsonIgnore
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)

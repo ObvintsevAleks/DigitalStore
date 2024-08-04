@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "Genre controller")
+@Tag(name = "genres")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/genres")
@@ -26,34 +26,34 @@ public class GenreController {
     private final GenreService service;
 
     @ApiGet
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllGenres() {
         log.info("Request to display all genres");
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @ApiGet
-    @GetMapping("/searchid/{genreId}")
-    public ResponseEntity<?> getGenreById(@PathVariable("genreId") UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getGenreById(@PathVariable("id") UUID id) {
         log.info("Request to display a artist with ID {}", id);
         return new ResponseEntity<>(service.getGenreById(id), HttpStatus.OK);
     }
 
     @ApiCreate
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> createGenre(@RequestBody GenreSaveDTO genreDTO) {
         return new ResponseEntity<>(service.createGenre(genreDTO), HttpStatus.CREATED);
     }
 
     @ApiUpdate
-    @PutMapping("/update/{genreId}")
+    @PutMapping
     public ResponseEntity<?> updateGenre(@RequestBody GenreDTO genreDTO) {
         return new ResponseEntity<>(service.updateGenre(genreDTO), HttpStatus.OK);
     }
 
     @ApiDelete
-    @DeleteMapping("/remove/{genreId}")
-    public ResponseEntity<?> deleteGenre(@PathVariable("genreId") UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteGenre(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteGenreById(id), HttpStatus.NO_CONTENT);
     }
 }

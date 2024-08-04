@@ -1,6 +1,7 @@
 package com.personal.Chinook.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.personal.Chinook.models.GenreDirection;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,11 +21,9 @@ public class GenreDTO {
     @JsonProperty(value = "Name", defaultValue = "cloud rap", required = true)
     private String name;
 
-    @Schema(description = "Направленность жанра", example = "Популярная музыка, академическая музыка и тд")
-    @JsonProperty("Area")
-    private String area;
+    @Schema(description = "Направленность жанра")
+    @JsonProperty(value = "GenreDirection", defaultValue = "POPULAR")
+    private GenreDirection genreDirection;
 
-    @Schema(description = "Используется ли только инструментал", example = "true")
-    @JsonProperty(value = "IsOnlyInstrumental", defaultValue = "true", required = true)
-    private Boolean isOnlyInstrumental;
+
 }
