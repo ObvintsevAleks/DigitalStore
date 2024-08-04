@@ -21,8 +21,8 @@ public class GenreService {
     private final GenreMapper genreMapper;
 
     @Transactional
-    public GenreDTO createGenre(GenreSaveDTO genreDTO) {
-        Genre genre = genreMapper.toGenre(genreDTO);
+    public GenreDTO createGenre(GenreSaveDTO genreSaveDTO) {
+        Genre genre = genreMapper.toGenre(genreSaveDTO);
         genreRepository.save(genre);
         return genreMapper.toGenreDTO(genre);
     }

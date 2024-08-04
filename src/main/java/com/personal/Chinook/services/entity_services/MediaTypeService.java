@@ -22,8 +22,8 @@ public class MediaTypeService {
 
 
     @Transactional
-    public MediaTypeDTO createMediaType(MediaTypeSaveDTO MediaTypeDTO) {
-        MediaType mediaType = mediaTypeMapper.toMediaType(MediaTypeDTO);
+    public MediaTypeDTO createMediaType(MediaTypeSaveDTO mediaTypeSaveDTO) {
+        MediaType mediaType = mediaTypeMapper.toMediaType(mediaTypeSaveDTO);
         mediaTypeRepository.save(mediaType);
         return mediaTypeMapper.toMediaTypeDTO(mediaType);
     }

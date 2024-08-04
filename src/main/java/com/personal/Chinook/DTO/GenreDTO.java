@@ -7,11 +7,12 @@ import lombok.Getter;
 
 import java.util.UUID;
 
+@Schema(description = "Жанр")
 @Getter
 @AllArgsConstructor
 public class GenreDTO {
 
-    @Schema(description = "Идентификатор", example = "8e262c04-a090-11e8-98d0-529269fb1459")
+    @Schema(description = "Идентификатор жанра", example = "8e262c04-a090-11e8-98d0-529269fb1459")
     @JsonProperty("ID")
     private UUID id;
 
@@ -23,7 +24,7 @@ public class GenreDTO {
     @JsonProperty("Area")
     private String area;
 
-    @Schema(description = "Используется только инструментал", example = "true")
+    @Schema(description = "Используется ли только инструментал", example = "true")
     @JsonProperty("IsOnlyInstrumental")
     private Boolean isOnlyInstrumental;
 }

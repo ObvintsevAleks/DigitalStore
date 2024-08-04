@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Schema(description = "Artists save dto")
+
 @Getter
 @AllArgsConstructor
 public class ArtistSaveDTO {
