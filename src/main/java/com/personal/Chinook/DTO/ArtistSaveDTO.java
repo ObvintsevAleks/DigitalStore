@@ -11,7 +11,7 @@ import lombok.Getter;
 public class ArtistSaveDTO {
 
     @Schema(description = "Имя артиста", example = "Luke")
-    @JsonProperty("Name")
+    @JsonProperty(value = "Name", defaultValue = "Luke", required = true)
     private String name;
 
     @Schema(description = "Фамилия артиста", example = "Barrras")

@@ -13,11 +13,11 @@ import java.util.UUID;
 public class GenreDTO {
 
     @Schema(description = "Идентификатор жанра", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty("ID")
+    @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 
     @Schema(description = "Название жанра", example = "cloud rap")
-    @JsonProperty("Name")
+    @JsonProperty(value = "Name", defaultValue = "cloud rap", required = true)
     private String name;
 
     @Schema(description = "Направленность жанра", example = "Популярная музыка, академическая музыка и тд")
@@ -25,6 +25,6 @@ public class GenreDTO {
     private String area;
 
     @Schema(description = "Используется ли только инструментал", example = "true")
-    @JsonProperty("IsOnlyInstrumental")
+    @JsonProperty(value = "IsOnlyInstrumental", defaultValue = "true", required = true)
     private Boolean isOnlyInstrumental;
 }

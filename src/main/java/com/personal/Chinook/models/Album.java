@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,8 +16,9 @@ import java.util.List;
 public class Album {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "AlbumId", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "Title", length = 160, nullable = false)
     private String title;

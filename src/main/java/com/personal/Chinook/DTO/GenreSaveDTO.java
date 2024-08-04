@@ -10,7 +10,7 @@ import lombok.Getter;
 public class GenreSaveDTO {
 
     @Schema(description = "Название жанра", example = "cloud rap")
-    @JsonProperty("Name")
+    @JsonProperty(value = "Name", defaultValue = "cloud rap", required = true)
     private String name;
 
     @Schema(description = "Направленность жанра", example = "Популярная музыка, академическая музыка и тд")
@@ -18,6 +18,6 @@ public class GenreSaveDTO {
     private String area;
 
     @Schema(description = "Используется только инструментал", example = "true")
-    @JsonProperty("IsOnlyInstrumental")
+    @JsonProperty(value = "IsOnlyInstrumental", defaultValue = "true", required = true)
     private Boolean isOnlyInstrumental;
 }
