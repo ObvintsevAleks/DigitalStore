@@ -1,6 +1,7 @@
 package com.personal.Chinook.mapper;
 
 import com.personal.Chinook.DTO.ArtistDTO;
+import com.personal.Chinook.DTO.ArtistSaveDTO;
 import com.personal.Chinook.models.Artist;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,7 +15,9 @@ public interface ArtistMapper {
 
     ArtistDTO toArtistDTO(Artist artist);
 
-    Artist toArtist(ArtistDTO artist);
+    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "albums", ignore = true)
+    Artist toArtist(ArtistSaveDTO artist);
 
     List<ArtistDTO> toArtistDTOs(List<Artist> artists);
 

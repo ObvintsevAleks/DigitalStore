@@ -1,8 +1,7 @@
 package com.personal.Chinook.mapper;
 
-import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.DTO.GenreDTO;
-import com.personal.Chinook.models.Artist;
+import com.personal.Chinook.DTO.GenreSaveDTO;
 import com.personal.Chinook.models.Genre;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,7 +15,9 @@ public interface GenreMapper {
 
     GenreDTO toGenreDTO(Genre genre);
 
-    Genre toGenre(GenreDTO artist);
+    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "tracks", ignore = true)
+    Genre toGenre(GenreSaveDTO artist);
 
     List<GenreDTO> toGenreDTOs(List<Genre> genres);
 

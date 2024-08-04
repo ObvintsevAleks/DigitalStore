@@ -1,6 +1,7 @@
 package com.personal.Chinook.controllers;
 
 import com.personal.Chinook.DTO.MediaTypeDTO;
+import com.personal.Chinook.DTO.MediaTypeSaveDTO;
 import com.personal.Chinook.services.entity_services.MediaTypeService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Tag(name = "MediaType controller")
 @RestController
@@ -28,27 +31,26 @@ public class MediaTypeController {
 
     @ApiGet
     @GetMapping("/searchid/{mediaTypeId}")
-    public ResponseEntity<?> getMediaTypeById(@PathVariable("mediaTypeId") Integer id) {
+    public ResponseEntity<?> getMediaTypeById(@PathVariable("mediaTypeId") UUID id) {
         return new ResponseEntity<>(service.getMediaTypeById(id), HttpStatus.OK);
     }
 
 
     @ApiCreate
     @PostMapping("/create")
-    public ResponseEntity<?> createMediaType(@RequestBody MediaTypeDTO mediaTypeDTO) {
-        return new ResponseEntity<>(service.createMediaType(mediaTypeDTO), HttpStatus.CREATED);
+    public ResponseEntity<?> createMediaType(@RequestBody MediaTypeSaveDTO mediaTypeSaveDTO) {
+        return new ResponseEntity<>(service.createMediaType(mediaTypeSaveDTO), HttpStatus.CREATED);
     }
 
     @ApiUpdate
     @PutMapping("/update/{mediaTypeId}")
-    public ResponseEntity<?> updateMediaType(@PathVariable("mediaTypeId") Integer id,
-                                             @RequestBody MediaTypeDTO mediaTypeDTO) {
-        return new ResponseEntity<>(service.updateMediaType(id, mediaTypeDTO), HttpStatus.OK);
+    public ResponseEntity<?> updateMediaType(@RequestBody MediaTypeDTO mediaTypeDTO) {
+        return new ResponseEntity<>(service.updateMediaType(mediaTypeDTO), HttpStatus.OK);
     }
 
     @ApiDelete
     @DeleteMapping("/remove/{mediaTypeId}")
-    public ResponseEntity<?> deleteMediaType(@PathVariable("mediaTypeId") Integer id) {
+    public ResponseEntity<?> deleteMediaType(@PathVariable("mediaTypeId") UUID id) {
         return new ResponseEntity<>(service.deleteMediaTypeById(id), HttpStatus.NO_CONTENT);
     }
 }

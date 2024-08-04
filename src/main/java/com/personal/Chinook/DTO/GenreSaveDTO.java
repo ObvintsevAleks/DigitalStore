@@ -5,15 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.UUID;
-
 @Getter
 @AllArgsConstructor
-public class GenreDTO {
-
-    @Schema(description = "Идентификатор", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty("ID")
-    private UUID id;
+public class GenreSaveDTO {
 
     @Schema(description = "Название жанра", example = "cloud rap")
     @JsonProperty("Name")

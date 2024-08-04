@@ -1,6 +1,7 @@
 package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.GenreDTO;
+import com.personal.Chinook.DTO.GenreSaveDTO;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.mapper.GenreMapper;
 import com.personal.Chinook.models.Genre;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class GenreService {
     private final GenreMapper genreMapper;
 
     @Transactional
-    public GenreDTO createGenre(GenreDTO genreDTO) {
+    public GenreDTO createGenre(GenreSaveDTO genreDTO) {
         Genre genre = genreMapper.toGenre(genreDTO);
         genreRepository.save(genre);
         return genreMapper.toGenreDTO(genre);
@@ -27,7 +29,7 @@ public class GenreService {
 
 
     @Transactional(readOnly = true)
-    public GenreDTO getGenreById(Integer id) throws NotFoundInDBException {
+    public GenreDTO getGenreById(UUID id) throws NotFoundInDBException {
         Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
         return genreMapper.toGenreDTO(genre);
     }
@@ -39,8 +41,8 @@ public class GenreService {
     }
 
     @Transactional
-    public GenreDTO updateGenre(Integer id, GenreDTO genreDTO) throws NotFoundInDBException {
-        Genre genreEntity = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+    public GenreDTO updateGenre(GenreDTO genreDTO) throws NotFoundInDBException {
+        Genre genreEntity = genreRepository.findById(genreDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
         if (genreMapper.toGenreDTO(genreEntity).equals(genreDTO)) {
             return genreMapper.toGenreDTO(genreEntity);
         }
@@ -50,7 +52,7 @@ public class GenreService {
     }
 
     @Transactional
-    public GenreDTO deleteGenreById(Integer id) throws NotFoundInDBException {
+    public GenreDTO deleteGenreById(UUID id) throws NotFoundInDBException {
         Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
         genreRepository.deleteById(id);
         return genreMapper.toGenreDTO(genre);

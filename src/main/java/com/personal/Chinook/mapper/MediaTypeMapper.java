@@ -1,6 +1,7 @@
 package com.personal.Chinook.mapper;
 
 import com.personal.Chinook.DTO.MediaTypeDTO;
+import com.personal.Chinook.DTO.MediaTypeSaveDTO;
 import com.personal.Chinook.models.MediaType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,12 +15,14 @@ public interface MediaTypeMapper {
 
     MediaTypeDTO toMediaTypeDTO(MediaType mediaType);
 
-    MediaType toMediaType(MediaTypeDTO mediaTypeDTO);
+    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "tracks", ignore = true)
+    MediaType toMediaType(MediaTypeSaveDTO mediaTypeDTO);
 
     List<MediaTypeDTO> toMediaTypeDTOs(List<MediaType> mediaTypes);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
     @Mapping(target = "tracks", ignore = true)
-    void updateMediaType(@MappingTarget MediaType genre, MediaTypeDTO genreDTO);
+    void updateMediaType(@MappingTarget MediaType mediaType, MediaTypeDTO mediaTypeDTO);
 
 }

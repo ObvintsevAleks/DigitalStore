@@ -1,6 +1,7 @@
 package com.personal.Chinook.controllers;
 
 import com.personal.Chinook.DTO.ArtistDTO;
+import com.personal.Chinook.DTO.ArtistSaveDTO;
 import com.personal.Chinook.services.entity_services.ArtistService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 
 @Slf4j
@@ -25,29 +28,28 @@ public class ArtistController {
 
     @ApiGet
     @GetMapping("/searchid/{artistId}")
-    public ArtistDTO getArtistById(@PathVariable("artistId") Integer artistId) {
+    public ArtistDTO getArtistById(@PathVariable("artistId") UUID artistId) {
         log.info("Request to display a artist with ID {}", artistId);
         return service.getArtistById(artistId);
     }
 
     @ApiUpdate
     @PutMapping("/update/{artistId}")
-    public ResponseEntity<?> updateArtistById(@PathVariable("artistId") Integer id,
-                                              @RequestBody ArtistDTO artistDTO) {
-        return new ResponseEntity<>(service.updateArtist(id, artistDTO), HttpStatus.OK);
+    public ResponseEntity<?> updateArtistById(@RequestBody ArtistDTO artistDTO) {
+        return new ResponseEntity<>(service.updateArtist(artistDTO), HttpStatus.OK);
     }
 
     @ApiDelete
     @DeleteMapping("/remove/{artistId}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") Integer artistId) {
+    public ResponseEntity<?> deleteArtistById(@PathVariable("artistId") UUID artistId) {
         return new ResponseEntity<>(service.deleteArtistById(artistId), HttpStatus.NO_CONTENT);
     }
 
 
     @PostMapping("/create")
     @ApiCreate
-    public ResponseEntity<?> createArtist(@RequestBody ArtistDTO artistDTO) {
-        return new ResponseEntity<>(service.createArtist(artistDTO), HttpStatus.CREATED);
+    public ResponseEntity<?> createArtist(@RequestBody ArtistSaveDTO artistSaveDTO) {
+        return new ResponseEntity<>(service.createArtist(artistSaveDTO), HttpStatus.CREATED);
     }
 
     @ApiGet

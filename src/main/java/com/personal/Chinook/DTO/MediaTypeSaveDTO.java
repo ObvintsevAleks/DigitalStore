@@ -2,22 +2,14 @@ package com.personal.Chinook.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class MediaTypeDTO {
-
-    @Schema(description = "Идентификатор", example = "1")
-    @JsonProperty("ID")
-    private UUID id;
+public class MediaTypeSaveDTO {
 
     @Schema(description = "Название mediaType", example = "mp4")
     @JsonProperty(value = "Name", required = true)

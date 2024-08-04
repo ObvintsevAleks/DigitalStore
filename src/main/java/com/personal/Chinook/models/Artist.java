@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,9 +16,9 @@ import java.util.List;
 public class Artist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ArtistId", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "Name", length = 120)
     private String name;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,11 +16,18 @@ import java.util.List;
 public class Genre {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "GenreId", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "Name", nullable = false, length = 120)
     private String name;
+
+    @Column(name = "Area", nullable = false, length = 120)
+    private String area;
+
+    @Column(name = "IsOnlyInstrumental", nullable = false)
+    private Boolean isOnlyInstrumental;
 
     @JsonIgnore
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
