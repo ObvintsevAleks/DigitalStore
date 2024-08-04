@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,16 +19,16 @@ import java.util.List;
 public class Track {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "TrackId", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "Name", nullable = false, length = 200)
     private String name;
 
 
-    @Column(name = "Composer", length = 220)
-    private String composer;
+    @Column(name = "Author", length = 220)
+    private String author;
 
     @NotNull
     private Integer milliseconds;
@@ -40,16 +40,12 @@ public class Track {
     private BigDecimal unitPrice;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
-    private List<InvoiceLine> invoiceLineList;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "AlbumId",
             referencedColumnName = "AlbumId",
-            foreignKey = @ForeignKey(name = "FK_TrackAlbumId")
+            foreignKey = @ForeignKey(name = "FK_TrackAlbumId"),
+            nullable = false
     )
     private Album album;
 
@@ -57,7 +53,8 @@ public class Track {
     @JoinColumn(
             name = "GenreId",
             referencedColumnName = "GenreId",
-            foreignKey = @ForeignKey(name = "FK_TrackGenreId")
+            foreignKey = @ForeignKey(name = "FK_TrackGenreId"),
+            nullable = false
     )
     private Genre genre;
 
@@ -65,7 +62,8 @@ public class Track {
     @JoinColumn(
             name = "MediaTypeId",
             referencedColumnName = "MediaTypeId",
-            foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId")
+            foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId"),
+            nullable = false
     )
     private MediaType mediaType;
 
@@ -75,4 +73,8 @@ public class Track {
             mappedBy = "trackList"
     )
     private List<Playlist> playlistList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
+    private List<InvoiceLine> invoiceLineList;
 }

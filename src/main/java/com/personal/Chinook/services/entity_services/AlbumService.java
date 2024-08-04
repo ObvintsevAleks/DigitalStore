@@ -2,13 +2,10 @@ package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.AlbumDTO;
 import com.personal.Chinook.DTO.AlbumSaveDto;
-import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.mapper.AlbumMapper;
 import com.personal.Chinook.models.Album;
-import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.repositories.AlbumRepository;
-import com.personal.Chinook.repositories.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +31,8 @@ public class AlbumService {
         List<Album> albums = albumRepository.searchByArtistId(id);
         return albumMapper.toAlbumDTOs(albums);
     }
+
+    //toDo 4. search albums by artistName
 
     @Transactional
     public AlbumDTO createAlbum(AlbumSaveDto albumSaveDto) {

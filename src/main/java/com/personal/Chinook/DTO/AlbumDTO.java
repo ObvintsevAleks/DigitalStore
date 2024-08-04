@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AlbumDTO {
 
-    @Schema(description = "Идентиикатор альбома", example = "8e262c04-a090-11e8-98d0-529269fb1459")
+    @Schema(description = "Идентификатор альбома", example = "8e262c04-a090-11e8-98d0-529269fb1459")
     @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 

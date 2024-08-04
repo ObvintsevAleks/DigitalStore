@@ -4,20 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import java.math.BigDecimal;
-import java.util.UUID;
 
-@Schema(description = "Композиция")
+import java.math.BigDecimal;
+
 @Getter
 @AllArgsConstructor
-public class TrackDTO {
-
-    @Schema(description = "Идентификатор композиции", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
-    private UUID id;
+public class TrackSaveDTO {
 
     @Schema(description = "Название композиции", example = "First memory type")
-    @JsonProperty(value = "name",  required = true)
+    @JsonProperty(value = "name", required = true)
     private String name;
 
     @Schema(description = "Автор композиции", example = "ASAP")
@@ -33,7 +28,7 @@ public class TrackDTO {
     private Integer bytes;
 
     @Schema(description = "Цена", example = "2.41")
-    @JsonProperty(value =  "unitPrice", required = true)
+    @JsonProperty(value = "unitPrice", required = true)
     private BigDecimal unitPrice;
 
     @Schema(description = "Альбом")
