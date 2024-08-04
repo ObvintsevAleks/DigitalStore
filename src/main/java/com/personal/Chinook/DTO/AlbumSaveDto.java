@@ -22,7 +22,7 @@ public class AlbumSaveDto {
     private Boolean isSingle;
 
     @Schema(description = "DTO артиста")
-    @JsonProperty("Artist ID")
+    @JsonProperty("ArtistDTO")
     private ArtistDTO artist;
 
     @JsonIgnore

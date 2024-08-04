@@ -36,12 +36,12 @@ public class AlbumController {
         return service.getAlbumById(albumId);
     }
 
-//    @ApiGet
-//    @GetMapping("/searchid/{artistId}")
-//    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("artistId") UUID artistId) {
-//        log.info("Request to display all albums by artistID {}", artistId);
-//        return service.getAllAlbumsByArtistId(artistId);
-//    }
+    @ApiGet
+    @GetMapping("/searchByArtistId/{artistId}")
+    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("artistId") UUID artistId) {
+        log.info("Request to display all albums by artistID {}", artistId);
+        return service.getAllAlbumsByArtistId(artistId);
+    }
 
     @ApiUpdate
     @PutMapping("/update/{albumId}")

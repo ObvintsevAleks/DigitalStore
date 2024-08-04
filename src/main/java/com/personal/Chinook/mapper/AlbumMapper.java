@@ -2,10 +2,7 @@ package com.personal.Chinook.mapper;
 
 import com.personal.Chinook.DTO.AlbumDTO;
 import com.personal.Chinook.DTO.AlbumSaveDto;
-import com.personal.Chinook.DTO.ArtistDTO;
-import com.personal.Chinook.DTO.ArtistSaveDTO;
 import com.personal.Chinook.models.Album;
-import com.personal.Chinook.models.Artist;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -22,6 +19,8 @@ public interface AlbumMapper {
     @Mapping(target = "tracks", ignore = true)
     Album toAlbum(AlbumSaveDto albumSaveDto);
 
+    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "tracks", ignore = true)
     List<AlbumDTO> toAlbumDTOs(List<Album> albums);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id

@@ -31,11 +31,12 @@ public class AlbumService {
         return albumMapper.toAlbumDTO(album);
     }
 
-//    @Transactional(readOnly = true)
-//    public List<AlbumDTO> getAllAlbumsByArtistId(UUID id) throws NotFoundInDBException {
-//        List<Album> albums = albumRepository.searchByArtistId(id);
-//        return albumMapper.toAlbumDTOs(albums);
-//    }
+    @Transactional(readOnly = true)
+    public List<AlbumDTO> getAllAlbumsByArtistId(UUID id) throws NotFoundInDBException {
+        List<Album> albums = albumRepository.searchByArtistId(id);
+
+        return albumMapper.toAlbumDTOs(albums);
+    }
 
     @Transactional
     public AlbumDTO createAlbum(AlbumSaveDto albumSaveDto) {

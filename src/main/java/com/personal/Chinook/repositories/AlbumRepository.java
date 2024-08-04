@@ -16,6 +16,6 @@ public interface AlbumRepository extends JpaRepository<Album, UUID> {
     @Query("select e from Album e where e.title like %:title% ")
     List<Album> searchByTitle(@Param("title") String title);
 
-    @Query("select e from Album e where e.artist = :artistId ")
-    List<Album> searchByArtistId(@Param("ArtistId") UUID artistId);
+    @Query("select a from Album a where a.artist.id = :artistId")
+    List<Album> searchByArtistId(@Param("artistId") UUID artistId);
 }

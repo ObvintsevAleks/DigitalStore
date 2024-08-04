@@ -2,9 +2,12 @@ package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.DTO.ArtistSaveDTO;
+import com.personal.Chinook.exceptions.custom.InvalidFieldException;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.mapper.ArtistMapper;
+import com.personal.Chinook.models.Album;
 import com.personal.Chinook.models.Artist;
+import com.personal.Chinook.repositories.AlbumRepository;
 import com.personal.Chinook.repositories.ArtistRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import java.util.UUID;
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
+    private final AlbumRepository albumRepository;
     private final ArtistMapper artistMapper;
 
 
@@ -50,6 +54,12 @@ public class ArtistService {
     @Transactional
     public ArtistDTO deleteArtistById(UUID id) throws NotFoundInDBException {
         Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        UUID artistId = artist.getId();
+        List<Album> albums = albumRepository.searchByArtistId(artistId);
+        if(!albums.isEmpty()) {
+            throw new InvalidFieldException("Перед тем как удалить Артиста c id ["+ id +"], необходимо удалить связанные с ним альбомы "
+                    +"\n" + albums.stream().map(Album::getId).toList());
+        }
         artistRepository.deleteById(id);
         return artistMapper.toArtistDTO(artist);
     }
