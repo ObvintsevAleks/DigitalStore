@@ -11,11 +11,8 @@ import java.util.List;
 @Schema(description = "Клиент")
 @Getter
 @AllArgsConstructor
-public class CustomerDTO {
+public class CustomerSaveDTO {
 
-    @Schema(description = "Идентификатор клиента", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
-    private final Integer id;
 
     @Schema(description = "Имя клиента", example = "Biba")
     @JsonProperty(value = "firstName",  required = true)
@@ -69,4 +66,5 @@ public class CustomerDTO {
     @Schema(description = "Идентификатор инвойсов")
     @JsonProperty("Invoice ID List")
     private List<InvoiceDTO> tracks;
+
 }

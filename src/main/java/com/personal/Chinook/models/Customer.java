@@ -2,28 +2,28 @@ package com.personal.Chinook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = "invoices")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "invoices")
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CustomerId", nullable = false)
-    private Integer customerId;
+    private UUID id;
 
-    @Column(name = "FirstName", nullable = false, length = 40)
+    @Column(name = "FirstName",length = 120, nullable = false)
     private String firstName;
 
-    @Column(name = "LastName", nullable = false, length = 20)
+    @Column(name = "LastName", length = 120, nullable = false)
     private String lastName;
 
     @Column(name = "Company", length = 80)
@@ -50,14 +50,14 @@ public class Customer {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @Column(name = "Email", nullable = false, length = 60)
+    @Column(name = "Email", nullable = false, length = 120)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "SupportRepId",
+            name = "EmployeeId",
             referencedColumnName = "EmployeeId",
-            foreignKey = @ForeignKey(name = "FK_CustomerSupportRepId")
+            foreignKey = @ForeignKey(name = "FK_CustomerEmployeeId")
     )
     private Employee employee;
 
@@ -65,5 +65,5 @@ public class Customer {
     // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Invoice> invoiceList;
+    private List<Invoice> invoices;
 }
