@@ -20,10 +20,10 @@ public class Artist {
     @Column(name = "ArtistId", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", length = 120)
+    @Column(name = "Name", length = 120, nullable = false)
     private String name;
 
-    @Column(name = "Surname", length = 120)
+    @Column(name = "Surname", length = 120, nullable = false)
     private String surname;
 
     // jsonignore property to not display it as part of request/response body

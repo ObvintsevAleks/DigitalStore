@@ -2,34 +2,35 @@ package com.personal.Chinook.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = "customers")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "customers")
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "EmployeeId", nullable = false)
-    private Integer employeeId;
+    private UUID id;
 
-    @Column(name = "FirstName", nullable = false, length = 20)
+    @Column(name = "FirstName", nullable = false, length = 120)
     private String firstName;
 
-    @Column(name = "LastName", nullable = false, length = 20)
+    @Column(name = "LastName", nullable = false, length = 120)
     private String lastName;
 
     @Column(name = "Title", length = 30)
     private String title;
 
-    @Column(name = "BirthDate")
+    @Column(name = "BirthDate", nullable = false)
     private Timestamp birthDate;
 
     @Column(name = "HireDate")
@@ -56,14 +57,14 @@ public class Employee {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @Column(name = "Email", length = 60)
+    @Column(name = "Email", length = 120)
     private String email;
 
     // jsonignore property to not display it as part of request/response body
     // relationship left untouched for jpql benefit for queries
     @JsonIgnore
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Customer> customerList;
+    private List<Customer> customers;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
