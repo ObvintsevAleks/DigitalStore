@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -16,8 +18,9 @@ import java.math.BigDecimal;
 public class InvoiceLine {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "InvoiceLineId", nullable = false)
-    private Integer invoiceLineId;
+    private UUID id;
 
     @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
