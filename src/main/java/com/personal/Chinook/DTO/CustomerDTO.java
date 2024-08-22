@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerDTO {
 
     @Schema(description = "Идентификатор клиента", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
+    @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private final Integer id;
 
     @Schema(description = "Имя клиента", example = "Biba")

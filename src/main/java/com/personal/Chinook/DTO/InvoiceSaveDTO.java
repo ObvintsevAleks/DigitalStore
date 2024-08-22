@@ -4,18 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Schema(description = "Инвойс")
 @Getter
 @AllArgsConstructor
-public class InvoiceDTO {
-
-    @Schema(description = "Идентификатор инвойса", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
-    private UUID id;
+public class InvoiceSaveDTO {
 
     @Schema(description = "Дата инвойса")
     @JsonProperty(value ="invoiceDate",  required = true)
@@ -48,4 +44,5 @@ public class InvoiceDTO {
     @Schema(description = "Клиент", example = "Biba")
     @JsonProperty(value = "customerDto",  required = true)
     private CustomerDTO customerDto;
+
 }

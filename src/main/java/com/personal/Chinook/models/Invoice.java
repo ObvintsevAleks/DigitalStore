@@ -1,41 +1,43 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = "invoiceLines")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "invoiceLines")
 public class Invoice {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "InvoiceId", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "InvoiceDate", nullable = false)
     private Timestamp invoiceDate;
 
-    @Column(name = "BillingAddress", length = 70)
+    @Column(name = "BillingAddress", length = 70, nullable = false)
     private String billingAddress;
 
-    @Column(name = "BillingCity", length = 40)
+    @Column(name = "BillingCity", length = 120)
     private String billingCity;
 
-    @Column(name = "BillingState", length = 40)
+    @Column(name = "BillingState", length = 120)
     private String billingState;
 
-    @Column(name = "BillingCountry", length = 40)
+    @Column(name = "BillingCountry", length = 120)
     private String billingCountry;
 
-    @Column(name = "BillingPostalCode", length = 10)
+    @Column(name = "BillingPostalCode", length = 120)
     private String billingPostalCode;
 
     @Column(name = "Total", nullable = false, precision = 10, scale = 2)
@@ -49,6 +51,7 @@ public class Invoice {
     )
     private Customer customer;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
-    private List<InvoiceLine> invoiceLineList;
+    private List<InvoiceLine> invoiceLines;
 }
