@@ -27,10 +27,9 @@ public class GenreService {
         return genreMapper.toGenreDTO(genre);
     }
 
-
     @Transactional(readOnly = true)
     public GenreDTO getGenreById(UUID id) throws NotFoundInDBException {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Жанр по id = "+ id));
         return genreMapper.toGenreDTO(genre);
     }
 
@@ -42,7 +41,7 @@ public class GenreService {
 
     @Transactional
     public GenreDTO updateGenre(GenreDTO genreDTO) throws NotFoundInDBException {
-        Genre genreEntity = genreRepository.findById(genreDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
+        Genre genreEntity = genreRepository.findById(genreDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найден Жанр по id = "+ genreDTO.getId()));
         if (genreMapper.toGenreDTO(genreEntity).equals(genreDTO)) {
             return genreMapper.toGenreDTO(genreEntity);
         }
@@ -53,8 +52,9 @@ public class GenreService {
 
     @Transactional
     public GenreDTO deleteGenreById(UUID id) throws NotFoundInDBException {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Жанр по id = "+ id));
         genreRepository.deleteById(id);
         return genreMapper.toGenreDTO(genre);
     }
+
 }

@@ -28,23 +28,22 @@ public class ArtistController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public ArtistDTO getArtistById(@PathVariable("id") UUID artistId) {
+    public ArtistDTO getArtist(@PathVariable("id") UUID artistId) {
         log.info("Request to display a artist with ID {}", artistId);
         return service.getArtistById(artistId);
     }
 
     @ApiUpdate
     @PutMapping
-    public ResponseEntity<?> updateArtistByDto(@RequestBody ArtistDTO artistDTO) {
+    public ResponseEntity<?> updateArtist(@RequestBody ArtistDTO artistDTO) {
         return new ResponseEntity<>(service.updateArtist(artistDTO), HttpStatus.OK);
     }
 
     @ApiDelete
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("id") UUID artistId) {
+    public ResponseEntity<?> deleteArtist(@PathVariable("id") UUID artistId) {
         return new ResponseEntity<>(service.deleteArtistById(artistId), HttpStatus.NO_CONTENT);
     }
-
 
     @PostMapping
     @ApiCreate
@@ -57,6 +56,5 @@ public class ArtistController {
     public ResponseEntity<?> getArtistByName(@PathVariable("byName") String artistName) {
         return new ResponseEntity<>(service.getArtistsByName(artistName), HttpStatus.OK);
     }
-
 
 }

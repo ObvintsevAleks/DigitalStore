@@ -20,7 +20,6 @@ public class MediaTypeService {
     private final MediaTypeRepository mediaTypeRepository;
     private final MediaTypeMapper mediaTypeMapper;
 
-
     @Transactional
     public MediaTypeDTO createMediaType(MediaTypeSaveDTO mediaTypeSaveDTO) {
         MediaType mediaType = mediaTypeMapper.toMediaType(mediaTypeSaveDTO);
@@ -28,10 +27,9 @@ public class MediaTypeService {
         return mediaTypeMapper.toMediaTypeDTO(mediaType);
     }
 
-
     @Transactional(readOnly = true)
     public MediaTypeDTO getMediaTypeById(UUID id) throws NotFoundInDBException {
-        MediaType mediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        MediaType mediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден формат медиа файла по id = "+ id));
         return mediaTypeMapper.toMediaTypeDTO(mediaType);
     }
 
@@ -43,7 +41,7 @@ public class MediaTypeService {
 
     @Transactional
     public MediaTypeDTO updateMediaType(MediaTypeDTO mediaTypeDTO) throws NotFoundInDBException {
-        MediaType mediaTypeEntity = mediaTypeRepository.findById(mediaTypeDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
+        MediaType mediaTypeEntity = mediaTypeRepository.findById(mediaTypeDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найден формат медиа файла по id = "+ mediaTypeDTO.getId()));
         if (mediaTypeMapper.toMediaTypeDTO(mediaTypeEntity).equals(mediaTypeDTO)) {
             return mediaTypeMapper.toMediaTypeDTO(mediaTypeEntity);
         }
@@ -54,7 +52,7 @@ public class MediaTypeService {
 
     @Transactional
     public MediaTypeDTO deleteMediaTypeById(UUID id) throws NotFoundInDBException {
-        MediaType mediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        MediaType mediaType = mediaTypeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден формат медиа файла по id = "+ id));
         mediaTypeRepository.deleteById(id);
         return mediaTypeMapper.toMediaTypeDTO(mediaType);
     }

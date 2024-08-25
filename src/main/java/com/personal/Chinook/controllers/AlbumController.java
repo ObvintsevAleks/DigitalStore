@@ -25,13 +25,11 @@ import java.util.UUID;
 @RequestMapping("/albums")
 public class AlbumController {
 
-
     private final AlbumService service;
-
 
     @ApiGet
     @GetMapping("/{id}")
-    public AlbumDTO getArtistById(@PathVariable("id") UUID albumId) {
+    public AlbumDTO getAlbumById(@PathVariable("id") UUID albumId) {
         log.info("Request to display a album with ID {}", albumId);
         return service.getAlbumById(albumId);
     }
@@ -45,20 +43,19 @@ public class AlbumController {
 
     @ApiUpdate
     @PutMapping
-    public ResponseEntity<?> updateArtistById(@RequestBody AlbumDTO albumDTO) {
+    public ResponseEntity<?> updateAlbumById(@RequestBody AlbumDTO albumDTO) {
         return new ResponseEntity<>(service.updateAlbum(albumDTO), HttpStatus.OK);
     }
 
     @ApiDelete
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteArtistById(@PathVariable("id") UUID albumId) {
+    public ResponseEntity<?> deleteAlbumById(@PathVariable("id") UUID albumId) {
         return new ResponseEntity<>(service.deleteAlbumById(albumId), HttpStatus.NO_CONTENT);
     }
 
-
     @PostMapping
     @ApiCreate
-    public ResponseEntity<?> createArtist(@RequestBody AlbumSaveDto albumSaveDto) {
+    public ResponseEntity<?> createAlbum(@RequestBody AlbumSaveDto albumSaveDto) {
         return new ResponseEntity<>(service.createAlbum(albumSaveDto), HttpStatus.CREATED);
     }
 
@@ -67,6 +64,5 @@ public class AlbumController {
     public ResponseEntity<?> getAlbumByTitle(@PathVariable("byTitle") String albumTitle) {
         return new ResponseEntity<>(service.getArtistsByTitle(albumTitle), HttpStatus.OK);
     }
-
 
 }

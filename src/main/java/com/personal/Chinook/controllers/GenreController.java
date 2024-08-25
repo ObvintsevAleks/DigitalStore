@@ -26,7 +26,7 @@ public class GenreController {
     private final GenreService service;
 
     @ApiGet
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<?> getAllGenres() {
         log.info("Request to display all genres");
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
@@ -34,7 +34,7 @@ public class GenreController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public ResponseEntity<?> getGenreById(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> getGenre(@PathVariable("id") UUID id) {
         log.info("Request to display a artist with ID {}", id);
         return new ResponseEntity<>(service.getGenreById(id), HttpStatus.OK);
     }
@@ -56,4 +56,5 @@ public class GenreController {
     public ResponseEntity<?> deleteGenre(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteGenreById(id), HttpStatus.NO_CONTENT);
     }
+
 }

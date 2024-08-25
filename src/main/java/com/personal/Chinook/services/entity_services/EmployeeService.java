@@ -29,13 +29,13 @@ public class EmployeeService {
     
     @Transactional(readOnly = true)
     public EmployeeDTO getEmployeeById(UUID id) throws NotFoundInDBException {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден сотрудник по id = "+ id));
         return employeeMapper.toEmployeeDTO(employee);
     }
 
     @Transactional
     public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) throws NotFoundInDBException {
-        Employee employeeEntity = employeeRepository.findById(employeeDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
+        Employee employeeEntity = employeeRepository.findById(employeeDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найден сотрудник по id = "+ employeeDTO.getId()));
         if (employeeMapper.toEmployeeDTO(employeeEntity).equals(employeeDTO)) {
             return employeeMapper.toEmployeeDTO(employeeEntity);
         }
@@ -46,12 +46,11 @@ public class EmployeeService {
 
     @Transactional
     public EmployeeDTO deleteEmployeeById(UUID id) throws NotFoundInDBException {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден сотрудник по id = "+ id));
         UUID employeeId = employee.getId();
         employeeRepository.deleteById(employeeId);
         return employeeMapper.toEmployeeDTO(employee);
     }
-
 
     @Transactional(readOnly = true)
     public List<EmployeeDTO> getEmployeeListByFirstname(String firstname) throws NotFoundInDBException {

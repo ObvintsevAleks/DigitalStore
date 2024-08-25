@@ -20,10 +20,9 @@ public class TrackService {
     private final TrackRepository trackRepository;
     private final TrackMapper trackMapper;
 
-
     @Transactional(readOnly = true)
     public TrackDTO getTrackById(UUID id) throws NotFoundInDBException {
-        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ id));
         return trackMapper.toTrackDTO(track);
     }
 
@@ -36,7 +35,7 @@ public class TrackService {
 
     @Transactional
     public TrackDTO updateTrack(TrackDTO trackDTO) throws NotFoundInDBException {
-        Track trackEntity = trackRepository.findById(trackDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
+        Track trackEntity = trackRepository.findById(trackDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ trackDTO.getId()));
         if (trackMapper.toTrackDTO(trackEntity).equals(trackDTO)) {
             return trackMapper.toTrackDTO(trackEntity);
         }
@@ -47,7 +46,7 @@ public class TrackService {
 
     @Transactional
     public TrackDTO deleteTrackById(UUID id) throws NotFoundInDBException {
-        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ id));
         trackRepository.deleteById(id);
         return trackMapper.toTrackDTO(track);
     }
@@ -74,14 +73,5 @@ public class TrackService {
         List<Track> tracks = trackRepository.searchByMediaTypeId(id);
         return trackMapper.toTrackDTOs(tracks);
     }
-
-//    @Transactional(readOnly = true)
-//    public List<TrackDTO> getArtistsByName(String title) throws NotFoundInDBException {
-//        List<Track> Tracks = trackRepository.searchByTitle(title);
-//        if (Tracks.isEmpty()) {
-//            throw new NotFoundInDBException("2");
-//        }
-//        return trackMapper.toTrackDTOs(Tracks);
-//    }
 
 }

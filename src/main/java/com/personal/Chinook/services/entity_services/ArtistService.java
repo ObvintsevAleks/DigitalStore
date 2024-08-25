@@ -25,7 +25,6 @@ public class ArtistService {
     private final AlbumRepository albumRepository;
     private final ArtistMapper artistMapper;
 
-
     @Transactional
     public ArtistDTO createArtist(ArtistSaveDTO artistSaveDTO) {
         Artist artist = artistMapper.toArtist(artistSaveDTO);
@@ -33,16 +32,15 @@ public class ArtistService {
         return artistMapper.toArtistDTO(artist);
     }
 
-
     @Transactional(readOnly = true)
     public ArtistDTO getArtistById(UUID id) throws NotFoundInDBException {
-        Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException(""));
+        Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Артист по id = "+ id));
         return artistMapper.toArtistDTO(artist);
     }
 
     @Transactional
     public ArtistDTO updateArtist(ArtistDTO artistDTO) throws NotFoundInDBException {
-        Artist artistEntity = artistRepository.findById(artistDTO.getId()).orElseThrow(() -> new NotFoundInDBException(""));
+        Artist artistEntity = artistRepository.findById(artistDTO.getId()).orElseThrow(() ->  new NotFoundInDBException("Не найден Артист по id = "+ artistDTO.getId()));
         if (artistMapper.toArtistDTO(artistEntity).equals(artistDTO)) {
             return artistMapper.toArtistDTO(artistEntity);
         }
@@ -53,7 +51,7 @@ public class ArtistService {
 
     @Transactional
     public ArtistDTO deleteArtistById(UUID id) throws NotFoundInDBException {
-        Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
+        Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Артист по id = "+ id));
         UUID artistId = artist.getId();
         List<Album> albums = albumRepository.searchByArtistId(artistId);
         if(!albums.isEmpty()) {
@@ -64,7 +62,6 @@ public class ArtistService {
         return artistMapper.toArtistDTO(artist);
     }
 
-
     @Transactional(readOnly = true)
     public List<ArtistDTO> getArtistsByName(String name) throws NotFoundInDBException {
         List<Artist> artists = artistRepository.searchByName(name);
@@ -73,6 +70,5 @@ public class ArtistService {
         }
         return artistMapper.toArtistDTOs(artists);
     }
-
 
 }

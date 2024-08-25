@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.UUID;
 
 @Schema(description = "Клиент")
 @Getter
@@ -15,7 +16,7 @@ public class CustomerDTO {
 
     @Schema(description = "Идентификатор клиента", example = "8e262c04-a090-11e8-98d0-529269fb1459")
     @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
-    private final Integer id;
+    private final UUID id;
 
     @Schema(description = "Имя клиента", example = "Biba")
     @JsonProperty(value = "firstName",  required = true)

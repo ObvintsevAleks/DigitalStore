@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface InvoiceLineMapper {
 
-    InvoiceLineDTO toInvoiceDTO(InvoiceLine invoiceLine);
+    InvoiceLineDTO toInvoiceLineDTO(InvoiceLine invoiceLine);
 
     List<InvoiceLineDTO> toInvoiceLineDTOs(List<InvoiceLine> invoiceLines);
 

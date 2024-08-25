@@ -36,7 +36,6 @@ public class MediaTypeController {
         return new ResponseEntity<>(service.getMediaTypeById(id), HttpStatus.OK);
     }
 
-
     @ApiCreate
     @PostMapping
     public ResponseEntity<?> createMediaType(@RequestBody MediaTypeSaveDTO mediaTypeSaveDTO) {
@@ -54,4 +53,5 @@ public class MediaTypeController {
     public ResponseEntity<?> deleteMediaType(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteMediaTypeById(id), HttpStatus.NO_CONTENT);
     }
+
 }
