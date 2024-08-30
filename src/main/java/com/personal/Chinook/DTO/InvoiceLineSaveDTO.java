@@ -7,23 +7,24 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Schema(description = "InvoiceLine")
 @Getter
 @AllArgsConstructor
 public class InvoiceLineSaveDTO {
 
+    @Schema(description = "invoiceDto")
     @JsonProperty("invoiceDto")
     private InvoiceDTO invoiceDto;
 
+    @Schema(description = "trackDto")
     @JsonProperty("trackDto")
     private TrackDTO trackDto;
 
-    @Schema(description = "Цена юнита")
-    @JsonProperty(value =  "unitPrice",  required = true)
+    @Schema(description = "Цена юнита", example = "10.10")
+    @JsonProperty(value = "unitPrice", defaultValue = "10.10", required = true)
     private BigDecimal unitPrice;
 
     @Schema(description = "Количество", example = "2")
-    @JsonProperty(value =  "quantity",  required = true)
+    @JsonProperty(value = "quantity", defaultValue = "2", required = true)
     private Integer quantity;
 
 }

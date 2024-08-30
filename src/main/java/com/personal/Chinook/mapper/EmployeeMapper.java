@@ -19,14 +19,14 @@ public interface EmployeeMapper {
 
     List<EmployeeDTO> toEmployeeDTOs(List<Employee> employees);
 
+//    @Mapping(target = "manager", ignore = true)
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "manager", ignore = true)
     @Mapping(target = "customers", ignore = true)
     Employee toEmployee(EmployeeSaveDTO employee);
 
+//    @Mapping(target = "manager", ignore = true)
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
     @Mapping(target = "customers", ignore = true)
-    @Mapping(target = "manager", ignore = true)
     void updateEmployee(@MappingTarget Employee employee, EmployeeDTO artistDTO);
 
 }

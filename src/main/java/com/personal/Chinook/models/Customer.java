@@ -29,7 +29,7 @@ public class Customer {
     @Column(name = "Company", length = 80)
     private String company;
 
-    @Column(name = "Address", length = 70)
+    @Column(name = "Address", length = 70, nullable = false)
     private String address;
 
     @Column(name = "City", length = 40)
@@ -50,7 +50,7 @@ public class Customer {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @Column(name = "Email", nullable = false, length = 120)
+    @Column(name = "Email", length = 120, nullable = false)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -3,9 +3,11 @@ package com.personal.Chinook.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,8 +24,10 @@ public class Invoice {
     @Column(name = "InvoiceId", nullable = false)
     private UUID id;
 
-    @Column(name = "InvoiceDate", nullable = false)
-    private Timestamp invoiceDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "InvoiceDate")
+    @CreatedDate
+    private ZonedDateTime invoiceDate = ZonedDateTime.now();
 
     @Column(name = "BillingAddress", length = 70, nullable = false)
     private String billingAddress;

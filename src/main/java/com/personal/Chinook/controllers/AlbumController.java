@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "albums")
+@Tag(name = "album-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/albums")

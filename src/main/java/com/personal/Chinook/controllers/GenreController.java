@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "genres")
+@Tag(name = "genre-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/genres")

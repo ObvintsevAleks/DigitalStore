@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 
-@Tag(name = "mediaTypes")
+@Tag(name = "mediaType-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mediatypes")

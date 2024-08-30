@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "customers")
+@Tag(name = "customer-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/customer")

@@ -1,6 +1,5 @@
 package com.personal.Chinook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +21,12 @@ public class InvoiceLine {
     @Column(name = "InvoiceLineId", nullable = false)
     private UUID id;
 
-    @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
+    @Column(name = "UnitPrice", precision = 10, scale = 2, nullable = false)
     private BigDecimal unitPrice;
 
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "InvoiceId",

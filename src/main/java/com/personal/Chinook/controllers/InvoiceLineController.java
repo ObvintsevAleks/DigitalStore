@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "invoiceLines")
+@Tag(name = "invoiceLine-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/invoiceLine")

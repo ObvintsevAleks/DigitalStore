@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -16,17 +17,19 @@ public class InvoiceLineDTO {
     @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 
+    @Schema(description = "invoiceDto")
     @JsonProperty("invoiceDto")
     private InvoiceDTO invoiceDto;
 
+    @Schema(description = "trackDto")
     @JsonProperty("trackDto")
     private TrackDTO trackDto;
 
-    @Schema(description = "Цена юнита")
-    @JsonProperty(value =  "unitPrice",  required = true)
+    @Schema(description = "Цена юнита", example = "10.10")
+    @JsonProperty(value = "unitPrice", defaultValue = "10.10", required = true)
     private BigDecimal unitPrice;
 
     @Schema(description = "Количество", example = "2")
-    @JsonProperty(value =  "quantity",  required = true)
+    @JsonProperty(value = "quantity", defaultValue = "2", required = true)
     private Integer quantity;
 }

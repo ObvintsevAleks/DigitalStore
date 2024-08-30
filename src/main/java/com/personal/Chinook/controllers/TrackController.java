@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "tracks")
+@Tag(name = "track-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/tracks")

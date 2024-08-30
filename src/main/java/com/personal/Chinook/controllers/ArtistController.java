@@ -18,10 +18,10 @@ import java.util.UUID;
 
 
 @Slf4j
-@Tag(name = "artists")
+@Tag(name = "artist-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/artists")
+@RequestMapping("/artist")
 public class ArtistController {
 
     private final ArtistService service;

@@ -3,8 +3,10 @@ package com.personal.Chinook.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,13 +32,17 @@ public class Employee {
     @Column(name = "Title", length = 30)
     private String title;
 
-    @Column(name = "BirthDate", nullable = false)
-    private Timestamp birthDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "BirthDate")
+    @CreatedDate
+    private ZonedDateTime birthDate = ZonedDateTime.now();
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "HireDate")
-    private Timestamp hireDate;
+    @CreatedDate
+    private ZonedDateTime hireDate = ZonedDateTime.now();
 
-    @Column(name = "Address", length = 70)
+    @Column(name = "Address", length = 70, nullable = false)
     private String address;
 
     @Column(name = "City", length = 40)
@@ -57,7 +63,7 @@ public class Employee {
     @Column(name = "Fax", length = 24)
     private String fax;
 
-    @Column(name = "Email", length = 120)
+    @Column(name = "Email", length = 120, nullable = false)
     private String email;
 
     // jsonignore property to not display it as part of request/response body
@@ -66,12 +72,12 @@ public class Employee {
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<Customer> customers;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "ReportsTo",
-            referencedColumnName = "EmployeeId",
-            foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo")
-    )
-    private Employee manager;
+//    @JsonIgnore
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(
+//            name = "ReportsTo",
+//            referencedColumnName = "EmployeeId",
+//            foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo")
+//    )
+//    private Employee manager;
 }

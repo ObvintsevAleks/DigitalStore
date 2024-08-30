@@ -13,14 +13,14 @@ import java.util.UUID;
 public class ArtistDTO {
 
     @Schema(description = "Идентификатор артиста", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
+    @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 
     @Schema(description = "Имя артиста", example = "Luke")
-    @JsonProperty(value = "Name", defaultValue = "Luke", required = true)
+    @JsonProperty(value = "name", defaultValue = "Luke", required = true)
     private String name;
 
     @Schema(description = "Фамилия артиста", example = "Barrras")
-    @JsonProperty("Surname")
+    @JsonProperty("surname")
     private String surname;
 }
