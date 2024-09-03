@@ -21,7 +21,7 @@ import java.util.UUID;
 @Tag(name = "artist-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/artist")
+@RequestMapping("/artists")
 public class ArtistController {
 
     private final ArtistService service;
@@ -52,8 +52,8 @@ public class ArtistController {
     }
 
     @ApiGet
-    @GetMapping("/{byName}")
-    public ResponseEntity<?> getArtistByName(@PathVariable("byName") String artistName) {
+    @GetMapping("/{name}")
+    public ResponseEntity<?> getArtistByName(@PathVariable("name") String artistName) {
         return new ResponseEntity<>(service.getArtistsByName(artistName), HttpStatus.OK);
     }
 

@@ -35,8 +35,8 @@ public class AlbumController {
     }
 
     @ApiGet
-    @GetMapping("/{byArtistId}")
-    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("byArtistId") UUID artistId) {
+    @GetMapping("/{artistId}")
+    public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("artistId") UUID artistId) {
         log.info("Request to display all albums by artistID {}", artistId);
         return service.getAllAlbumsByArtistId(artistId);
     }

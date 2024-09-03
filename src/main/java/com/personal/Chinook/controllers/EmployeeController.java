@@ -51,14 +51,14 @@ public class EmployeeController {
     }
 
     @ApiGet
-    @GetMapping("/{firstname}")
-    public ResponseEntity<?> getEmployeeByLastname(@PathVariable("firstname") String firstName) {
+    @GetMapping("/{name}/firstname")
+    public ResponseEntity<?> getEmployeeByLastname(@PathVariable("name") String firstName) {
         return new ResponseEntity<>(service.getEmployeeListByFirstname(firstName), HttpStatus.OK);
     }
 
     @ApiGet
-    @GetMapping("/{lastname}")
-    public ResponseEntity<?> getEmployeeByFirstname(@PathVariable("lastname") String lastname) {
+    @GetMapping("/{name}/lastname")
+    public ResponseEntity<?> getEmployeeByFirstname(@PathVariable("name") String lastname) {
         return new ResponseEntity<>(service.getEmployeeListByLastname(lastname), HttpStatus.OK);
     }
 

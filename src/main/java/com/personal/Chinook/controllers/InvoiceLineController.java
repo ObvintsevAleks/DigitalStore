@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Slf4j
-@Tag(name = "invoiceLine-controller")
+@Tag(name = "invoice-line-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/invoiceLine")
+@RequestMapping("/invoice-lines")
 public class InvoiceLineController {
 
     private final InvoiceLineService service;
