@@ -49,9 +49,10 @@ public class Invoice {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "customerId",
-            referencedColumnName = "customerId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceCustomerId")
+            name = "CustomerId",
+            referencedColumnName = "CustomerId",
+            foreignKey = @ForeignKey(name = "FK_InvoiceCustomerId"),
+            nullable = false
     )
     private Customer customer;
 

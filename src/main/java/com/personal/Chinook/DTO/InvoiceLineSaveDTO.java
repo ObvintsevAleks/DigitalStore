@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class InvoiceLineSaveDTO {
 
-    @Schema(description = "invoiceDto")
-    @JsonProperty("invoiceDto")
-    private InvoiceDTO invoiceDto;
+    @Schema(description = "invoice")
+    @JsonProperty(value = "invoice", required = true)
+    private InvoiceDTO invoice;
 
-    @Schema(description = "trackDto")
-    @JsonProperty("trackDto")
-    private TrackDTO trackDto;
+    @Schema(description = "track")
+    @JsonProperty(value = "track", required = true)
+    private TrackDTO track;
 
     @Schema(description = "Цена юнита", example = "10.10")
     @JsonProperty(value = "unitPrice", defaultValue = "10.10", required = true)

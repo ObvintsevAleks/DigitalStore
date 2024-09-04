@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -42,7 +41,7 @@ public class InvoiceSaveDTO {
     private BigDecimal total;
 
     @Schema(description = "Клиент")
-    @JsonProperty(value = "customerDto", required = true)
-    private CustomerDTO customerDto;
+    @JsonProperty(value = "customer", required = true)
+    private CustomerDTO customer;
 
 }

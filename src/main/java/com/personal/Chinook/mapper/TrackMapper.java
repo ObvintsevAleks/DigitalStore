@@ -10,21 +10,18 @@ import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {MediaTypeMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface TrackMapper {
-
 
     TrackDTO toTrackDTO(Track track);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "playlistList", ignore = true)
     @Mapping(target = "invoiceLineList", ignore = true)
     Track toTrack(TrackSaveDTO trackSaveDTO);
 
     List<TrackDTO> toTrackDTOs(List<Track> tracks);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "playlistList", ignore = true)
     @Mapping(target = "invoiceLineList", ignore = true)
     void updateTrack(@MappingTarget Track track, TrackDTO trackDTO);
 

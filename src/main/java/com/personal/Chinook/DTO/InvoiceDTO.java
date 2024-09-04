@@ -47,6 +47,6 @@ public class InvoiceDTO {
     private BigDecimal total;
 
     @Schema(description = "Клиент")
-    @JsonProperty(value = "customerDto", required = true)
-    private CustomerDTO customerDto;
+    @JsonProperty(value = "customer", required = true)
+    private CustomerDTO customer;
 }

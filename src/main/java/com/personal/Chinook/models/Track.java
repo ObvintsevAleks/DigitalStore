@@ -11,11 +11,11 @@ import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = "invoiceLineList")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "invoiceLineList")
 @Builder
-@Table(name = "track")
 public class Track {
 
     @Id
@@ -25,7 +25,6 @@ public class Track {
 
     @Column(name = "Name", nullable = false, length = 200)
     private String name;
-
 
     @Column(name = "Author", length = 220)
     private String author;
@@ -38,7 +37,6 @@ public class Track {
 
     @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -66,13 +64,6 @@ public class Track {
             nullable = false
     )
     private MediaType mediaType;
-
-    @JsonIgnore
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "trackList"
-    )
-    private List<Playlist> playlistList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)

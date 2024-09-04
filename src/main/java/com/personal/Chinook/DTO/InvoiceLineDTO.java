@@ -17,14 +17,6 @@ public class InvoiceLineDTO {
     @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 
-    @Schema(description = "invoiceDto")
-    @JsonProperty("invoiceDto")
-    private InvoiceDTO invoiceDto;
-
-    @Schema(description = "trackDto")
-    @JsonProperty("trackDto")
-    private TrackDTO trackDto;
-
     @Schema(description = "Цена юнита", example = "10.10")
     @JsonProperty(value = "unitPrice", defaultValue = "10.10", required = true)
     private BigDecimal unitPrice;
@@ -32,4 +24,13 @@ public class InvoiceLineDTO {
     @Schema(description = "Количество", example = "2")
     @JsonProperty(value = "quantity", defaultValue = "2", required = true)
     private Integer quantity;
+
+    @Schema(description = "invoice")
+    @JsonProperty(value = "invoice", required = true)
+    private InvoiceDTO invoice;
+
+    @Schema(description = "track")
+    @JsonProperty(value = "track", required = true)
+    private TrackDTO track;
+
 }

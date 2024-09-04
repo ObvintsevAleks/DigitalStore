@@ -1,9 +1,7 @@
 package com.personal.Chinook.mapper;
 
-import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.DTO.EmployeeDTO;
 import com.personal.Chinook.DTO.EmployeeSaveDTO;
-import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.models.Employee;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

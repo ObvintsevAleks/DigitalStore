@@ -31,7 +31,8 @@ public class InvoiceLine {
     @JoinColumn(
             name = "InvoiceId",
             referencedColumnName = "InvoiceId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceLineInvoiceId")
+            foreignKey = @ForeignKey(name = "FK_InvoiceLineInvoiceId"),
+            nullable = false
     )
     private Invoice invoice;
 
@@ -39,7 +40,8 @@ public class InvoiceLine {
     @JoinColumn(
             name = "TrackId",
             referencedColumnName = "TrackId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceLineTrackId")
+            foreignKey = @ForeignKey(name = "FK_InvoiceLineTrackId"),
+            nullable = false
     )
     private Track track;
 }
