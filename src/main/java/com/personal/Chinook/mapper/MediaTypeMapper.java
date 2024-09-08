@@ -15,13 +15,13 @@ public interface MediaTypeMapper {
 
     MediaTypeDTO toMediaTypeDTO(MediaType mediaType);
 
-    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "tracks", ignore = true)
     MediaType toMediaType(MediaTypeSaveDTO mediaTypeDTO);
 
     List<MediaTypeDTO> toMediaTypeDTOs(List<MediaType> mediaTypes);
 
-    @Mapping(target = "id", ignore = true) //bc we dont want to override id
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "tracks", ignore = true)
     void updateMediaType(@MappingTarget MediaType mediaType, MediaTypeDTO mediaTypeDTO);
 

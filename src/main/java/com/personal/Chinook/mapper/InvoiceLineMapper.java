@@ -17,10 +17,10 @@ public interface InvoiceLineMapper {
 
     List<InvoiceLineDTO> toInvoiceLineDTOs(List<InvoiceLine> invoiceLines);
 
-    @Mapping(target = "id", ignore = true)  //bc we dont want to override id
+    @Mapping(target = "id", ignore = true)
     InvoiceLine toInvoiceLine(InvoiceLineSaveDTO invoiceLineSaveDTO);
 
-    @Mapping(target = "id", ignore = true)  //bc we dont want to override id
+    @Mapping(target = "id", ignore = true)
     void updateInvoiceLine(@MappingTarget InvoiceLine invoiceLine, InvoiceLineDTO invoiceLineDTO);
 
 }

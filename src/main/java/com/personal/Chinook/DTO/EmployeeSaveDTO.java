@@ -5,31 +5,32 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
 public class EmployeeSaveDTO {
 
-    @Schema(description = "Имя работника", example = "Biba")
+    @Schema(description = "Имя", example = "Biba")
     @JsonProperty(value = "firstName", defaultValue = "Biba", required = true)
     private String firstName;
 
-    @Schema(description = "Фамилия работника", example = "Boba")
+    @Schema(description = "Фамилия", example = "Boba")
     @JsonProperty(value = "lastName", defaultValue = "Biba", required = true)
     private String lastName;
 
-    @Schema(description = "title", example = "tipa title")
-    @JsonProperty(value = "title")
-    private String title;
+    @Schema(description = "Позиция", example = "SHOP_ASSISTANT",
+            allowableValues = {"DIRECTOR", "MANAGER", "SHOP_ASSISTANT", "TRAINEE"})
+    @JsonProperty(value = "position", defaultValue = "SHOP_ASSISTANT", required = true)
+    private String position;
 
-    @Schema(description = "День рождения", example = "2019-08-06T16:30:00Z")
-    @JsonProperty(value = "birthDate", defaultValue = "2019-08-06T16:30:00Z", required = true)
-    private ZonedDateTime birthDate;
+    @Schema(description = "День рождения", example = "2019-08-06")
+    @JsonProperty(value = "birthDate", defaultValue = "2019-08-06", required = true)
+    private LocalDate birthDate;
 
-    @Schema(description = "Дата найма", example = "2019-08-06T16:30:00Z")
-    @JsonProperty(value = "hireDate")
-    private ZonedDateTime hireDate;
+    @Schema(description = "Дата найма", example = "2019-08-06")
+    @JsonProperty(value = "hireDate", defaultValue = "2019-08-06", required = true)
+    private LocalDate hireDate;
 
     @Schema(description = "Адрес", example = "ул Пушкина, д. 125, кв. 22")
     @JsonProperty(value = "address", defaultValue = "ул Пушкина, д. 125, кв. 22", required = true)
@@ -63,7 +64,4 @@ public class EmployeeSaveDTO {
     @JsonProperty(value = "email", defaultValue = "somemail@mail.com", required = true)
     private String email;
 
-//    @Schema(description = "Менеджер, кто нанял работника")
-//    @JsonProperty(value = "reportsTo")
-//    private Integer reportsTo;
 }

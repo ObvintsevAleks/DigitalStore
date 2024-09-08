@@ -1,6 +1,5 @@
 package com.personal.Chinook.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -8,33 +7,32 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
 public class InvoiceSaveDTO {
 
-    @Schema(description = "Дата инвойса", example = "2019-08-06T16:30:00Z")
+    @Schema(description = "Дата заказа", example = "2019-08-06T16:30:00Z")
     @JsonProperty(value = "invoiceDate", defaultValue = "2019-08-06T16:30:00Z", required = true)
     private ZonedDateTime invoiceDate;
 
-    @Schema(description = "Адрес оплаты", example = "Tumen, Pushkin st. 22, flat 10")
+    @Schema(description = "Адрес", example = "Tumen, Pushkin st. 22, flat 10")
     @JsonProperty(value = "billingAddress", defaultValue = "Tumen, Pushkin st. 22, flat 10")
     private String billingAddress;
 
-    @Schema(description = "Город адреса оплаты", example = "Tumen")
+    @Schema(description = "Город", example = "Tumen")
     @JsonProperty(value = "billingCity", defaultValue = "Tumen")
     private String billingCity;
 
-    @Schema(description = "Штат/регион оплаты", example = "Tumen region")
+    @Schema(description = "Штат/регион", example = "Tumen region")
     @JsonProperty(value = "billingState", defaultValue = "Tumen region")
     private String billingState;
 
-    @Schema(description = "Страна оплаты", example = "Russia")
+    @Schema(description = "Страна", example = "Russia")
     @JsonProperty(value = "billingCountry", defaultValue = "Russia")
     private String billingCountry;
 
-    @Schema(description = "Почтовый код оплаты", example = "6440111")
+    @Schema(description = "Почтовый код", example = "6440111")
     @JsonProperty(value = "billingPostalCode", defaultValue = "6440111")
     private String billingPostalCode;
 
@@ -46,9 +44,8 @@ public class InvoiceSaveDTO {
     @JsonProperty(value = "customer", required = true)
     private CustomerDTO customer;
 
-    @JsonIgnore
-    @Schema(description = "Идентификатор invoice-line")
-    @JsonProperty("tracks")
-    private List<InvoiceLineDTO> invoiceLines;
+    @Schema(description = "Сотрудник")
+    @JsonProperty(value = "employee", required = true)
+    private EmployeeDTO employee;
 
 }

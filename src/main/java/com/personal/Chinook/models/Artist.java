@@ -3,7 +3,10 @@ package com.personal.Chinook.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,11 +23,19 @@ public class Artist {
     @Column(name = "ArtistId", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", length = 120, nullable = false)
+    @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "Surname", length = 120, nullable = false)
+    @Column(name = "Surname", nullable = false)
     private String surname;
+
+    @Column(name = "Pseudonym", nullable = false)
+    private String pseudonym;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "BirthDate", nullable = false)
+    @CreatedDate
+    private LocalDate birthDate;
 
     // jsonignore property to not display it as part of request/response body
     // relationship left untouched for jpql benefit for queries

@@ -1,22 +1,20 @@
 package com.personal.Chinook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "invoiceLines")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "invoiceLines")
 public class Invoice {
 
     @Id
@@ -29,19 +27,19 @@ public class Invoice {
     @CreatedDate
     private ZonedDateTime invoiceDate = ZonedDateTime.now();
 
-    @Column(name = "BillingAddress", length = 70, nullable = false)
+    @Column(name = "BillingAddress", nullable = false)
     private String billingAddress;
 
-    @Column(name = "BillingCity", length = 120)
+    @Column(name = "BillingCity")
     private String billingCity;
 
-    @Column(name = "BillingState", length = 120)
+    @Column(name = "BillingState")
     private String billingState;
 
-    @Column(name = "BillingCountry", length = 120)
+    @Column(name = "BillingCountry")
     private String billingCountry;
 
-    @Column(name = "BillingPostalCode", length = 120)
+    @Column(name = "BillingPostalCode")
     private String billingPostalCode;
 
     @Column(name = "Total", nullable = false, precision = 10, scale = 2)
@@ -56,7 +54,13 @@ public class Invoice {
     )
     private Customer customer;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY)
-    private List<InvoiceLine> invoiceLines;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "EmployeeId",
+            referencedColumnName = "EmployeeId",
+            foreignKey = @ForeignKey(name = "FK_InvoiceEmployeeId"),
+            nullable = false
+    )
+    private Employee employee;
+
 }

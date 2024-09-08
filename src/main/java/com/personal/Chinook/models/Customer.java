@@ -1,18 +1,19 @@
 package com.personal.Chinook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "invoices")
-@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "invoices")
+@AllArgsConstructor
 public class Customer {
 
     @Id
@@ -20,50 +21,39 @@ public class Customer {
     @Column(name = "CustomerId", nullable = false)
     private UUID id;
 
-    @Column(name = "FirstName",length = 120, nullable = false)
+    @Column(name = "FirstName", nullable = false)
     private String firstName;
 
-    @Column(name = "LastName", length = 120, nullable = false)
+    @Column(name = "LastName", nullable = false)
     private String lastName;
 
-    @Column(name = "Company", length = 80)
-    private String company;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "BirthDate")
+    @CreatedDate
+    private LocalDate birthDate;
 
-    @Column(name = "Address", length = 70, nullable = false)
+    @Column(name = "Address", nullable = false)
     private String address;
 
-    @Column(name = "City", length = 40)
+    @Column(name = "City")
     private String city;
 
-    @Column(name = "State", length = 40)
+    @Column(name = "State")
     private String state;
 
-    @Column(name = "Country", length = 40)
+    @Column(name = "Country")
     private String country;
 
-    @Column(name = "PostalCode", length = 10)
+    @Column(name = "PostalCode")
     private String postalCode;
 
-    @Column(name = "Phone", length = 24)
+    @Column(name = "Phone")
     private String phone;
 
-    @Column(name = "Fax", length = 24)
+    @Column(name = "Fax")
     private String fax;
 
-    @Column(name = "Email", length = 120, nullable = false)
+    @Column(name = "Email", nullable = false)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "EmployeeId",
-            referencedColumnName = "EmployeeId",
-            foreignKey = @ForeignKey(name = "FK_CustomerEmployeeId")
-    )
-    private Employee employee;
-
-    // jsonignore property to not display it as part of request/response body
-    // relationship left untouched for jpql benefit for queries
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Invoice> invoices;
 }

@@ -1,20 +1,21 @@
 package com.personal.Chinook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "invoiceLines")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "invoiceLines")
 @Builder
 public class Track {
 
@@ -23,13 +24,18 @@ public class Track {
     @Column(name = "TrackId", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false, length = 200)
+    @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "Author", length = 220)
+    @Column(name = "Author")
     private String author;
 
-    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "createdAt", nullable = false)
+    @CreatedDate
+    private ZonedDateTime createdAt;
+
+    @Column(name = "milliseconds")
     private Integer milliseconds;
 
     @Column(name = "Bytes")
@@ -65,7 +71,4 @@ public class Track {
     )
     private MediaType mediaType;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
-    private List<InvoiceLine> invoiceLines;
 }

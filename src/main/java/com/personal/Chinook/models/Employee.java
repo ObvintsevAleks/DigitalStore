@@ -1,21 +1,20 @@
 package com.personal.Chinook.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.personal.Chinook.models.enumpack.Position;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.ZonedDateTime;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "customers")
-@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "customers")
+@AllArgsConstructor
 public class Employee {
 
     @Id
@@ -23,61 +22,48 @@ public class Employee {
     @Column(name = "EmployeeId", nullable = false)
     private UUID id;
 
-    @Column(name = "FirstName", nullable = false, length = 120)
+    @Column(name = "FirstName", nullable = false)
     private String firstName;
 
-    @Column(name = "LastName", nullable = false, length = 120)
+    @Column(name = "LastName", nullable = false)
     private String lastName;
 
-    @Column(name = "Title", length = 30)
-    private String title;
+    @Column(name = "Position", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Position position;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(name = "BirthDate")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "BirthDate", nullable = false)
     @CreatedDate
-    private ZonedDateTime birthDate = ZonedDateTime.now();
+    private LocalDate birthDate;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(name = "HireDate")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Column(name = "HireDate", nullable = false)
     @CreatedDate
-    private ZonedDateTime hireDate = ZonedDateTime.now();
+    private LocalDate hireDate;
 
-    @Column(name = "Address", length = 70, nullable = false)
+    @Column(name = "Address", nullable = false)
     private String address;
 
-    @Column(name = "City", length = 40)
+    @Column(name = "City")
     private String city;
 
-    @Column(name = "State", length = 40)
+    @Column(name = "State")
     private String state;
 
-    @Column(name = "Country", length = 40)
+    @Column(name = "Country")
     private String country;
 
-    @Column(name = "PostalCode", length = 10)
+    @Column(name = "PostalCode")
     private String postalCode;
 
-    @Column(name = "Phone", length = 24)
+    @Column(name = "Phone")
     private String phone;
 
-    @Column(name = "Fax", length = 24)
+    @Column(name = "Fax")
     private String fax;
 
-    @Column(name = "Email", length = 120, nullable = false)
+    @Column(name = "Email", nullable = false)
     private String email;
 
-    // jsonignore property to not display it as part of request/response body
-    // relationship left untouched for jpql benefit for queries
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
-    private List<Customer> customers;
-
-//    @JsonIgnore
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(
-//            name = "ReportsTo",
-//            referencedColumnName = "EmployeeId",
-//            foreignKey = @ForeignKey(name = "FK_EmployeeReportsTo")
-//    )
-//    private Employee manager;
 }

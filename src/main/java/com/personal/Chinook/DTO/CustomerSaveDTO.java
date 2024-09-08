@@ -1,28 +1,27 @@
 package com.personal.Chinook.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @AllArgsConstructor
 public class CustomerSaveDTO {
 
-    @Schema(description = "Имя клиента", example = "Biba")
+    @Schema(description = "Имя", example = "Biba")
     @JsonProperty(value = "firstName", defaultValue = "Biba", required = true)
     private final String firstName;
 
-    @Schema(description = "Фамилия клиента", example = "Boba")
+    @Schema(description = "Фамилия", example = "Boba")
     @JsonProperty(value = "lastName", defaultValue = "Boba", required = true)
     private final String lastName;
 
-    @Schema(description = "Название компании", example = "Biba and Boba company LTD")
-    @JsonProperty(value = "company", defaultValue = "Biba and Boba company LTD")
-    private final String company;
+    @Schema(description = "День рождения", example = "2019-08-06")
+    @JsonProperty(value = "birthDate", defaultValue = "2019-08-06")
+    private LocalDate birthDate;
 
     @Schema(description = "Адрес", example = "Pushkin street 22")
     @JsonProperty(value = "address", defaultValue = "Pushkin street 22", required = true)
@@ -55,14 +54,5 @@ public class CustomerSaveDTO {
     @Schema(description = "Email", example = "somemail@mail.com")
     @JsonProperty(value = "email", defaultValue = "somemail@mail.com", required = true)
     private final String email;
-
-    @Schema(description = "DTO работника")
-    @JsonProperty(value = "employee", required = true)
-    private EmployeeDTO employee;
-
-    @JsonIgnore
-    @Schema(description = "Идентификатор инвойсов")
-    @JsonProperty("tracks")
-    private List<InvoiceDTO> tracks;
 
 }

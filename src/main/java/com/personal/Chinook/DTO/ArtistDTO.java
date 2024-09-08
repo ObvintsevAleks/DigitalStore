@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Schema(description = "Артист")
@@ -21,6 +22,14 @@ public class ArtistDTO {
     private String name;
 
     @Schema(description = "Фамилия артиста", example = "Barrras")
-    @JsonProperty("surname")
+    @JsonProperty(value = "surname", required = true)
     private String surname;
+
+    @Schema(description = "Псевдоним артиста", example = "ABc1")
+    @JsonProperty(value = "pseudonym", required = true)
+    private String pseudonym;
+
+    @Schema(description = "День рождения артиста", example = "1985-10-07")
+    @JsonProperty(value = "birthDate", required = true, defaultValue = "1985-10-07")
+    private LocalDate birthDate;
 }

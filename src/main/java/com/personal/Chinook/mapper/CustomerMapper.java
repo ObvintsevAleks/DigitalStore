@@ -17,13 +17,10 @@ public interface CustomerMapper {
 
     List<CustomerDTO> toCustomerDTOs(List<Customer> customers);
 
-    @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "invoices", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Customer toCustomer(CustomerSaveDTO customerSaveDTO);
 
-    @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "invoices", ignore = true)
+    @Mapping(target = "id", ignore = true)
     void updateCustomer(@MappingTarget Customer customer, CustomerDTO customerDTO);
-
 
 }

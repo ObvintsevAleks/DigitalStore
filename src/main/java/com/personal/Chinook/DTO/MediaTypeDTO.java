@@ -3,36 +3,33 @@ package com.personal.Chinook.DTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Schema(description = "Медиа-тип")
+@Schema(description = "Формат записи")
 @Getter
 @AllArgsConstructor
 public class MediaTypeDTO {
 
-    @Schema(description = "Идентификатор медиа-типа", example = "8e262c04-a090-11e8-98d0-529269fb1459")
-    @JsonProperty(value = "Id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
+    @Schema(description = "Идентификатор формата записи", example = "8e262c04-a090-11e8-98d0-529269fb1459")
+    @JsonProperty(value = "id", defaultValue = "8e262c04-a090-11e8-98d0-529269fb1459", required = true)
     private UUID id;
 
-    @Schema(description = "Название медиа-типа", example = "mp4")
-    @JsonProperty(value = "Name", defaultValue = "mp4", required = true)
+    @Schema(description = "Название формата записи", example = "mp4")
+    @JsonProperty(value = "name", defaultValue = "mp4", required = true)
     private String name;
 
-    @Schema(description = "Дата создания медиа-типа", example = "2019-08-06T16:30:00Z")
-    @JsonProperty(value = "createdAt", defaultValue = "2019-08-06T16:30:00Z", required = true)
-    private ZonedDateTime createdAt;
+    @Schema(description = "Дата создания формата записи", example = "2019-08-06")
+    @JsonProperty(value = "createdAt", defaultValue = "2019-08-06", required = true)
+    private LocalDate createdAt;
 
     @JsonIgnore
     @Schema(description = "Идентификатор треков")
-    @JsonProperty("Track ID List")
+    @JsonProperty("tracks")
     private List<TrackDTO> tracks;
 
 }
