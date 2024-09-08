@@ -27,9 +27,9 @@ public class InvoiceLineController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public InvoiceLineDTO getInvoiceLine(@PathVariable("id") UUID invoiceLineId) {
+    public ResponseEntity<?> getInvoiceLine(@PathVariable("id") UUID invoiceLineId) {
         log.info("Request to display a artist with ID {}", invoiceLineId);
-        return service.getInvoiceLineById(invoiceLineId);
+        return new ResponseEntity<>(service.getInvoiceLineById(invoiceLineId), HttpStatus.OK);
     }
 
     @ApiUpdate

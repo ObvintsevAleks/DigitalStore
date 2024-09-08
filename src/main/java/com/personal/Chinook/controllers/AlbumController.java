@@ -26,7 +26,6 @@ import java.util.UUID;
 public class AlbumController {
 
     private final AlbumService service;
-
     @ApiGet
     @GetMapping("/{id}")
     public AlbumDTO getAlbumById(@PathVariable("id") UUID albumId) {

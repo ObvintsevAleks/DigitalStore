@@ -1,11 +1,13 @@
 package com.personal.Chinook.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Schema(description = "Работник")
@@ -69,7 +71,8 @@ public class EmployeeDTO {
     @JsonProperty(value = "email", defaultValue = "somemail@mail.com", required = true)
     private String email;
 
-//    @Schema(description = "Менеджер, кто нанял работника")
-//    @JsonProperty(value = "reportsTo")
-//    private Integer reportsTo;
+    @JsonIgnore
+    @Schema(description = "Идентификатор клиентов")
+    @JsonProperty("customers")
+    private List<CustomerDTO> customers;
 }

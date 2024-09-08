@@ -1,5 +1,6 @@
 package com.personal.Chinook.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Schema(description = "Инвойс")
@@ -49,4 +51,10 @@ public class InvoiceDTO {
     @Schema(description = "Клиент")
     @JsonProperty(value = "customer", required = true)
     private CustomerDTO customer;
+
+    @JsonIgnore
+    @Schema(description = "Идентификатор invoice-line")
+    @JsonProperty("tracks")
+    private List<InvoiceLineDTO> invoiceLines;
+
 }

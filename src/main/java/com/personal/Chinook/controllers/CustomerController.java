@@ -27,9 +27,9 @@ public class CustomerController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public CustomerDTO getCustomer(@PathVariable("id") UUID customerId) {
+    public ResponseEntity<?> getCustomer(@PathVariable("id") UUID customerId) {
         log.info("Request to display a artist with ID {}", customerId);
-        return service.getCustomerById(customerId);
+        return new ResponseEntity<>(service.getCustomerById(customerId), HttpStatus.OK);
     }
 
     @ApiUpdate

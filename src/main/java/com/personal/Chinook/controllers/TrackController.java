@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -28,9 +27,9 @@ public class TrackController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public TrackDTO getTrackById(@PathVariable("id") UUID trackId) {
+    public ResponseEntity<?> getTrackById(@PathVariable("id") UUID trackId) {
         log.info("Request to display a album with ID {}", trackId);
-        return service.getTrackById(trackId);
+        return new ResponseEntity<>(service.getTrackById(trackId), HttpStatus.OK);
     }
 
     @ApiUpdate
@@ -53,23 +52,23 @@ public class TrackController {
 
     @ApiGet
     @GetMapping("/{albumId}")
-    public List<TrackDTO> getAllTracksByAlbumId(@PathVariable("albumId") UUID albumId) {
+    public ResponseEntity<?> getAllTracksByAlbumId(@PathVariable("albumId") UUID albumId) {
         log.info("Request to display a album with ID {}", albumId);
-        return service.getAllTracksByAlbumId(albumId);
+        return new ResponseEntity<>(service.getAllTracksByAlbumId(albumId), HttpStatus.OK);
     }
 
     @ApiGet
     @GetMapping("/{genreId}")
-    public List<TrackDTO> getAllTracksByGenreId(@PathVariable("genreId") UUID genreId) {
+    public ResponseEntity<?> getAllTracksByGenreId(@PathVariable("genreId") UUID genreId) {
         log.info("Request to display a album with ID {}", genreId);
-        return service.getAllTracksByGenreId(genreId);
+        return new ResponseEntity<>(service.getAllTracksByGenreId(genreId), HttpStatus.OK);
     }
 
     @ApiGet
     @GetMapping("/{mediaTypeId}")
-    public List<TrackDTO> getAllTracksByMediaTypeId(@PathVariable("mediaTypeId") UUID mediaTypeId) {
+    public ResponseEntity<?> getAllTracksByMediaTypeId(@PathVariable("mediaTypeId") UUID mediaTypeId) {
         log.info("Request to display a album with ID {}", mediaTypeId);
-        return service.getAllTracksByMediaTypeId(mediaTypeId);
+        return new ResponseEntity<>(service.getAllTracksByMediaTypeId(mediaTypeId), HttpStatus.OK);
     }
 
 }

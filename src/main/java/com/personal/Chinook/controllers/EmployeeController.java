@@ -27,9 +27,9 @@ public class EmployeeController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public EmployeeDTO getEmployee(@PathVariable("id") UUID employeeId) {
+    public ResponseEntity<?> getEmployee(@PathVariable("id") UUID employeeId) {
         log.info("Request to display a artist with ID {}", employeeId);
-        return service.getEmployeeById(employeeId);
+        return new ResponseEntity<>(service.getEmployeeById(employeeId), HttpStatus.OK);
     }
 
     @ApiUpdate

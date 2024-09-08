@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 
-@Tag(name = "mediaType-controller")
+@Tag(name = "media-type-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/mediatypes")
+@RequestMapping("/media-types")
 public class MediaTypeController {
 
     private final MediaTypeService service;

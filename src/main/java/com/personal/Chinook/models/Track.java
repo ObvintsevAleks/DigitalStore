@@ -11,10 +11,10 @@ import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "invoiceLineList")
+@ToString(exclude = "invoiceLines")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "invoiceLineList")
+@EqualsAndHashCode(exclude = "invoiceLines")
 @Builder
 public class Track {
 
@@ -67,5 +67,5 @@ public class Track {
 
     @JsonIgnore
     @OneToMany(mappedBy = "track", fetch = FetchType.LAZY)
-    private List<InvoiceLine> invoiceLineList;
+    private List<InvoiceLine> invoiceLines;
 }

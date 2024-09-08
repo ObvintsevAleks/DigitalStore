@@ -28,9 +28,9 @@ public class ArtistController {
 
     @ApiGet
     @GetMapping("/{id}")
-    public ArtistDTO getArtist(@PathVariable("id") UUID artistId) {
+    public ResponseEntity<?> getArtist(@PathVariable("id") UUID artistId) {
         log.info("Request to display a artist with ID {}", artistId);
-        return service.getArtistById(artistId);
+        return new ResponseEntity<>(service.getArtistById(artistId), HttpStatus.OK);
     }
 
     @ApiUpdate

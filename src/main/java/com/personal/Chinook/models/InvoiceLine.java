@@ -1,10 +1,7 @@
 package com.personal.Chinook.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -13,7 +10,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class InvoiceLine {
 
     @Id
@@ -27,6 +23,8 @@ public class InvoiceLine {
     @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "InvoiceId",
@@ -36,6 +34,8 @@ public class InvoiceLine {
     )
     private Invoice invoice;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "TrackId",

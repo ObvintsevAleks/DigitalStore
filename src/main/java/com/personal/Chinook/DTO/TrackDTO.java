@@ -1,10 +1,12 @@
 package com.personal.Chinook.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Schema(description = "Композиция")
@@ -47,5 +49,10 @@ public class TrackDTO {
     @Schema(description = "Жанр")
     @JsonProperty(value = "genre", required = true)
     private GenreDTO genre;
+
+    @JsonIgnore
+    @Schema(description = "Идентификатор invoice-line")
+    @JsonProperty("tracks")
+    private List<InvoiceLineDTO> invoiceLines;
 
 }

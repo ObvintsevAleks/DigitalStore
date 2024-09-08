@@ -16,13 +16,13 @@ public interface TrackMapper {
     TrackDTO toTrackDTO(Track track);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "invoiceLineList", ignore = true)
+    @Mapping(target = "invoiceLines", ignore = true)
     Track toTrack(TrackSaveDTO trackSaveDTO);
 
     List<TrackDTO> toTrackDTOs(List<Track> tracks);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "invoiceLineList", ignore = true)
+    @Mapping(target = "invoiceLines", ignore = true)
     void updateTrack(@MappingTarget Track track, TrackDTO trackDTO);
 
 }

@@ -1,5 +1,6 @@
 package com.personal.Chinook.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Schema(description = "Медиа-тип")
@@ -27,5 +29,10 @@ public class MediaTypeDTO {
     @Schema(description = "Дата создания медиа-типа", example = "2019-08-06T16:30:00Z")
     @JsonProperty(value = "createdAt", defaultValue = "2019-08-06T16:30:00Z", required = true)
     private ZonedDateTime createdAt;
+
+    @JsonIgnore
+    @Schema(description = "Идентификатор треков")
+    @JsonProperty("Track ID List")
+    private List<TrackDTO> tracks;
 
 }
