@@ -51,13 +51,13 @@ public class CustomerController {
     }
 
     @ApiGet
-    @GetMapping("/{name}/firstname}")
+    @GetMapping("/firstname/{name}")
     public ResponseEntity<?> getCustomerByLastname(@PathVariable("name") String firstName) {
         return new ResponseEntity<>(service.getCustomerListByFirstname(firstName), HttpStatus.OK);
     }
 
     @ApiGet
-    @GetMapping("/{name}/lastname}")
+    @GetMapping("/lastname/{name}")
     public ResponseEntity<?> getCustomerByFirstname(@PathVariable("name") String lastname) {
         return new ResponseEntity<>(service.getCustomerListByLastname(lastname), HttpStatus.OK);
     }

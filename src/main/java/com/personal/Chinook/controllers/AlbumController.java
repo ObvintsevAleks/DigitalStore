@@ -8,7 +8,13 @@ import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;
 import com.personal.Chinook.utils.swagger.ApiUpdate;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +33,9 @@ public class AlbumController {
 
     private final AlbumService service;
     @ApiGet
+    @Operation(summary = "Получить альбом по идентификатору", description = "Получить альбом по идентификатору", tags = {"album-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @GetMapping("/{id}")
     public AlbumDTO getAlbumById(@PathVariable("id") UUID albumId) {
         log.info("Request to display a album with ID {}", albumId);
@@ -34,33 +43,50 @@ public class AlbumController {
     }
 
     @ApiGet
-    @GetMapping("/{artistId}")
+    @Operation(summary = "Получить список альбомов по идентификатору артиста", description = "Получить список альбомов по идентификатору артиста", tags = {"album-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
+    @GetMapping("/albums-by-artist-id/{artistId}")
     public List<AlbumDTO> getAllAlbumsByArtistId(@PathVariable("artistId") UUID artistId) {
         log.info("Request to display all albums by artistID {}", artistId);
         return service.getAllAlbumsByArtistId(artistId);
     }
 
     @ApiUpdate
+    @Operation(summary = "Обновить альбом", description = "Обновить альбом", tags = {"album-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @PutMapping
     public ResponseEntity<?> updateAlbumById(@RequestBody AlbumDTO albumDTO) {
         return new ResponseEntity<>(service.updateAlbum(albumDTO), HttpStatus.OK);
     }
 
     @ApiDelete
+    @Operation(summary = "Удалить альбом", description = "Удалить альбом", tags = {"album-controller"})
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAlbumById(@PathVariable("id") UUID albumId) {
         return new ResponseEntity<>(service.deleteAlbumById(albumId), HttpStatus.NO_CONTENT);
     }
 
     @PostMapping
+    @Operation(summary = "Создать альбом", description = "Создать альбом", tags = {"album-controller"})
+    @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
+            content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @ApiCreate
-    public ResponseEntity<?> createAlbum(@RequestBody AlbumSaveDto albumSaveDto) {
+    public ResponseEntity<?> createAlbum(
+            @Parameter(description = "Product to add cannot null or empty.", required = true, schema = @Schema(implementation = AlbumSaveDto.class))
+            @Valid
+            @RequestBody AlbumSaveDto albumSaveDto
+    ) {
         return new ResponseEntity<>(service.createAlbum(albumSaveDto), HttpStatus.CREATED);
     }
 
     @ApiGet
-    @GetMapping("/{byTitle}")
-    public ResponseEntity<?> getAlbumByTitle(@PathVariable("byTitle") String albumTitle) {
+    @Operation(summary = "Получить список альбомов по заголовку", description = "Получить список альбомов по заголовку", tags = {"album-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
+    @GetMapping("/albums-by-title/{title}")
+    public ResponseEntity<?> getAlbumByTitle(@PathVariable("title") String albumTitle) {
         return new ResponseEntity<>(service.getArtistsByTitle(albumTitle), HttpStatus.OK);
     }
 

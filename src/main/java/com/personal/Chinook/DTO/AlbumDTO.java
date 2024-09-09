@@ -24,8 +24,7 @@ public class AlbumDTO {
     @JsonProperty(value = "title", defaultValue = "The first album", required = true)
     private String title;
 
-    @Schema(description = "Тип альбома", example = "SINGLE",
-            allowableValues = {"ALBUM", "EP", "SINGLE"})
+    @Schema(description = "Тип альбома", example = "SINGLE")
     @JsonProperty(value = "albumType", defaultValue = "SINGLE", required = true)
     private AlbumType albumType;
 

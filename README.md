@@ -17,8 +17,13 @@ Provider repository:
 Referenced (and found it on):
 <a href= "https://github.com/morenoh149/postgresDBSamples">postgresDBSamples<a/>
 <hr>
-<h3>Future implementations planned: </h3>
+<h3>TODO ёпта: </h3>
 
-- Thymeleaf
+- ui дока на сваггер нормальная
+- авторизация (по jwt спиздить с гитхаба)
+- валидация нормальная переработать
+- перевести схему на валидацию а не создание (хибернейт)
+- для схемы добавить sql с инсертом данных (спиздить с аналога той же бд)
+- отдельно попробовать написать валидлацию для поля email
 
-- Security and Authentication
+- решить проблему с зацикливанием последнего эндпоинта

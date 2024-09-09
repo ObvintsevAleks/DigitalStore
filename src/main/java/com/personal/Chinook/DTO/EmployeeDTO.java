@@ -25,8 +25,7 @@ public class EmployeeDTO {
     @JsonProperty(value = "lastName", defaultValue = "Biba", required = true)
     private String lastName;
 
-    @Schema(description = "Позиция", example = "SHOP_ASSISTANT",
-            allowableValues = {"DIRECTOR", "MANAGER", "SHOP_ASSISTANT", "TRAINEE"})
+    @Schema(description = "Позиция", example = "SHOP_ASSISTANT")
     @JsonProperty(value = "position", defaultValue = "SHOP_ASSISTANT", required = true)
     private String position;
 

@@ -28,9 +28,7 @@ public class GenreDTO {
     @JsonProperty(value = "createdAt", required = true, defaultValue = "1985-10-07")
     private LocalDate createdAt;
 
-    @Schema(description = "Направленность жанра",
-            allowableValues = {"NATIONAL", "RITUAL", "ACADEMIC", "POPULAR"}
-    )
+    @Schema(description = "Направленность жанра")
     @JsonProperty(value = "genreDirection", defaultValue = "POPULAR")
     private GenreDirection genreDirection;
 
