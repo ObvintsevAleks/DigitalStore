@@ -1,5 +1,7 @@
 package com.personal.Chinook.controllers;
 
+import com.personal.Chinook.DTO.AlbumDTO;
+import com.personal.Chinook.DTO.AlbumSaveDto;
 import com.personal.Chinook.DTO.MediaTypeDTO;
 import com.personal.Chinook.DTO.MediaTypeSaveDTO;
 import com.personal.Chinook.services.entity_services.MediaTypeService;
@@ -7,7 +9,13 @@ import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;
 import com.personal.Chinook.utils.swagger.ApiUpdate;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,30 +33,45 @@ public class MediaTypeController {
     private final MediaTypeService service;
 
     @ApiGet
-    @GetMapping
+    @Operation(summary = "Получить все медиа-типы", description = "Получить все медиа-типы", tags = {"media-type-controller"})
+    @GetMapping("/all")
     public ResponseEntity<?> getAllMediaTypes() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @ApiGet
+    @Operation(summary = "Получить медиа-тип по идентификатору", description = "Получить медиа-тип по идентификатору", tags = {"media-type-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @GetMapping("/{id}")
     public ResponseEntity<?> getMediaTypeById(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.getMediaTypeById(id), HttpStatus.OK);
     }
 
     @ApiCreate
+    @Operation(summary = "Создать медиа-тип", description = "Создать медиа-тип", tags = {"media-type-controller"})
+    @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
+            content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @PostMapping
-    public ResponseEntity<?> createMediaType(@RequestBody MediaTypeSaveDTO mediaTypeSaveDTO) {
+    public ResponseEntity<?> createMediaType(
+            @Parameter(description = "Product to add cannot null or empty.", required = true, schema = @Schema(implementation = MediaTypeSaveDTO.class))
+            @Valid
+            @RequestBody MediaTypeSaveDTO mediaTypeSaveDTO
+    ) {
         return new ResponseEntity<>(service.createMediaType(mediaTypeSaveDTO), HttpStatus.CREATED);
     }
 
     @ApiUpdate
+    @Operation(summary = "Обновить медиа-тип", description = "Обновить медиа-тип", tags = {"media-type-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @PutMapping
     public ResponseEntity<?> updateMediaType(@RequestBody MediaTypeDTO mediaTypeDTO) {
         return new ResponseEntity<>(service.updateMediaType(mediaTypeDTO), HttpStatus.OK);
     }
 
     @ApiDelete
+    @Operation(summary = "Удалить медиа-тип", description = "Удалить медиа-тип", tags = {"media-type-controller"})
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMediaType(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteMediaTypeById(id), HttpStatus.NO_CONTENT);
