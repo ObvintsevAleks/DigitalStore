@@ -23,6 +23,7 @@ Referenced (and found it on):
 - решить проблему с зацикливанием последнего эндпоинта +++
 - авторизаци€ (по jwt спиздить с гитхаба)
 - валидаци€ нормальна€ переработать
+- валидаци€, добавить при создании ошибку (не найдена вложенна€ сущность)
 - перевести схему на валидацию а не создание (хибернейт)
 - дл€ схемы добавить sql с инсертом данных (спиздить с аналога той же бд)
 - отдельно попробовать написать валидлацию дл€ пол€ email
@@ -32,4 +33,6 @@ Referenced (and found it on):
 - album controller, список альбомов по фамилии и имени артиста
 - genre controller, mediaType-controller (уникальность по имени)
 - /tracks/all-tracks-by-media-type/{id} - не работает нормально
-- track controller, by id track, stack overflow error
+- track controller, get all tracks by artist Id
+- invoice line controller, get all invoice line by trackId;  get all track by invoiceId 
+- invoice controller, get all customers by employeeId; get all employees by customersId
