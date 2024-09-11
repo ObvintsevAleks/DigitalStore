@@ -13,10 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "tracks")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "tracks")
 public class Genre {
 
     @Id
@@ -35,9 +33,5 @@ public class Genre {
     @Column(name = "GenreDirection", nullable = false)
     @Enumerated(EnumType.STRING)
     private GenreDirection genreDirection;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
-    private List<Track> tracks;
 
 }

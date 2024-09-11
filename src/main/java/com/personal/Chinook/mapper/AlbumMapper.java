@@ -16,15 +16,12 @@ public interface AlbumMapper {
     AlbumDTO toAlbumDTO(Album album);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "tracks", ignore = true)
     Album toAlbum(AlbumSaveDto albumSaveDto);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "tracks", ignore = true)
     List<AlbumDTO> toAlbumDTOs(List<Album> albums);
 
     @Mapping(target = "id", ignore = true) //bc we dont want to override id
-    @Mapping(target = "tracks", ignore = true)
     void updateAlbum(@MappingTarget Album album, AlbumDTO albumDTO);
 
 }

@@ -12,8 +12,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "tracks")
-@EqualsAndHashCode(exclude = "tracks")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -32,7 +30,4 @@ public class MediaType {
     @CreatedDate
     private LocalDate createdAt;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "mediaType", fetch = FetchType.LAZY)
-    private List<Track> tracks;
 }

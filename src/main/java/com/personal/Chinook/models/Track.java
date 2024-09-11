@@ -1,19 +1,20 @@
 package com.personal.Chinook.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
+@ToString(exclude = "invoiceLines")
+@EqualsAndHashCode(exclude = "invoiceLines")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -13,10 +13,8 @@ import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "tracks")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "tracks")
 public class Album {
 
     @Id
@@ -45,7 +43,4 @@ public class Album {
     )
     private Artist artist;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
-    private List<Track> tracks;
 }

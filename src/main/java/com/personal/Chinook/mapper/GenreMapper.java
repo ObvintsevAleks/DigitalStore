@@ -16,13 +16,11 @@ public interface GenreMapper {
     GenreDTO toGenreDTO(Genre genre);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "tracks", ignore = true)
     Genre toGenre(GenreSaveDTO artist);
 
     List<GenreDTO> toGenreDTOs(List<Genre> genres);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "tracks", ignore = true)
     void updateGenre(@MappingTarget Genre genre, GenreDTO genreDTO);
 
 }
