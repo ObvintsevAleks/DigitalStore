@@ -94,4 +94,20 @@ public class TrackController {
         return new ResponseEntity<>(service.getAllTracksByMediaTypeId(mediaTypeId), HttpStatus.OK);
     }
 
+    @ApiGet
+    @Operation(summary = "Получить все аудиозаписи по идентификатору артиста", description = "Получить все аудиозаписи по идентификатору артиста", tags = {"track-controller"})
+    @GetMapping("/all-tracks-by-artist-id/{id}")
+    public ResponseEntity<?> getAllTracksyArtistId(@PathVariable("id") UUID artistId) {
+        log.info("Request to display a album with ID {}", artistId);
+        return new ResponseEntity<>(service.getAllTracksByArtistId(artistId), HttpStatus.OK);
+    }
+
+    @ApiGet
+    @Operation(summary = "Получить все аудиозаписи по идентификатору артиста", description = "Получить все аудиозаписи по идентификатору артиста", tags = {"track-controller"})
+    @GetMapping("/all-tracks-by-artist-pseudonym/{pseudonym}")
+    public ResponseEntity<?> getAllTracksyArtistId(@PathVariable("pseudonym") String artistPseudonym) {
+        log.info("Request to display a album with ID {}", artistPseudonym);
+        return new ResponseEntity<>(service.getAllTracksByArtistPseudonym(artistPseudonym), HttpStatus.OK);
+    }
+
 }

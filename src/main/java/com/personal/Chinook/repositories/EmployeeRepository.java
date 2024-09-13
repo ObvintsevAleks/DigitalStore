@@ -8,15 +8,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
     @Query("select e from Employee e where e.firstName like %:firstname% ")
-    List<Employee> searchByFirstname(@Param("firstname") String firstname);
+    Optional<List<Employee>> searchByFirstname(@Param("firstname") String firstname);
 
     @Query("select e from Employee e where e.lastName like %:lastname% ")
-    List<Employee> searchByLastname(@Param("lastname") String lastname);
+    Optional<List<Employee>> searchByLastname(@Param("lastname") String lastname);
 
 }

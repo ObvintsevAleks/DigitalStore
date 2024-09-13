@@ -84,4 +84,14 @@ public class ArtistController {
         return new ResponseEntity<>(service.getArtistsByName(artistName), HttpStatus.OK);
     }
 
+    @ApiGet
+    @Operation(summary = "Получить список артистов по имени", description = "Получить список артистов по псевдониму", tags = {"artist-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(allOf = ArtistDTO.class)))
+    @GetMapping("/artists-by-pseudonym/{pseudonym}")
+    public ResponseEntity<?> getArtistByPseudonym(@PathVariable("pseudonym") String pseudonym) {
+        return new ResponseEntity<>(service.getArtistsByName(pseudonym), HttpStatus.OK);
+    }
+
+
 }

@@ -68,4 +68,24 @@ public class InvoiceLineController {
         return new ResponseEntity<>(service.createInvoiceLine(invoiceLineSaveDTO), HttpStatus.CREATED);
     }
 
+    @ApiGet
+    @Operation(summary = "Получить список invoice-line по идентификатору аудиозаписи", description = "Получить список invoice-line по идентификатору аудиозаписи", tags = {"invoice-line-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = InvoiceLineDTO.class)))
+    @GetMapping("/invoice-lines-by-track/{id}")
+    public ResponseEntity<?> getInvoiceLinesByTrackId(@PathVariable("id") UUID trackId) {
+        log.info("Request to display a artist with ID {}", trackId);
+        return new ResponseEntity<>(service.getInvoiceLineByTrackId(trackId), HttpStatus.OK);
+    }
+
+    @ApiGet
+    @Operation(summary = "Получить список invoice-line по идентификатору заказа", description = "Получить список invoice-line по идентификатору заказа", tags = {"invoice-line-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = InvoiceLineDTO.class)))
+    @GetMapping("/all-invoice-line-by-invoice/{id}")
+    public ResponseEntity<?> getInvoiceLinesByInvoiceId(@PathVariable("id") UUID invoiceId) {
+        log.info("Request to display a artist with ID {}", invoiceId);
+        return new ResponseEntity<>(service.getInvoiceLineByInvoiceId(invoiceId), HttpStatus.OK);
+    }
+
 }

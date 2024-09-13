@@ -2,17 +2,21 @@ package com.personal.Chinook.services.entity_services;
 
 import com.personal.Chinook.DTO.AlbumDTO;
 import com.personal.Chinook.DTO.AlbumSaveDto;
+import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.exceptions.custom.InvalidFieldException;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
 import com.personal.Chinook.mapper.AlbumMapper;
 import com.personal.Chinook.models.Album;
+import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.models.Track;
 import com.personal.Chinook.repositories.AlbumRepository;
+import com.personal.Chinook.repositories.ArtistRepository;
 import com.personal.Chinook.repositories.TrackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +25,7 @@ import java.util.UUID;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
+    private final ArtistService artistService;
     private final TrackRepository trackRepository;
     private final AlbumMapper albumMapper;
 
@@ -29,14 +34,6 @@ public class AlbumService {
         Album album = albumRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Альбом по id = "+ id));
         return albumMapper.toAlbumDTO(album);
     }
-
-    @Transactional(readOnly = true)
-    public List<AlbumDTO> getAllAlbumsByArtistId(UUID id) throws NotFoundInDBException {
-        List<Album> albums = albumRepository.searchByArtistId(id);
-        return albumMapper.toAlbumDTOs(albums);
-    }
-
-    //toDo 4. search albums by artistName
 
     @Transactional
     public AlbumDTO createAlbum(AlbumSaveDto albumSaveDto) {
@@ -69,12 +66,26 @@ public class AlbumService {
     }
 
     @Transactional(readOnly = true)
-    public List<AlbumDTO> getArtistsByTitle(String title) throws NotFoundInDBException {
-        List<Album> albums = albumRepository.searchByTitle(title);
-        if (albums.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+    public List<AlbumDTO> getAllAlbumsByArtistId(UUID id) throws NotFoundInDBException {
+        List<Album> albums = albumRepository.searchByArtistId(id).orElseThrow(() -> new NotFoundInDBException("Не найдены альбомы по id артиста = "+ id));
         return albumMapper.toAlbumDTOs(albums);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AlbumDTO> getAlbumsByTitle(String title) throws NotFoundInDBException {
+        List<Album> albums = albumRepository.searchByTitle(title).orElseThrow(() -> new NotFoundInDBException("Не найдены альбомы по заголовку = "+ title));
+        return albumMapper.toAlbumDTOs(albums);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AlbumDTO> getAlbumsByArtistPseudonym(String pseudonym) throws NotFoundInDBException {
+        List<ArtistDTO> artists = artistService.getArtistsByPseudonym(pseudonym);
+        List<AlbumDTO> albums = new ArrayList<>();
+        for (ArtistDTO artist : artists) {
+            UUID artistId = artist.getId();
+            albums.addAll(getAllAlbumsByArtistId(artistId));
+        }
+        return albums;
     }
 
 //    @Transactional

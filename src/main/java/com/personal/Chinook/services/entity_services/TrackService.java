@@ -1,5 +1,6 @@
 package com.personal.Chinook.services.entity_services;
 
+import com.personal.Chinook.DTO.AlbumDTO;
 import com.personal.Chinook.DTO.TrackDTO;
 import com.personal.Chinook.DTO.TrackSaveDTO;
 import com.personal.Chinook.exceptions.custom.NotFoundInDBException;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +20,12 @@ import java.util.UUID;
 public class TrackService {
 
     private final TrackRepository trackRepository;
+    private final AlbumService albumService;
     private final TrackMapper trackMapper;
 
     @Transactional(readOnly = true)
     public TrackDTO getTrackById(UUID id) throws NotFoundInDBException {
-        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ id));
+        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найдена аудиозапись id = "+ id));
         return trackMapper.toTrackDTO(track);
     }
 
@@ -35,7 +38,7 @@ public class TrackService {
 
     @Transactional
     public TrackDTO updateTrack(TrackDTO trackDTO) throws NotFoundInDBException {
-        Track trackEntity = trackRepository.findById(trackDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ trackDTO.getId()));
+        Track trackEntity = trackRepository.findById(trackDTO.getId()).orElseThrow(() -> new NotFoundInDBException("Не найдена аудиозапись id = "+ trackDTO.getId()));
         if (trackMapper.toTrackDTO(trackEntity).equals(trackDTO)) {
             return trackMapper.toTrackDTO(trackEntity);
         }
@@ -46,15 +49,10 @@ public class TrackService {
 
     @Transactional
     public TrackDTO deleteTrackById(UUID id) throws NotFoundInDBException {
-        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден трэк id = "+ id));
+        Track track = trackRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найдена аудиозапись id = "+ id));
         trackRepository.deleteById(id);
         return trackMapper.toTrackDTO(track);
     }
-
-    //toDO 1. search track by mediaTypeName
-    //     2. search track by genreName
-    //     3. search track by albumName
-    //     4. search track by artistName
 
     @Transactional(readOnly = true)
     public List<TrackDTO> getAllTracksByAlbumId(UUID id) throws NotFoundInDBException {
@@ -72,6 +70,22 @@ public class TrackService {
     public List<TrackDTO> getAllTracksByMediaTypeId(UUID id) throws NotFoundInDBException {
         List<Track> tracks = trackRepository.searchByMediaTypeId(id);
         return trackMapper.toTrackDTOs(tracks);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrackDTO> getAllTracksByArtistId(UUID artistId) throws NotFoundInDBException {
+        List<AlbumDTO> albums = albumService.getAllAlbumsByArtistId(artistId);
+        List<TrackDTO> lists = new ArrayList<>();
+        albums.forEach(album -> lists.addAll(album.getTracks()));
+        return lists;
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrackDTO> getAllTracksByArtistPseudonym(String artistPseudonym) throws NotFoundInDBException {
+        List<AlbumDTO> albums = albumService.getAlbumsByArtistPseudonym(artistPseudonym);
+        List<TrackDTO> lists = new ArrayList<>();
+        albums.forEach(album -> lists.addAll(album.getTracks()));
+        return lists;
     }
 
 }

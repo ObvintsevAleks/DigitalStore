@@ -1,5 +1,6 @@
 package com.personal.Chinook.services.entity_services;
 
+import com.personal.Chinook.DTO.AlbumDTO;
 import com.personal.Chinook.DTO.ArtistDTO;
 import com.personal.Chinook.DTO.ArtistSaveDTO;
 import com.personal.Chinook.exceptions.custom.InvalidFieldException;
@@ -23,6 +24,7 @@ public class ArtistService {
 
     private final ArtistRepository artistRepository;
     private final AlbumRepository albumRepository;
+    private final AlbumService albumService;
     private final ArtistMapper artistMapper;
 
     @Transactional
@@ -53,7 +55,7 @@ public class ArtistService {
     public ArtistDTO deleteArtistById(UUID id) throws NotFoundInDBException {
         Artist artist = artistRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("Не найден Артист по id = "+ id));
         UUID artistId = artist.getId();
-        List<Album> albums = albumRepository.searchByArtistId(artistId);
+        List<Album> albums = albumRepository.searchByArtistId(artistId).orElseThrow(() -> new NotFoundInDBException("Не найден альбом по id артиста = "+ id));
         if(!albums.isEmpty()) {
             throw new InvalidFieldException("Перед тем как удалить Артиста c id ["+ id +"], необходимо удалить связанные с ним альбомы "
                     +"\n" + albums.stream().map(Album::getId).toList());
@@ -64,10 +66,13 @@ public class ArtistService {
 
     @Transactional(readOnly = true)
     public List<ArtistDTO> getArtistsByName(String name) throws NotFoundInDBException {
-        List<Artist> artists = artistRepository.searchByName(name);
-        if (artists.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+        List<Artist> artists = artistRepository.searchByName(name).orElseThrow(() -> new NotFoundInDBException("Не найдена артист по имени = "+ name));
+        return artistMapper.toArtistDTOs(artists);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ArtistDTO> getArtistsByPseudonym(String pseudonym) throws NotFoundInDBException {
+        List<Artist> artists = artistRepository.searchByPseudonym(pseudonym).orElseThrow(() -> new NotFoundInDBException("Не найдена артист по псевдониму = "+ pseudonym));
         return artistMapper.toArtistDTOs(artists);
     }
 

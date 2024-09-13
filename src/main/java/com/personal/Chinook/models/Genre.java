@@ -22,7 +22,7 @@ public class Genre {
     @Column(name = "GenreId", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "Name", nullable = false, unique = true)
     private String name;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

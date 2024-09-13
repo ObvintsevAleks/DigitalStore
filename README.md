@@ -29,10 +29,10 @@ Referenced (and found it on):
 - отдельно попробовать написать валидлацию для поля email
 
 Доработка контроллеров
-- album controller, список альбомов по псевдониму артиста
-- album controller, список альбомов по фамилии и имени артиста
-- genre controller, mediaType-controller (уникальность по имени)
-- /tracks/all-tracks-by-media-type/{id} - не работает нормально
-- track controller, get all tracks by artist Id
-- invoice line controller, get all invoice line by trackId;  get all track by invoiceId 
-- invoice controller, get all customers by employeeId; get all employees by customersId
+- album controller, список альбомов по псевдониму артиста ++
+- track controller, get all tracks by artist псевдоним ++
+- track controller, get all tracks by artist Id ++
+- genre controller, mediaType-controller (уникальность по имени) ++
+- /tracks/all-tracks-by-media-type/{id} - не работает нормально ++
+- invoice line controller, get all invoice line by trackId;  get all track by invoiceId ++
+- invoice controller, get all customers by employeeId; get all employees by customersId ++

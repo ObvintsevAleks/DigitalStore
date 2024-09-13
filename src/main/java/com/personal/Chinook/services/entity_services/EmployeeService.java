@@ -54,19 +54,13 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public List<EmployeeDTO> getEmployeeListByFirstname(String firstname) throws NotFoundInDBException {
-        List<Employee> employees = employeeRepository.searchByFirstname(firstname);
-        if (employees.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+        List<Employee> employees = employeeRepository.searchByFirstname(firstname).orElseThrow(() -> new NotFoundInDBException("Не найден сотрудник по имени = "+ firstname));
         return employeeMapper.toEmployeeDTOs(employees);
     }
 
     @Transactional(readOnly = true)
     public List<EmployeeDTO> getEmployeeListByLastname(String lastname) throws NotFoundInDBException {
-        List<Employee> employees = employeeRepository.searchByLastname(lastname);
-        if (employees.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+        List<Employee> employees = employeeRepository.searchByLastname(lastname).orElseThrow(() -> new NotFoundInDBException("Не найден сотрудник по фамилии = "+ lastname));
         return employeeMapper.toEmployeeDTOs(employees);
     }
     

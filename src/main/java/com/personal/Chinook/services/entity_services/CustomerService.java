@@ -55,19 +55,13 @@ public class CustomerService {
 
     @Transactional(readOnly = true)
     public List<CustomerDTO> getCustomerListByFirstname(String firstname) throws NotFoundInDBException {
-        List<Customer> Customers = customerRepository.searchByFirstname(firstname);
-        if (Customers.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+        List<Customer> Customers = customerRepository.searchByFirstname(firstname).orElseThrow(() -> new NotFoundInDBException("Не найден покупатель по имени = "+ firstname));
         return customerMapper.toCustomerDTOs(Customers);
     }
 
     @Transactional(readOnly = true)
     public List<CustomerDTO> getCustomerListByLastname(String lastname) throws NotFoundInDBException {
-        List<Customer> Customers = customerRepository.searchByLastname(lastname);
-        if (Customers.isEmpty()) {
-            throw new NotFoundInDBException("2");
-        }
+        List<Customer> Customers = customerRepository.searchByLastname(lastname).orElseThrow(() -> new NotFoundInDBException("Не найден покупатель по фамилии = "+ lastname));
         return customerMapper.toCustomerDTOs(Customers);
     }
 

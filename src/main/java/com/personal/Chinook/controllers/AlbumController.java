@@ -87,7 +87,16 @@ public class AlbumController {
             content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
     @GetMapping("/albums-by-title/{title}")
     public ResponseEntity<?> getAlbumByTitle(@PathVariable("title") String albumTitle) {
-        return new ResponseEntity<>(service.getArtistsByTitle(albumTitle), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAlbumsByTitle(albumTitle), HttpStatus.OK);
+    }
+
+    @ApiGet
+    @Operation(summary = "Получить список альбомов по псевдониму артиста", description = "Получить список альбомов по псевдониму артиста", tags = {"album-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
+    @GetMapping("/albums-by-artist-pseudonym/{pseudonym}")
+    public ResponseEntity<?> getAlbumByArtistPseudonym(@PathVariable("pseudonym") String artistPseudonym) {
+        return new ResponseEntity<>(service.getAlbumsByArtistPseudonym(artistPseudonym), HttpStatus.OK);
     }
 
 }
