@@ -82,7 +82,7 @@ public class InvoiceLineController {
     @Operation(summary = "Получить список invoice-line по идентификатору заказа", description = "Получить список invoice-line по идентификатору заказа", tags = {"invoice-line-controller"})
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = InvoiceLineDTO.class)))
-    @GetMapping("/all-invoice-line-by-invoice/{id}")
+    @GetMapping("/invoice-line-by-invoice/{id}")
     public ResponseEntity<?> getInvoiceLinesByInvoiceId(@PathVariable("id") UUID invoiceId) {
         log.info("Request to display a artist with ID {}", invoiceId);
         return new ResponseEntity<>(service.getInvoiceLineByInvoiceId(invoiceId), HttpStatus.OK);

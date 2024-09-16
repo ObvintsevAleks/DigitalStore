@@ -67,4 +67,24 @@ public class InvoiceController {
         return new ResponseEntity<>(service.createInvoice(invoiceSaveDTO), HttpStatus.CREATED);
     }
 
+    @ApiGet
+    @Operation(summary = "Получить заказ по идентификатору клиента", description = "Получить заказ по идентификатору клиента", tags = {"invoice-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
+    @GetMapping("/invoices-by-customer/{id}")
+    public ResponseEntity<?> getInvoicesByCustomerId(@PathVariable("id") UUID customerId) {
+        log.info("Request to display a artist with ID {}", customerId);
+        return new ResponseEntity<>(service.getInvoiceByCustomerId(customerId), HttpStatus.OK);
+    }
+
+    @ApiGet
+    @Operation(summary = "Получить заказ по идентификатору сотрудника", description = "Получить заказ по идентификатору сотрудника", tags = {"invoice-controller"})
+    @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
+            content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
+    @GetMapping("/invoices-by-employee/{id}")
+    public ResponseEntity<?> getInvoicesByEmployeeId(@PathVariable("id") UUID employeeId) {
+        log.info("Request to display a artist with ID {}", employeeId);
+        return new ResponseEntity<>(service.getInvoiceByEmployeeId(employeeId), HttpStatus.OK);
+    }
+
 }

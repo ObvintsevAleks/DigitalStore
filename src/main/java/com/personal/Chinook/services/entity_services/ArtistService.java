@@ -11,6 +11,7 @@ import com.personal.Chinook.models.Artist;
 import com.personal.Chinook.repositories.AlbumRepository;
 import com.personal.Chinook.repositories.ArtistRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,9 +24,10 @@ import java.util.UUID;
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
-    private final AlbumRepository albumRepository;
-    private final AlbumService albumService;
     private final ArtistMapper artistMapper;
+
+    @Autowired
+    private final AlbumRepository albumRepository;
 
     @Transactional
     public ArtistDTO createArtist(ArtistSaveDTO artistSaveDTO) {

@@ -32,9 +32,4 @@ public class GenreDTO {
     @JsonProperty(value = "genreDirection", defaultValue = "POPULAR")
     private GenreDirection genreDirection;
 
-    @JsonIgnore
-    @Schema(description = "Идентификатор треков")
-    @JsonProperty("tracks")
-    private List<TrackDTO> tracks;
-
 }

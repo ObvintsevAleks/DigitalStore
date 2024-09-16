@@ -75,17 +75,17 @@ public class TrackService {
     @Transactional(readOnly = true)
     public List<TrackDTO> getAllTracksByArtistId(UUID artistId) throws NotFoundInDBException {
         List<AlbumDTO> albums = albumService.getAllAlbumsByArtistId(artistId);
-        List<TrackDTO> lists = new ArrayList<>();
-        albums.forEach(album -> lists.addAll(album.getTracks()));
-        return lists;
+        List<Track> lists = new ArrayList<>();
+        albums.forEach(album -> lists.addAll(trackRepository.searchByAlbumId(album.getId())));
+        return trackMapper.toTrackDTOs(lists);
     }
 
     @Transactional(readOnly = true)
     public List<TrackDTO> getAllTracksByArtistPseudonym(String artistPseudonym) throws NotFoundInDBException {
         List<AlbumDTO> albums = albumService.getAlbumsByArtistPseudonym(artistPseudonym);
-        List<TrackDTO> lists = new ArrayList<>();
-        albums.forEach(album -> lists.addAll(album.getTracks()));
-        return lists;
+        List<Track> lists = new ArrayList<>();
+        albums.forEach(album -> lists.addAll(trackRepository.searchByAlbumId(album.getId())));
+        return trackMapper.toTrackDTOs(lists);
     }
 
 }

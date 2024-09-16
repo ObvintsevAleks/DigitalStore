@@ -17,7 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     @Query("select e from Customer e where e.firstName like %:firstname% ")
     Optional<List<Customer>> searchByFirstname(@Param("firstname") String firstname);
 
-    @Query("select e from Customer e where e.firstName like %:lastname% ")
+    @Query("select e from Customer e where e.lastName like %:lastname% ")
     Optional<List<Customer>> searchByLastname(@Param("lastname") String lastname);
 
 }

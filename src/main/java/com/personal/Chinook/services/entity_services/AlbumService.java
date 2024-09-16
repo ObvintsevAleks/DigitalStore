@@ -13,6 +13,7 @@ import com.personal.Chinook.repositories.AlbumRepository;
 import com.personal.Chinook.repositories.ArtistRepository;
 import com.personal.Chinook.repositories.TrackRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +26,12 @@ import java.util.UUID;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
-    private final ArtistService artistService;
-    private final TrackRepository trackRepository;
     private final AlbumMapper albumMapper;
+
+    @Autowired
+    private final ArtistService artistService;
+    @Autowired
+    private final TrackRepository trackRepository;
 
     @Transactional(readOnly = true)
     public AlbumDTO getAlbumById(UUID id) throws NotFoundInDBException {
@@ -88,14 +92,4 @@ public class AlbumService {
         return albums;
     }
 
-//    @Transactional
-//    public AlbumDTO deleteAlbumWithTracksById(UUID id) throws NotFoundInDBException {
-//        Album album = albumRepository.findById(id).orElseThrow(() -> new NotFoundInDBException("asrd"));
-//        List<Track> tracks = trackRepository.searchByAlbumId(id);
-//        if(!tracks.isEmpty()) {
-//
-//        }
-//        albumRepository.deleteById(id);
-//        return albumMapper.toAlbumDTO(album);
-//    }
 }

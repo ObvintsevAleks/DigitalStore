@@ -27,9 +27,4 @@ public class MediaTypeDTO {
     @JsonProperty(value = "createdAt", defaultValue = "2019-08-06", required = true)
     private LocalDate createdAt;
 
-    @JsonIgnore
-    @Schema(description = "Идентификатор треков")
-    @JsonProperty("tracks")
-    private List<TrackDTO> tracks;
-
 }

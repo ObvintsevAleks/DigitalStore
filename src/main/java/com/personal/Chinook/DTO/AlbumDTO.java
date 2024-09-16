@@ -36,8 +36,4 @@ public class AlbumDTO {
     @JsonProperty(value = "artist", required = true)
     private ArtistDTO artist;
 
-    @JsonIgnore
-    @Schema(description = "Аудиозапись")
-    @JsonProperty("tracks")
-    private List<TrackDTO> tracks;
 }
