@@ -25,7 +25,7 @@ import java.util.UUID;
 @Tag(name = "invoice-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/invoice")
+@RequestMapping("/invoices")
 public class InvoiceController {
 
     private final InvoiceService service;

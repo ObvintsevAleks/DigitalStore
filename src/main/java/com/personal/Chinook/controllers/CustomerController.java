@@ -28,7 +28,7 @@ import java.util.UUID;
 @Tag(name = "customer-controller")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomerController {
 
     private final CustomerService service;
