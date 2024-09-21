@@ -33,14 +33,14 @@ public class MediaTypeController {
     private final MediaTypeService service;
 
     @ApiGet
-    @Operation(summary = "Получить все медиа-типы", description = "Получить все медиа-типы", tags = {"media-type-controller"})
+    @Operation(summary = "Получить все медиа-типы", description = "Получить все медиа-типы")
     @GetMapping("/all")
     public ResponseEntity<?> getAllMediaTypes() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @ApiGet
-    @Operation(summary = "Получить медиа-тип по идентификатору", description = "Получить медиа-тип по идентификатору", tags = {"media-type-controller"})
+    @Operation(summary = "Получить медиа-тип по идентификатору", description = "Получить медиа-тип по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @GetMapping("/{id}")
@@ -49,7 +49,7 @@ public class MediaTypeController {
     }
 
     @ApiCreate
-    @Operation(summary = "Создать медиа-тип", description = "Создать медиа-тип", tags = {"media-type-controller"})
+    @Operation(summary = "Создать медиа-тип", description = "Создать медиа-тип")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @PostMapping
@@ -62,7 +62,7 @@ public class MediaTypeController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить медиа-тип", description = "Обновить медиа-тип", tags = {"media-type-controller"})
+    @Operation(summary = "Обновить медиа-тип", description = "Обновить медиа-тип")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = MediaTypeDTO.class)))
     @PutMapping
@@ -71,7 +71,7 @@ public class MediaTypeController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить медиа-тип", description = "Удалить медиа-тип", tags = {"media-type-controller"})
+    @Operation(summary = "Удалить медиа-тип", description = "Удалить медиа-тип")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteMediaType(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteMediaTypeById(id), HttpStatus.NO_CONTENT);

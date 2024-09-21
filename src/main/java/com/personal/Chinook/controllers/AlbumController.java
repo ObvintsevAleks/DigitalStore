@@ -33,7 +33,7 @@ public class AlbumController {
 
     private final AlbumService service;
     @ApiGet
-    @Operation(summary = "Получить альбом по идентификатору", description = "Получить альбом по идентификатору", tags = {"album-controller"})
+    @Operation(summary = "Получить альбом по идентификатору", description = "Получить альбом по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @GetMapping("/{id}")
@@ -43,7 +43,7 @@ public class AlbumController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список альбомов по идентификатору артиста", description = "Получить список альбомов по идентификатору артиста", tags = {"album-controller"})
+    @Operation(summary = "Получить список альбомов по идентификатору артиста", description = "Получить список альбомов по идентификатору артиста")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
     @GetMapping("/albums-by-artist-id/{artistId}")
@@ -53,7 +53,7 @@ public class AlbumController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить альбом", description = "Обновить альбом", tags = {"album-controller"})
+    @Operation(summary = "Обновить альбом", description = "Обновить альбом")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @PutMapping
@@ -62,14 +62,14 @@ public class AlbumController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить альбом", description = "Удалить альбом", tags = {"album-controller"})
+    @Operation(summary = "Удалить альбом", description = "Удалить альбом")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAlbumById(@PathVariable("id") UUID albumId) {
         return new ResponseEntity<>(service.deleteAlbumById(albumId), HttpStatus.NO_CONTENT);
     }
 
     @PostMapping
-    @Operation(summary = "Создать альбом", description = "Создать альбом", tags = {"album-controller"})
+    @Operation(summary = "Создать альбом", description = "Создать альбом")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = AlbumDTO.class)))
     @ApiCreate
@@ -82,7 +82,7 @@ public class AlbumController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список альбомов по заголовку", description = "Получить список альбомов по заголовку", tags = {"album-controller"})
+    @Operation(summary = "Получить список альбомов по заголовку", description = "Получить список альбомов по заголовку")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
     @GetMapping("/albums-by-title/{title}")
@@ -91,7 +91,7 @@ public class AlbumController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список альбомов по псевдониму артиста", description = "Получить список альбомов по псевдониму артиста", tags = {"album-controller"})
+    @Operation(summary = "Получить список альбомов по псевдониму артиста", description = "Получить список альбомов по псевдониму артиста")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(allOf = AlbumDTO.class)))
     @GetMapping("/albums-by-artist-pseudonym/{pseudonym}")

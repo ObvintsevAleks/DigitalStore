@@ -28,7 +28,6 @@ management.endpoint.health.show-details: ALWAYS
 management.endpoint.health.probes.enabled: true
 management.endpoints. web.exposure.include: "*"
 
-
 logging:
   level:
     org.springframework: INFO
@@ -40,11 +39,10 @@ jwt:
   expirationMinute: 10
 
 swagger:
-  contact-name: Obvinsev A
-  contact-mail: omer@farukgenc.com
-  contact-url: https://farukgenc.com
-  app-name: Spring Boot Boilerplate Project
-  app-description: "Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(3.3.1), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger (Open API)"
+  contact-name: Obvinsev Aleksey
+  contact-mail: Obvintsev.Aleksey@yandex.ru
+  app-name: Rest-api Spring Boot starter
+  app-description: "Rest-api Spring Boot Boilerplate starter.\n This project includes : Spring Boot(3.3.1), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger (Open API).\n If you're hiring for AQA - [my telegramm contact](https://t.me/TommyBahama)."
   app-version: 3.3.1
   app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
   app-license: Apache 2.0

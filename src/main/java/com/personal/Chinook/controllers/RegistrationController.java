@@ -4,6 +4,7 @@ import com.personal.Chinook.security.dto.RegistrationRequest;
 import com.personal.Chinook.security.dto.RegistrationResponse;
 import com.personal.Chinook.security.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "registration-controller")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/register")
@@ -21,7 +23,7 @@ public class RegistrationController {
     private final UserService userService;
 
     @PostMapping
-    @Operation(tags = "Register Service", description = "You can register to the system by sending information in the appropriate format.")
+    @Operation(description = "You can register to the system by sending information in the appropriate format.")
     public ResponseEntity<RegistrationResponse> registrationRequest(@Valid @RequestBody RegistrationRequest registrationRequest) {
 
         final RegistrationResponse registrationResponse = userService.registration(registrationRequest);

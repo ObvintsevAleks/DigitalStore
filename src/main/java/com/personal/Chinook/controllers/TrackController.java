@@ -34,7 +34,7 @@ public class TrackController {
     private final TrackService service;
 
     @ApiGet
-    @Operation(summary = "Получить аудиозапись по идентификатору", description = "Получить аудиозапись по идентификатору", tags = {"track-controller"})
+    @Operation(summary = "Получить аудиозапись по идентификатору", description = "Получить аудиозапись по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = TrackDTO.class)))
     @GetMapping("/{id}")
@@ -44,7 +44,7 @@ public class TrackController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить аудиозапись", description = "Обновить аудиозапись", tags = {"track-controller"})
+    @Operation(summary = "Обновить аудиозапись", description = "Обновить аудиозапись")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = TrackDTO.class)))
     @PutMapping
@@ -53,14 +53,14 @@ public class TrackController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить аудиозапись", description = "Удалить аудиозапись", tags = {"track-controller"})
+    @Operation(summary = "Удалить аудиозапись", description = "Удалить аудиозапись")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTrackById(@PathVariable("id") UUID trackId) {
         return new ResponseEntity<>(service.deleteTrackById(trackId), HttpStatus.NO_CONTENT);
     }
 
     @ApiCreate
-    @Operation(summary = "Создать аудиозапись", description = "Создать аудиозапись", tags = {"track-controller"})
+    @Operation(summary = "Создать аудиозапись", description = "Создать аудиозапись")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = TrackDTO.class)))
     @PostMapping
@@ -71,7 +71,7 @@ public class TrackController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить все аудиозаписи по идентификатору альбома", description = "Получить все аудиозаписи по идентификатору альбома", tags = {"track-controller"})
+    @Operation(summary = "Получить все аудиозаписи по идентификатору альбома", description = "Получить все аудиозаписи по идентификатору альбома")
     @GetMapping("/all-tracks-by-album/{id}")
     public ResponseEntity<?> getAllTracksByAlbumId(@PathVariable("id") UUID albumId) {
         log.info("Request to display a album with ID {}", albumId);
@@ -79,7 +79,7 @@ public class TrackController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить все аудиозаписи по идентификатору жанра", description = "Получить все аудиозаписи по идентификатору жанра", tags = {"track-controller"})
+    @Operation(summary = "Получить все аудиозаписи по идентификатору жанра", description = "Получить все аудиозаписи по идентификатору жанра")
     @GetMapping("/all-tracks-by-genre/{id}")
     public ResponseEntity<?> getAllTracksByGenreId(@PathVariable("id") UUID genreId) {
         log.info("Request to display a album with ID {}", genreId);
@@ -87,7 +87,7 @@ public class TrackController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить все аудиозаписи по идентификатору медиа-типа", description = "Получить все аудиозаписи по идентификатору медиа-типа", tags = {"track-controller"})
+    @Operation(summary = "Получить все аудиозаписи по идентификатору медиа-типа", description = "Получить все аудиозаписи по идентификатору медиа-типа")
     @GetMapping("/all-tracks-by-media-type/{id}")
     public ResponseEntity<?> getAllTracksByMediaTypeId(@PathVariable("id") UUID mediaTypeId) {
         log.info("Request to display a album with ID {}", mediaTypeId);
@@ -95,7 +95,7 @@ public class TrackController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить все аудиозаписи по идентификатору артиста", description = "Получить все аудиозаписи по идентификатору артиста", tags = {"track-controller"})
+    @Operation(summary = "Получить все аудиозаписи по идентификатору артиста", description = "Получить все аудиозаписи по идентификатору артиста")
     @GetMapping("/tracks-by-artist-id/{id}")
     public ResponseEntity<?> getAllTracksByArtistId(@PathVariable("id") UUID artistId) {
         log.info("Request to display a album with ID {}", artistId);
@@ -103,7 +103,7 @@ public class TrackController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить все аудиозаписи по псевдониму артиста", description = "Получить все аудиозаписи по псевдониму артиста", tags = {"track-controller"})
+    @Operation(summary = "Получить все аудиозаписи по псевдониму артиста", description = "Получить все аудиозаписи по псевдониму артиста")
     @GetMapping("/tracks-by-artist-pseudonym/{pseudonym}")
     public ResponseEntity<?> getAllTracksByArtistPseudonym(@PathVariable("pseudonym") String artistPseudonym) {
         log.info("Request to display a album with ID {}", artistPseudonym);
