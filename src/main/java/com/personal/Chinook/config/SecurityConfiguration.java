@@ -1,7 +1,7 @@
 package com.personal.Chinook.config;
 
-import com.personal.Chinook.security.jwt.JwtAuthenticationEntryPoint;
-import com.personal.Chinook.security.jwt.JwtAuthenticationFilter;
+import com.personal.Chinook.config.jwt.JwtAuthenticationEntryPoint;
+import com.personal.Chinook.config.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

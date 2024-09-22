@@ -1,10 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.DTO.AlbumDTO;
-import com.personal.Chinook.DTO.AlbumSaveDto;
-import com.personal.Chinook.DTO.MediaTypeDTO;
-import com.personal.Chinook.DTO.MediaTypeSaveDTO;
-import com.personal.Chinook.services.entity_services.MediaTypeService;
+import com.personal.Chinook.dto.MediaTypeDTO;
+import com.personal.Chinook.dto.MediaTypeSaveDTO;
+import com.personal.Chinook.services.MediaTypeService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

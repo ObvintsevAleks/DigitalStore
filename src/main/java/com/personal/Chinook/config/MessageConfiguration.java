@@ -1,6 +1,6 @@
 package com.personal.Chinook.config;
 
-import com.personal.Chinook.security.utils.ProjectConstants;
+import com.personal.Chinook.utils.ProjectConstants;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

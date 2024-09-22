@@ -1,10 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.DTO.MediaTypeDTO;
-import com.personal.Chinook.DTO.MediaTypeSaveDTO;
-import com.personal.Chinook.DTO.TrackDTO;
-import com.personal.Chinook.DTO.TrackSaveDTO;
-import com.personal.Chinook.services.entity_services.TrackService;
+import com.personal.Chinook.dto.TrackDTO;
+import com.personal.Chinook.dto.TrackSaveDTO;
+import com.personal.Chinook.services.TrackService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

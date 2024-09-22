@@ -1,9 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.DTO.ArtistDTO;
-import com.personal.Chinook.DTO.ArtistSaveDTO;
-import com.personal.Chinook.models.Artist;
-import com.personal.Chinook.services.entity_services.ArtistService;
+import com.personal.Chinook.dto.ArtistDTO;
+import com.personal.Chinook.dto.ArtistSaveDTO;
+import com.personal.Chinook.services.ArtistService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

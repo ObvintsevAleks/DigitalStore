@@ -1,0 +1,17 @@
+package com.personal.Chinook.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class PlaylistDTO {
+
+    @JsonProperty("ID")
+    private Integer id;
+
+    @JsonProperty("Name")
+    private String name;
+
+}

@@ -1,8 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.DTO.InvoiceLineDTO;
-import com.personal.Chinook.DTO.InvoiceLineSaveDTO;
-import com.personal.Chinook.services.entity_services.InvoiceLineService;
+import com.personal.Chinook.dto.InvoiceLineDTO;
+import com.personal.Chinook.dto.InvoiceLineSaveDTO;
+import com.personal.Chinook.services.InvoiceLineService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

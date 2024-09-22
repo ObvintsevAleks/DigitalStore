@@ -1,9 +1,9 @@
 package com.personal.Chinook.controllers;
 
 
-import com.personal.Chinook.security.dto.LoginRequest;
-import com.personal.Chinook.security.dto.LoginResponse;
-import com.personal.Chinook.security.jwt.JwtTokenService;
+import com.personal.Chinook.dto.security.LoginRequest;
+import com.personal.Chinook.dto.security.LoginResponse;
+import com.personal.Chinook.config.jwt.JwtTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

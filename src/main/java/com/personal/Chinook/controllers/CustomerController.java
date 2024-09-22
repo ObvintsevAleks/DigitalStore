@@ -1,10 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.DTO.CustomerDTO;
-import com.personal.Chinook.DTO.CustomerSaveDTO;
-import com.personal.Chinook.DTO.EmployeeDTO;
-import com.personal.Chinook.DTO.EmployeeSaveDTO;
-import com.personal.Chinook.services.entity_services.CustomerService;
+import com.personal.Chinook.dto.CustomerDTO;
+import com.personal.Chinook.dto.CustomerSaveDTO;
+import com.personal.Chinook.services.CustomerService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

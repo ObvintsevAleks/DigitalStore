@@ -1,9 +1,9 @@
 package com.personal.Chinook.controllers;
 
 
-import com.personal.Chinook.DTO.AlbumDTO;
-import com.personal.Chinook.DTO.AlbumSaveDto;
-import com.personal.Chinook.services.entity_services.AlbumService;
+import com.personal.Chinook.dto.AlbumDTO;
+import com.personal.Chinook.dto.AlbumSaveDto;
+import com.personal.Chinook.services.AlbumService;
 import com.personal.Chinook.utils.swagger.ApiCreate;
 import com.personal.Chinook.utils.swagger.ApiDelete;
 import com.personal.Chinook.utils.swagger.ApiGet;

@@ -1,8 +1,8 @@
 package com.personal.Chinook.controllers;
 
-import com.personal.Chinook.security.dto.RegistrationRequest;
-import com.personal.Chinook.security.dto.RegistrationResponse;
-import com.personal.Chinook.security.service.UserService;
+import com.personal.Chinook.dto.security.RegistrationRequest;
+import com.personal.Chinook.dto.security.RegistrationResponse;
+import com.personal.Chinook.services.security.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
