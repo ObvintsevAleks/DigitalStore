@@ -1,35 +1,27 @@
-# Chinook-REST
-<h4> Small personal project regarding a RESTful API for the popular digital media sample database "Chinook"
-<br>
-<h4> This small project is being built in Java, making use of Spring Boot tools from the Spring Framework.
-<br>
+# Spring-boot rest-api boilerplate
+<h4> Небольшой пет-проект rest-api </h4>
+<h4>Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger.</h4>
 <hr>
-<h3>Database Name: Chinook</h3>
-<h3> Database Engine: PostgreSQL </h3>
+<h3> Если у Вас интересный продукт и Вы ищете AQA, то мой контакт <a href= "https://t.me/TommyBahama">telegram<a/>  </h3> 
 
-<img width="674" alt="chinook-datamodel" src="https://github.com/gchang110101/Chinook-REST/assets/111550683/1c6b21b8-0b76-416a-a477-86bbd4489498">
 <hr>
-<h3><u> Credit (create db script): </u></h3>
-Provider repository:
-<a href= "https://github.com/lerocha/chinook-database">chinook-database<a/>
+<h3>
+<li> Db Name: Digital store </li>
 <br>
-<br>
-Referenced (and found it on):
-<a href= "https://github.com/morenoh149/postgresDBSamples">postgresDBSamples<a/>
-<hr>
+<li> Db Engine: PostgreSQL </li>
+</h3>
+
+
+ТУТ должна быть картинка с моей бд
+- использовать https://chartdb.io/ и отрисовать грасивую диаграмму с бд
+
 <h3>TODO ёпта: </h3>
 
 - ui дока на сваггер нормальная ++
 - решить проблему с зацикливанием последнего эндпоинта +++
 - авторизация (по jwt спиздить с гитхаба) ++
-- валидация нормальная переработать
-- валидация, добавить при создании ошибку (не найдена вложенная сущность)
-- валидация, добавить при создании уникальных сущностей ошибку 
-- перевести схему на валидацию а не создание (хибернейт)
-- для схемы добавить sql с инсертом данных (спиздить с аналога той же бд)
-- отдельно попробовать написать валидлацию для поля email (лучше использовать аннотацию)
 
-Доработка контроллеров
+<h3>Доработка контроллеров</h3>
 - album controller, список альбомов по псевдониму артиста ++
 - track controller, get all tracks by artist псевдоним ++
 - track controller, get all tracks by artist Id ++
@@ -38,15 +30,19 @@ Referenced (and found it on):
 - invoice line controller, get all invoice line by trackId;  get all track by invoiceId ++
 - invoice controller, get all customers by employeeId; get all employees by customersId ++
 
+<h3>Блок с валидацией (если не будет впадлу сделать)</h3>
+- валидация нормальная переработать (500 не падает, но падает 401 которую перехватывает один из advice)
+- валидация, добавить при создании ошибку (не найдена вложенная сущность)
+- валидация, добавить при создании уникальных сущностей ошибку
+- валидация для поля email (прокинуть spring аннотацию)
 
+<h3>Блок с бд</h3>
+- перевести схему на валидацию а не создание (хибернейт, если не будет впадлу сделать)
+- для схемы добавить sql с инсертом данных (если не будет впадлу сделать, данные брать из аналогов той же бд - уже есть локально - смотри digital store)
 
-# Spring-boot rest-api boilerplate
+<hr>
 
-Проект включает: Spring Boot(3.3.1), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger (Open API).
-
-Если вы находитесь в поиске AQA - [мой контакт в телеграмм](https://t.me/TommyBahama).
-
-## REST API Endpoints
+## Rest-api endpoints
 
 Swagger документация - http://localhost:8181/api/swagger-ui/index.html
 
