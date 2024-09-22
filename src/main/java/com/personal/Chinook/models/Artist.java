@@ -16,24 +16,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "albums")
+@Table(name = "artist")
 public class Artist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ArtistId", nullable = false)
+    @Column(name = "artist_id", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "Surname", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "Pseudonym", nullable = false)
+    @Column(name = "pseudonym", nullable = false)
     private String pseudonym;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "BirthDate", nullable = false)
+    @Column(name = "birth_date", nullable = false)
     @CreatedDate
     private LocalDate birthDate;
 

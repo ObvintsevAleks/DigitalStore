@@ -14,46 +14,47 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "customer")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "CustomerId", nullable = false)
+    @Column(name = "customer_id", nullable = false)
     private UUID id;
 
-    @Column(name = "FirstName", nullable = false)
+    @Column(name = "name", nullable = false)
     private String firstName;
 
-    @Column(name = "LastName", nullable = false)
+    @Column(name = "surname", nullable = false)
     private String lastName;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "BirthDate")
+    @Column(name = "birth_date")
     @CreatedDate
     private LocalDate birthDate;
 
-    @Column(name = "Address", nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "City")
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "State")
+    @Column(name = "state")
     private String state;
 
-    @Column(name = "Country")
+    @Column(name = "country")
     private String country;
 
-    @Column(name = "PostalCode")
+    @Column(name = "postal_code")
     private String postalCode;
 
-    @Column(name = "Phone")
+    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "Fax")
+    @Column(name = "fax")
     private String fax;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
 }

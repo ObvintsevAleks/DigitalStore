@@ -15,18 +15,19 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "media_type")
 public class MediaType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "MediaTypeId", nullable = false)
+    @Column(name = "media_type_id", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
     private LocalDate createdAt;
 

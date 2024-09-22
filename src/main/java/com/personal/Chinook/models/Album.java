@@ -15,30 +15,31 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "album")
 public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "AlbumId", nullable = false)
+    @Column(name = "album_id", nullable = false)
     private UUID id;
 
-    @Column(name = "Title", nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "albumType", nullable = false)
+    @Column(name = "album_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private AlbumType albumType;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
     private ZonedDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "ArtistId",
-            referencedColumnName = "ArtistId",
-            foreignKey = @ForeignKey(name = "FK_AlbumArtistId"),
+            name = "artist_id",
+            referencedColumnName = "artist_id",
+            foreignKey = @ForeignKey(name = "fk_album_artist_id"),
             nullable = false
     )
     private Artist artist;

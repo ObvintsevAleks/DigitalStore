@@ -13,61 +13,60 @@ import java.util.UUID;
 
 @Entity
 @Data
-@ToString(exclude = "invoiceLines")
-@EqualsAndHashCode(exclude = "invoiceLines")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "track")
 public class Track {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TrackId", nullable = false)
+    @Column(name = "track_id", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "Author")
+    @Column(name = "author")
     private String author;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
     private ZonedDateTime createdAt;
 
     @Column(name = "milliseconds")
     private Integer milliseconds;
 
-    @Column(name = "Bytes")
+    @Column(name = "bytes")
     private Integer bytes;
 
-    @Column(name = "UnitPrice", nullable = false, precision = 10, scale = 2)
+    @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "AlbumId",
-            referencedColumnName = "AlbumId",
-            foreignKey = @ForeignKey(name = "FK_TrackAlbumId"),
+            name = "album_id",
+            referencedColumnName = "album_id",
+            foreignKey = @ForeignKey(name = "fk_track_album_id"),
             nullable = false
     )
     private Album album;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "GenreId",
-            referencedColumnName = "GenreId",
-            foreignKey = @ForeignKey(name = "FK_TrackGenreId"),
+            name = "genre_id",
+            referencedColumnName = "genre_id",
+            foreignKey = @ForeignKey(name = "fk_track_genre_id"),
             nullable = false
     )
     private Genre genre;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "MediaTypeId",
-            referencedColumnName = "MediaTypeId",
-            foreignKey = @ForeignKey(name = "FK_TrackMediaTypeId"),
+            name = "media_type_id",
+            referencedColumnName = "media_type_id",
+            foreignKey = @ForeignKey(name = "fk_track_media_type_id"),
             nullable = false
     )
     private MediaType mediaType;

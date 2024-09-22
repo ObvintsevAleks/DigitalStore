@@ -10,26 +10,27 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "invoice_line")
 public class InvoiceLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "InvoiceLineId", nullable = false)
+    @Column(name = "invoice_line_id", nullable = false)
     private UUID id;
 
-    @Column(name = "UnitPrice", precision = 10, scale = 2, nullable = false)
+    @Column(name = "unit_price", precision = 10, scale = 2, nullable = false)
     private BigDecimal unitPrice;
 
-    @Column(name = "Quantity", nullable = false)
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "InvoiceId",
-            referencedColumnName = "InvoiceId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceLineInvoiceId"),
+            name = "invoice_id",
+            referencedColumnName = "invoice_id",
+            foreignKey = @ForeignKey(name = "fk_invoice_line_invoice_id"),
             nullable = false
     )
     private Invoice invoice;
@@ -38,9 +39,9 @@ public class InvoiceLine {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "TrackId",
-            referencedColumnName = "TrackId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceLineTrackId"),
+            name = "track_id",
+            referencedColumnName = "track_id",
+            foreignKey = @ForeignKey(name = "fk_invoice_line_track_id"),
             nullable = false
     )
     private Track track;

@@ -15,22 +15,23 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "genre")
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "GenreId", nullable = false)
+    @Column(name = "genre_id", nullable = false)
     private UUID id;
 
-    @Column(name = "Name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreatedDate
     private LocalDate createdAt;
 
-    @Column(name = "GenreDirection", nullable = false)
+    @Column(name = "genre_direction", nullable = false)
     @Enumerated(EnumType.STRING)
     private GenreDirection genreDirection;
 

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.personal</groupId>
-	<artifactId>Chinook</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Chinook</name>
+	<artifactId>DigitalStore</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>DigitalStore</name>
 	<description>REST API for the sample Database</description>
 	<properties>
 		<java.version>17</java.version>

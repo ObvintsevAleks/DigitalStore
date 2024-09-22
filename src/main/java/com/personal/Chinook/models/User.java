@@ -19,7 +19,7 @@ public class User {
 
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "user_name", unique = true)
     private String username;
 
     private String password;
@@ -27,6 +27,7 @@ public class User {
     private String email;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
     private UserRole userRole;
 
 }

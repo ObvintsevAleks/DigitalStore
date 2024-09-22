@@ -15,50 +15,51 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "invoice")
 public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "InvoiceId", nullable = false)
+    @Column(name = "invoice_id", nullable = false)
     private UUID id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @Column(name = "InvoiceDate")
+    @Column(name = "invoice_date")
     @CreatedDate
     private ZonedDateTime invoiceDate = ZonedDateTime.now();
 
-    @Column(name = "BillingAddress", nullable = false)
+    @Column(name = "billing_address", nullable = false)
     private String billingAddress;
 
-    @Column(name = "BillingCity")
+    @Column(name = "billing_city")
     private String billingCity;
 
-    @Column(name = "BillingState")
+    @Column(name = "billing_state")
     private String billingState;
 
-    @Column(name = "BillingCountry")
+    @Column(name = "billing_country")
     private String billingCountry;
 
-    @Column(name = "BillingPostalCode")
+    @Column(name = "billing_postal_code")
     private String billingPostalCode;
 
-    @Column(name = "Total", nullable = false, precision = 10, scale = 2)
+    @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "CustomerId",
-            referencedColumnName = "CustomerId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceCustomerId"),
+            name = "customer_id",
+            referencedColumnName = "customer_id",
+            foreignKey = @ForeignKey(name = "fk_invoice_customer_id"),
             nullable = false
     )
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-            name = "EmployeeId",
-            referencedColumnName = "EmployeeId",
-            foreignKey = @ForeignKey(name = "FK_InvoiceEmployeeId"),
+            name = "employee_id",
+            referencedColumnName = "employee_id",
+            foreignKey = @ForeignKey(name = "fk_invoice_employee_id"),
             nullable = false
     )
     private Employee employee;
