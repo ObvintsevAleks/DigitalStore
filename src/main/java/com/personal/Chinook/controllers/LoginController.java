@@ -23,11 +23,9 @@ public class LoginController {
     private final JwtTokenService jwtTokenService;
 
     @PostMapping
-    @Operation(description = "You must log in with the correct information to successfully obtain the token information.")
+    @Operation(summary = "Авторизация пользователя")
     public ResponseEntity<LoginResponse> loginRequest(@Valid @RequestBody LoginRequest loginRequest) {
-
         final LoginResponse loginResponse = jwtTokenService.getLoginResponse(loginRequest);
-
         return ResponseEntity.ok(loginResponse);
     }
 

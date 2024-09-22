@@ -34,7 +34,7 @@ public class GenreController {
     private final GenreService service;
 
     @ApiGet
-    @Operation(summary = "Получить все жанры", description = "Получить все жанры")
+    @Operation(summary = "Получить все жанры")
     @GetMapping("/all")
     public ResponseEntity<?> getAllGenres() {
         log.info("Request to display all genres");
@@ -42,7 +42,7 @@ public class GenreController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить жанр по идентификатору", description = "Получить жанр по идентификатору")
+    @Operation(summary = "Получить жанр по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = GenreDTO.class)))
     @GetMapping("/{id}")
@@ -52,7 +52,7 @@ public class GenreController {
     }
 
     @ApiCreate
-    @Operation(summary = "Создать жанр", description = "Создать жанр")
+    @Operation(summary = "Создать жанр")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = GenreDTO.class)))
     @PostMapping
@@ -63,7 +63,7 @@ public class GenreController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить жанр", description = "Обновить жанр")
+    @Operation(summary = "Обновить жанр")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = GenreDTO.class)))
     @PutMapping
@@ -72,7 +72,7 @@ public class GenreController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить жанр", description = "Удалить жанр")
+    @Operation(summary = "Удалить жанр")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteGenre(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(service.deleteGenreById(id), HttpStatus.NO_CONTENT);

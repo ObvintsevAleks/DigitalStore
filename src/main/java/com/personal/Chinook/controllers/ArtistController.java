@@ -35,7 +35,7 @@ public class ArtistController {
 
 
     @ApiGet
-    @Operation(summary = "Получить артиста по идентификатору", description = "Получить артиста по идентификатору")
+    @Operation(summary = "Получить артиста по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = ArtistDTO.class)))
     @GetMapping("/{id}")
@@ -46,7 +46,7 @@ public class ArtistController {
 
 
     @ApiUpdate
-    @Operation(summary = "Обновление артиста", description = "Обновление артиста")
+    @Operation(summary = "Обновление артиста")
     @ApiResponse(responseCode = "200", description = "В случае успешного обновления сущности",
             content = @Content(schema = @Schema(implementation = ArtistDTO.class)))
     @PutMapping
@@ -55,14 +55,14 @@ public class ArtistController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удаление артиста", description = "Удаление артиста")
+    @Operation(summary = "Удаление артиста")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteArtist(@PathVariable("id") UUID artistId) {
         return new ResponseEntity<>(service.deleteArtistById(artistId), HttpStatus.NO_CONTENT);
     }
 
     @ApiCreate
-    @Operation(summary = "Создание артиста", description = "Создание артиста")
+    @Operation(summary = "Создание артиста")
     @ApiResponse(responseCode = "201", description = "В случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = ArtistDTO.class)))
     @PostMapping
@@ -76,7 +76,7 @@ public class ArtistController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список артистов по имени", description = "Получить список артистов по имени")
+    @Operation(summary = "Получить список артистов по имени")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(allOf = ArtistDTO.class)))
     @GetMapping("/artists-by-name/{name}")
@@ -85,7 +85,7 @@ public class ArtistController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список артистов по псевдониму", description = "Получить список артистов по псевдониму")
+    @Operation(summary = "Получить список артистов по псевдониму")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(allOf = ArtistDTO.class)))
     @GetMapping("/artists-by-pseudonym/{pseudonym}")

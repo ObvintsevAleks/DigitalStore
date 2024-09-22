@@ -34,7 +34,7 @@ public class CustomerController {
     private final CustomerService service;
 
     @ApiGet
-    @Operation(summary = "Получить клиента по идентификатору", description = "Получить клиента по идентификатору")
+    @Operation(summary = "Получить клиента по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = CustomerDTO.class)))
     @GetMapping("/{id}")
@@ -44,7 +44,7 @@ public class CustomerController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить клиента", description = "Обновить клиента")
+    @Operation(summary = "Обновить клиента")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = CustomerDTO.class)))
     @PutMapping
@@ -53,14 +53,14 @@ public class CustomerController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить клиента", description = "Удалить клиента")
+    @Operation(summary = "Удалить клиента")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable("id") UUID customerId) {
         return new ResponseEntity<>(service.deleteCustomerById(customerId), HttpStatus.NO_CONTENT);
     }
 
     @ApiCreate
-    @Operation(summary = "Создать клиента", description = "Создать клиента")
+    @Operation(summary = "Создать клиента")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = CustomerDTO.class)))
     @PostMapping
@@ -71,14 +71,14 @@ public class CustomerController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список клиентов по имени", description = "Получить список клиентов по имени")
+    @Operation(summary = "Получить список клиентов по имени")
     @GetMapping("/firstname/{name}")
     public ResponseEntity<?> getCustomerByFirstname(@PathVariable("name") String firstName) {
         return new ResponseEntity<>(service.getCustomerListByFirstname(firstName), HttpStatus.OK);
     }
 
     @ApiGet
-    @Operation(summary = "Получить список клиентов по фамилии", description = "Получить список клиентов по фамилии")
+    @Operation(summary = "Получить список клиентов по фамилии")
     @GetMapping("/lastname/{name}")
     public ResponseEntity<?> getCustomerByLastname(@PathVariable("name") String lastname) {
         return new ResponseEntity<>(service.getCustomerListByLastname(lastname), HttpStatus.OK);

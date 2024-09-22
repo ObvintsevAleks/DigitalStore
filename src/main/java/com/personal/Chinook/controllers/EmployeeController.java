@@ -34,7 +34,7 @@ public class EmployeeController {
     private final EmployeeService service;
 
     @ApiGet
-    @Operation(summary = "Получить работника по идентификатору", description = "Получить работника по идентификатору")
+    @Operation(summary = "Получить работника по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = EmployeeDTO.class)))
     @GetMapping("/{id}")
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить работника", description = "Обновить работника")
+    @Operation(summary = "Обновить работника")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = EmployeeDTO.class)))
     @PutMapping
@@ -53,14 +53,14 @@ public class EmployeeController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить работника", description = "Удалить работника")
+    @Operation(summary = "Удалить работника")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") UUID employeeId) {
         return new ResponseEntity<>(service.deleteEmployeeById(employeeId), HttpStatus.NO_CONTENT);
     }
 
     @ApiCreate
-    @Operation(summary = "Создать работника", description = "Создать работника")
+    @Operation(summary = "Создать работника")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = EmployeeDTO.class)))
     @PostMapping
@@ -71,14 +71,14 @@ public class EmployeeController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить список работников по имени", description = "Получить список работников по имени")
+    @Operation(summary = "Получить список работников по имени")
     @GetMapping("/firstname/{name}")
     public ResponseEntity<?> getEmployeeByLastname(@PathVariable("name") String firstName) {
         return new ResponseEntity<>(service.getEmployeeListByFirstname(firstName), HttpStatus.OK);
     }
 
     @ApiGet
-    @Operation(summary = "Получить список работников по фамилии", description = "Получить список работников по фамилии")
+    @Operation(summary = "Получить список работников по фамилии")
     @GetMapping("/lastname/{name}")
     public ResponseEntity<?> getEmployeeByFirstname(@PathVariable("name") String lastname) {
         return new ResponseEntity<>(service.getEmployeeListByLastname(lastname), HttpStatus.OK);

@@ -27,7 +27,7 @@ Referenced (and found it on):
 - валидация, добавить при создании уникальных сущностей ошибку 
 - перевести схему на валидацию а не создание (хибернейт)
 - для схемы добавить sql с инсертом данных (спиздить с аналога той же бд)
-- отдельно попробовать написать валидлацию для поля email
+- отдельно попробовать написать валидлацию для поля email (лучше использовать аннотацию)
 
 Доработка контроллеров
 - album controller, список альбомов по псевдониму артиста ++
@@ -42,62 +42,94 @@ Referenced (and found it on):
 
 # Spring-boot rest-api boilerplate
 
-This project includes : Spring Boot(3.3.1), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger (Open API).
-If you're hiring for AQA - [my telegramm contact](https://t.me/TommyBahama).
+Проект включает: Spring Boot(3.3.1), Spring Data JPA, Spring Validation, Spring Security + JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger (Open API).
+
+Если вы находитесь в поиске AQA - [мой контакт в телеграмм](https://t.me/TommyBahama).
 
 ## REST API Endpoints
 
-All inputs and outputs use JSON format.
-
-To open Swagger (interactive) API documentation, navigate your browser to http://localhost:8181/api/swagger-ui/index.html
+Swagger документация - http://localhost:8181/api/swagger-ui/index.html
 
 
 ```
 registration-controller
-  POST /register - create user, required : String name , String email, String username, String password
+  POST /register - создать пользователя
 
 login-controller
-  POST /login - Login using username: b and password:b
+  POST /login - авторизоваться за пользователя
   
 artist-controller
-  PUT /artists - Update artist
-  POST /artists - Create artist
-  GET /artists/{id} - Get artist with ID
-  DELETE /artists/{id} - Remove artist with ID
-  GET /artists/artists-by-pseudonym/{pseudonym} - Get list of artist with same pseudonym
-  GET /artists/artists-by-name/{name} - Get list of artist with same name
+  PUT /artists - Обновить артиста
+  POST /artists - Создание артиста
+  GET /artists/{id} - Получить артиста по идентификатору
+  DELETE /artists/{id} - Удаление артиста
+  GET /artists/artists-by-pseudonym/{pseudonym} - Получить список артистов по псевдониму
+  GET /artists/artists-by-name/{name} - Получить список артистов по имени
   
 genre-controller
-  PUT /genres - Update genre
-  POST /genres - Create genre
-  GET /genres/{id} - Get genre with ID
-  DELETE /genres/{id} - Remove genre with ID
-  GET /genres/all - Get all genre
+  PUT /genres - Обновить жанр
+  POST /genres - Создать жанр
+  GET /genres/{id} - Получить жанр по идентификатору
+  DELETE /genres/{id} - Удалить жанр
+  GET /genres/all - Получить все жанры
 
 media-type-controller  
-  PUT /media-types - Update media-type
-  POST /media-types - Create media-type
-  GET /media-types/{id} - Get media-type with ID
-  DELETE /media-types/{id} - Remove media-type with ID
-  GET /media-types/all - Get all media-type
+  PUT /media-types - Обновить медиа-тип
+  POST /media-types - Создать медиа-тип
+  GET /media-types/{id} - Получить медиа-тип по идентификатору
+  DELETE /media-types/{id} - Удалить медиа-тип
+  GET /media-types/all - Получить все медиа-типы
 
 album-controller
-  PUT /albums - Update album
-  POST /albums - Create album
-  GET /albums/{id} - Get album with ID
-  DELETE /albums/{id} - Remove album with ID
-  GET /albums/albums-by-title/{title} - Get list of albums with identical title
-  GET /albums/albums-by-artist-pseudonym/{pseudonym}  - Get list of albums by artist pseudonym
-  GET /albums/albums-by-artist-id/{id}  - Get list of albums by artist ID
+  PUT /albums - Обновить альбом
+  POST /albums - Создать альбом
+  GET /albums/{id} - Получить альбом по идентификатору
+  DELETE /albums/{id} - Удалить альбом
+  GET /albums/albums-by-title/{title} - Получить список альбомов по заголовку
+  GET /albums/albums-by-artist-pseudonym/{pseudonym} - Получить список альбомов по псевдониму артиста
+  GET /albums/albums-by-artist-id/{artistId} - Получить список альбомов по идентификатору артиста
   
 track-controller
-  PUT /tracks - Update track
-  POST /tracks - Create genres
-  GET /tracks/{id} - Get genres with ID
-  DELETE /tracks/{id} - Remove genres with ID
-  GET /tracks/tracks-by-artist-pseudonym/{pseudonym}
+  PUT /tracks - Обновить аудиозапись
+  POST /tracks - Создать аудиозапись
+  GET /tracks/{id} - Получить аудиозапись по идентификатору
+  DELETE /tracks/{id} - Удалить аудиозапись
+  GET /tracks/tracks-by-artist-pseudonym/{pseudonym} - Получить все аудиозаписи по псевдониму артиста
+  GET /tracks/tracks-by-artist-id/{id} - Получить все аудиозаписи по идентификатору артиста
+  GET /tracks/all-tracks-by-media-type/{id} - Получить все аудиозаписи по идентификатору медиа-типа
+  GET /tracks/all-tracks-by-genre/{id} - Получить все аудиозаписи по идентификатору жанра
+  GET /tracks/all-tracks-by-album/{id} - Получить все аудиозаписи по идентификатору альбома
   
+employee-controller  
+  PUT /employees - Обновить работника
+  POST /employees - Создать работника
+  GET /employees/{id} - Получить работника по идентификатору
+  DELETE /employees/{id} - Удалить работника
+  GET /employees/lastname/{name} - Получить список работников по фамилии
+  GET /employees/firstname/{name} - Получить список работников по имени
   
- 
+customer-controller  
+  PUT /customers - Обновить клиента
+  POST /customers - Создать клиента
+  GET /customers/{id} -Получить клиента по идентификатору
+  DELETE /customers/{id} - Удалить клиента
+  GET /customers/lastname/{name} - Получить список клиентов по фамилии
+  GET /customers/firstname/{name} - Получить список клиентов по имени
+  
+invoice-controller  
+  PUT /invoices - Обновить заказ
+  POST /invoices - Создать заказ
+  GET /invoices/{id} - Получить заказ по идентификатору
+  DELETE /invoices/{id} - Удалить заказ
+  GET /invoices/invoices-by-employee/{id} - Получить заказ по идентификатору сотрудника
+  GET /invoices/invoices-by-customer/{id} - Получить заказ по идентификатору клиента
+  
+invoice-line-controller  
+  PUT /invoice-lines - Обновить сформированный заказ
+  POST /invoice-lines - Создать сформированный заказ
+  GET /invoice-lines/{id} - Получить сформированный заказ по идентификатору
+  DELETE /invoice-lines/{id} - Удалить сформированный заказ
+  GET /invoice-lines/invoice-lines-by-track/{id} - Получить список сформированных заказов по идентификатору аудиозаписи
+  GET /invoice-lines/invoice-line-by-invoice/{id} - Получить список сформированных заказов по идентификатору заказа
 
 ```

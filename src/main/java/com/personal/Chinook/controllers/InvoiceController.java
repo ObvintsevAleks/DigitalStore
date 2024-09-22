@@ -31,7 +31,7 @@ public class InvoiceController {
     private final InvoiceService service;
 
     @ApiGet
-    @Operation(summary = "Получить заказ по идентификатору", description = "Получить заказ по идентификатору")
+    @Operation(summary = "Получить заказ по идентификатору")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
     @GetMapping("/{id}")
@@ -41,7 +41,7 @@ public class InvoiceController {
     }
 
     @ApiUpdate
-    @Operation(summary = "Обновить заказ", description = "Обновить заказ")
+    @Operation(summary = "Обновить заказ")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
     @PutMapping
@@ -50,14 +50,14 @@ public class InvoiceController {
     }
 
     @ApiDelete
-    @Operation(summary = "Удалить заказ", description = "Удалить заказ")
+    @Operation(summary = "Удалить заказ")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteInvoice(@PathVariable("id") UUID invoiceId) {
         return new ResponseEntity<>(service.deleteInvoiceById(invoiceId), HttpStatus.NO_CONTENT);
     }
 
     @ApiCreate
-    @Operation(summary = "Создать заказ", description = "Создать заказ")
+    @Operation(summary = "Создать заказ")
     @ApiResponse(responseCode = "201", description = " случае успешного создания сущности",
             content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
     @PostMapping
@@ -68,7 +68,7 @@ public class InvoiceController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить заказ по идентификатору клиента", description = "Получить заказ по идентификатору клиента")
+    @Operation(summary = "Получить заказ по идентификатору клиента")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
     @GetMapping("/invoices-by-customer/{id}")
@@ -78,7 +78,7 @@ public class InvoiceController {
     }
 
     @ApiGet
-    @Operation(summary = "Получить заказ по идентификатору сотрудника", description = "Получить заказ по идентификатору сотрудника")
+    @Operation(summary = "Получить заказ по идентификатору сотрудника")
     @ApiResponse(responseCode = "200", description = "В случае успешного выполнения",
             content = @Content(schema = @Schema(implementation = InvoiceDTO.class)))
     @GetMapping("/invoices-by-employee/{id}")

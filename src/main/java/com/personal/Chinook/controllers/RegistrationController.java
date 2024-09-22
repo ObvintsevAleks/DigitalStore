@@ -23,11 +23,9 @@ public class RegistrationController {
     private final UserService userService;
 
     @PostMapping
-    @Operation(description = "You can register to the system by sending information in the appropriate format.")
+    @Operation(summary = "Регистрация пользователя")
     public ResponseEntity<RegistrationResponse> registrationRequest(@Valid @RequestBody RegistrationRequest registrationRequest) {
-
         final RegistrationResponse registrationResponse = userService.registration(registrationRequest);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(registrationResponse);
     }
 
