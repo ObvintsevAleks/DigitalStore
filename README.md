@@ -1,12 +1,12 @@
-# Spring-boot rest-api boilerplate
+# Rest-api spring boot boilerplate
 <h4> Небольшой пет-проект rest-api </h4>
 <h4>Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger.</h4>
 <hr>
-<h3> Если у Вас интересный продукт и Вы ищете AQA - мой контакт для связи <a href= "https://t.me/TommyBahama">telegram<a/>  </h3> 
+<h3> Если у Вас интересный продукт и Вы ищете AQA - мой <a href= "https://t.me/TommyBahama">telegram контакт<a/> для связи</h3> 
 
 <hr>
 <h3>
-<li> Db Name: Digital store </li>
+<li> Db Name: DigitalStore </li>
 <br>
 <li> Db Engine: PostgreSQL </li>
 </h3>
