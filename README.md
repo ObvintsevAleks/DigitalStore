@@ -1,15 +1,13 @@
 # Rest-api spring boot boilerplate
-<h4> Небольшой пет-проект rest-api </h4>
-<h4>Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger.</h4>
-<hr>
-<h3> Если у Вас интересный продукт и Вы ищете AQA - мой <a href= "https://t.me/TommyBahama">telegram контакт<a/> для связи</h3> 
+- <h4> Небольшой пет-проект rest-api </h4>
+- <h4> Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger. </h4>
+- <h4> Если у Вас интересный продукт и Вы ищете AQA - мой <a href="https://t.me/TommyBahama" rel="noopener noreferrer" class="link">telegram контакт</a> и <a href="mailto:Obvintsev.Aleksey@yandex.ru" rel="noopener noreferrer" class="link">почта</a> </h4> 
 
 <hr>
-<h3>
-<li> Db Name: DigitalStore </li>
-<br>
-<li> Db Engine: PostgreSQL </li>
-</h3>
+
+- <h4>Db Name: DigitalStore </h4>
+- <h4> Db Engine: PostgreSQL </h4>
+
 
 <h3><p style="text-align: center;">ER - diagram</p>
  
@@ -102,34 +100,6 @@ invoice-line-controller
   DELETE /invoice-lines/{id} - Удалить сформированный заказ
   GET /invoice-lines/invoice-lines-by-track/{id} - Получить список сформированных заказов по идентификатору аудиозаписи
   GET /invoice-lines/invoice-line-by-invoice/{id} - Получить список сформированных заказов по идентификатору заказа
-
 ```
 
-<hr>
-
-<h3>TODO ёпта: </h3>
-
-- ui дока на сваггер нормальная ++
-- решить проблему с зацикливанием последнего эндпоинта +++
-- авторизация (по jwt спиздить с гитхаба) ++
-- использовать https://chartdb.io/ и отрисовать красивую диаграмму с бд ++
-
-<h3>Доработка контроллеров</h3>
-- album controller, список альбомов по псевдониму артиста ++
-- track controller, get all tracks by artist псевдоним ++
-- track controller, get all tracks by artist Id ++
-- genre controller, mediaType-controller (уникальность по имени) ++
-- /tracks/all-tracks-by-media-type/{id} - не работает нормально ++
-- invoice line controller, get all invoice line by trackId;  get all track by invoiceId ++
-- invoice controller, get all customers by employeeId; get all employees by customersId ++
-
-<h3>Блок с валидацией (если не будет впадлу сделать)</h3>
-- валидация нормальная переработать (500 не падает, но падает 401 которую перехватывает один из advice)
-- валидация, добавить при создании ошибку (не найдена вложенная сущность)
-- валидация, добавить при создании уникальных сущностей ошибку
-- валидация для поля email (прокинуть spring аннотацию)
-
-<h3>Блок с бд</h3>
-- перевести схему на валидацию а не создание (хибернейт, если не будет впадлу сделать)
-- для схемы добавить sql с инсертом данных (если не будет впадлу сделать, данные брать из аналогов той же бд - уже есть локально - смотри digital store)
 
