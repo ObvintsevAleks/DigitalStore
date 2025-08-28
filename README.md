@@ -1,7 +1,6 @@
 # Rest-api spring boot boilerplate
-- <h4> Небольшой пет-проект rest-api </h4>
-- <h4> Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger. </h4>
-- <h4> Если у Вас интересный продукт и Вы ищете AQA - мой <a href="https://t.me/TommyBahama" rel="noopener noreferrer" class="link">telegram контакт</a> и <a href="mailto:Obvintsev.Aleksey@yandex.ru" rel="noopener noreferrer" class="link">почта</a> </h4> 
+- <h4> РќРµР±РѕР»СЊС€РѕР№ РїРµС‚-РїСЂРѕРµРєС‚ rest-api </h4>
+- <h4> Р’РєР»СЋС‡Р°РµС‚: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ JWT Token), Mapstruct, Lombok, Swagger. </h4>
 
 <hr>
 
@@ -17,89 +16,89 @@
 
 ## Rest-api endpoints
 
-Swagger документация - http://localhost:8181/api/swagger-ui/index.html
+Swagger РґРѕРєСѓРјРµРЅС‚Р°С†РёСЏ - http://localhost:8181/api/swagger-ui/index.html
 
 
 ```
 registration-controller
-  POST /register - создать пользователя
+  POST /register - СЃРѕР·РґР°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 
 login-controller
-  POST /login - авторизоваться за пользователя
+  POST /login - Р°РІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ Р·Р° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
   
 artist-controller
-  PUT /artists - Обновить артиста
-  POST /artists - Создание артиста
-  GET /artists/{id} - Получить артиста по идентификатору
-  DELETE /artists/{id} - Удаление артиста
-  GET /artists/artists-by-pseudonym/{pseudonym} - Получить список артистов по псевдониму
-  GET /artists/artists-by-name/{name} - Получить список артистов по имени
+  PUT /artists - РћР±РЅРѕРІРёС‚СЊ Р°СЂС‚РёСЃС‚Р°
+  POST /artists - РЎРѕР·РґР°РЅРёРµ Р°СЂС‚РёСЃС‚Р°
+  GET /artists/{id} - РџРѕР»СѓС‡РёС‚СЊ Р°СЂС‚РёСЃС‚Р° РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /artists/{id} - РЈРґР°Р»РµРЅРёРµ Р°СЂС‚РёСЃС‚Р°
+  GET /artists/artists-by-pseudonym/{pseudonym} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°СЂС‚РёСЃС‚РѕРІ РїРѕ РїСЃРµРІРґРѕРЅРёРјСѓ
+  GET /artists/artists-by-name/{name} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°СЂС‚РёСЃС‚РѕРІ РїРѕ РёРјРµРЅРё
   
 genre-controller
-  PUT /genres - Обновить жанр
-  POST /genres - Создать жанр
-  GET /genres/{id} - Получить жанр по идентификатору
-  DELETE /genres/{id} - Удалить жанр
-  GET /genres/all - Получить все жанры
+  PUT /genres - РћР±РЅРѕРІРёС‚СЊ Р¶Р°РЅСЂ
+  POST /genres - РЎРѕР·РґР°С‚СЊ Р¶Р°РЅСЂ
+  GET /genres/{id} - РџРѕР»СѓС‡РёС‚СЊ Р¶Р°РЅСЂ РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /genres/{id} - РЈРґР°Р»РёС‚СЊ Р¶Р°РЅСЂ
+  GET /genres/all - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р¶Р°РЅСЂС‹
 
 media-type-controller  
-  PUT /media-types - Обновить медиа-тип
-  POST /media-types - Создать медиа-тип
-  GET /media-types/{id} - Получить медиа-тип по идентификатору
-  DELETE /media-types/{id} - Удалить медиа-тип
-  GET /media-types/all - Получить все медиа-типы
+  PUT /media-types - РћР±РЅРѕРІРёС‚СЊ РјРµРґРёР°-С‚РёРї
+  POST /media-types - РЎРѕР·РґР°С‚СЊ РјРµРґРёР°-С‚РёРї
+  GET /media-types/{id} - РџРѕР»СѓС‡РёС‚СЊ РјРµРґРёР°-С‚РёРї РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /media-types/{id} - РЈРґР°Р»РёС‚СЊ РјРµРґРёР°-С‚РёРї
+  GET /media-types/all - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ РјРµРґРёР°-С‚РёРїС‹
 
 album-controller
-  PUT /albums - Обновить альбом
-  POST /albums - Создать альбом
-  GET /albums/{id} - Получить альбом по идентификатору
-  DELETE /albums/{id} - Удалить альбом
-  GET /albums/albums-by-title/{title} - Получить список альбомов по заголовку
-  GET /albums/albums-by-artist-pseudonym/{pseudonym} - Получить список альбомов по псевдониму артиста
-  GET /albums/albums-by-artist-id/{artistId} - Получить список альбомов по идентификатору артиста
+  PUT /albums - РћР±РЅРѕРІРёС‚СЊ Р°Р»СЊР±РѕРј
+  POST /albums - РЎРѕР·РґР°С‚СЊ Р°Р»СЊР±РѕРј
+  GET /albums/{id} - РџРѕР»СѓС‡РёС‚СЊ Р°Р»СЊР±РѕРј РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /albums/{id} - РЈРґР°Р»РёС‚СЊ Р°Р»СЊР±РѕРј
+  GET /albums/albums-by-title/{title} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°Р»СЊР±РѕРјРѕРІ РїРѕ Р·Р°РіРѕР»РѕРІРєСѓ
+  GET /albums/albums-by-artist-pseudonym/{pseudonym} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°Р»СЊР±РѕРјРѕРІ РїРѕ РїСЃРµРІРґРѕРЅРёРјСѓ Р°СЂС‚РёСЃС‚Р°
+  GET /albums/albums-by-artist-id/{artistId} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°Р»СЊР±РѕРјРѕРІ РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р°СЂС‚РёСЃС‚Р°
   
 track-controller
-  PUT /tracks - Обновить аудиозапись
-  POST /tracks - Создать аудиозапись
-  GET /tracks/{id} - Получить аудиозапись по идентификатору
-  DELETE /tracks/{id} - Удалить аудиозапись
-  GET /tracks/tracks-by-artist-pseudonym/{pseudonym} - Получить все аудиозаписи по псевдониму артиста
-  GET /tracks/tracks-by-artist-id/{id} - Получить все аудиозаписи по идентификатору артиста
-  GET /tracks/all-tracks-by-media-type/{id} - Получить все аудиозаписи по идентификатору медиа-типа
-  GET /tracks/all-tracks-by-genre/{id} - Получить все аудиозаписи по идентификатору жанра
-  GET /tracks/all-tracks-by-album/{id} - Получить все аудиозаписи по идентификатору альбома
+  PUT /tracks - РћР±РЅРѕРІРёС‚СЊ Р°СѓРґРёРѕР·Р°РїРёСЃСЊ
+  POST /tracks - РЎРѕР·РґР°С‚СЊ Р°СѓРґРёРѕР·Р°РїРёСЃСЊ
+  GET /tracks/{id} - РџРѕР»СѓС‡РёС‚СЊ Р°СѓРґРёРѕР·Р°РїРёСЃСЊ РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /tracks/{id} - РЈРґР°Р»РёС‚СЊ Р°СѓРґРёРѕР·Р°РїРёСЃСЊ
+  GET /tracks/tracks-by-artist-pseudonym/{pseudonym} - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р°СѓРґРёРѕР·Р°РїРёСЃРё РїРѕ РїСЃРµРІРґРѕРЅРёРјСѓ Р°СЂС‚РёСЃС‚Р°
+  GET /tracks/tracks-by-artist-id/{id} - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р°СѓРґРёРѕР·Р°РїРёСЃРё РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р°СЂС‚РёСЃС‚Р°
+  GET /tracks/all-tracks-by-media-type/{id} - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р°СѓРґРёРѕР·Р°РїРёСЃРё РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ РјРµРґРёР°-С‚РёРїР°
+  GET /tracks/all-tracks-by-genre/{id} - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р°СѓРґРёРѕР·Р°РїРёСЃРё РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р¶Р°РЅСЂР°
+  GET /tracks/all-tracks-by-album/{id} - РџРѕР»СѓС‡РёС‚СЊ РІСЃРµ Р°СѓРґРёРѕР·Р°РїРёСЃРё РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р°Р»СЊР±РѕРјР°
   
 employee-controller  
-  PUT /employees - Обновить работника
-  POST /employees - Создать работника
-  GET /employees/{id} - Получить работника по идентификатору
-  DELETE /employees/{id} - Удалить работника
-  GET /employees/lastname/{name} - Получить список работников по фамилии
-  GET /employees/firstname/{name} - Получить список работников по имени
+  PUT /employees - РћР±РЅРѕРІРёС‚СЊ СЂР°Р±РѕС‚РЅРёРєР°
+  POST /employees - РЎРѕР·РґР°С‚СЊ СЂР°Р±РѕС‚РЅРёРєР°
+  GET /employees/{id} - РџРѕР»СѓС‡РёС‚СЊ СЂР°Р±РѕС‚РЅРёРєР° РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /employees/{id} - РЈРґР°Р»РёС‚СЊ СЂР°Р±РѕС‚РЅРёРєР°
+  GET /employees/lastname/{name} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЂР°Р±РѕС‚РЅРёРєРѕРІ РїРѕ С„Р°РјРёР»РёРё
+  GET /employees/firstname/{name} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЂР°Р±РѕС‚РЅРёРєРѕРІ РїРѕ РёРјРµРЅРё
   
 customer-controller  
-  PUT /customers - Обновить клиента
-  POST /customers - Создать клиента
-  GET /customers/{id} -Получить клиента по идентификатору
-  DELETE /customers/{id} - Удалить клиента
-  GET /customers/lastname/{name} - Получить список клиентов по фамилии
-  GET /customers/firstname/{name} - Получить список клиентов по имени
+  PUT /customers - РћР±РЅРѕРІРёС‚СЊ РєР»РёРµРЅС‚Р°
+  POST /customers - РЎРѕР·РґР°С‚СЊ РєР»РёРµРЅС‚Р°
+  GET /customers/{id} -РџРѕР»СѓС‡РёС‚СЊ РєР»РёРµРЅС‚Р° РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /customers/{id} - РЈРґР°Р»РёС‚СЊ РєР»РёРµРЅС‚Р°
+  GET /customers/lastname/{name} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РєР»РёРµРЅС‚РѕРІ РїРѕ С„Р°РјРёР»РёРё
+  GET /customers/firstname/{name} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє РєР»РёРµРЅС‚РѕРІ РїРѕ РёРјРµРЅРё
   
 invoice-controller  
-  PUT /invoices - Обновить заказ
-  POST /invoices - Создать заказ
-  GET /invoices/{id} - Получить заказ по идентификатору
-  DELETE /invoices/{id} - Удалить заказ
-  GET /invoices/invoices-by-employee/{id} - Получить заказ по идентификатору сотрудника
-  GET /invoices/invoices-by-customer/{id} - Получить заказ по идентификатору клиента
+  PUT /invoices - РћР±РЅРѕРІРёС‚СЊ Р·Р°РєР°Р·
+  POST /invoices - РЎРѕР·РґР°С‚СЊ Р·Р°РєР°Р·
+  GET /invoices/{id} - РџРѕР»СѓС‡РёС‚СЊ Р·Р°РєР°Р· РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /invoices/{id} - РЈРґР°Р»РёС‚СЊ Р·Р°РєР°Р·
+  GET /invoices/invoices-by-employee/{id} - РџРѕР»СѓС‡РёС‚СЊ Р·Р°РєР°Р· РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ СЃРѕС‚СЂСѓРґРЅРёРєР°
+  GET /invoices/invoices-by-customer/{id} - РџРѕР»СѓС‡РёС‚СЊ Р·Р°РєР°Р· РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ РєР»РёРµРЅС‚Р°
   
 invoice-line-controller  
-  PUT /invoice-lines - Обновить сформированный заказ
-  POST /invoice-lines - Создать сформированный заказ
-  GET /invoice-lines/{id} - Получить сформированный заказ по идентификатору
-  DELETE /invoice-lines/{id} - Удалить сформированный заказ
-  GET /invoice-lines/invoice-lines-by-track/{id} - Получить список сформированных заказов по идентификатору аудиозаписи
-  GET /invoice-lines/invoice-line-by-invoice/{id} - Получить список сформированных заказов по идентификатору заказа
+  PUT /invoice-lines - РћР±РЅРѕРІРёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РєР°Р·
+  POST /invoice-lines - РЎРѕР·РґР°С‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РєР°Р·
+  GET /invoice-lines/{id} - РџРѕР»СѓС‡РёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РєР°Р· РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ
+  DELETE /invoice-lines/{id} - РЈРґР°Р»РёС‚СЊ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹Р№ Р·Р°РєР°Р·
+  GET /invoice-lines/invoice-lines-by-track/{id} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹С… Р·Р°РєР°Р·РѕРІ РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р°СѓРґРёРѕР·Р°РїРёСЃРё
+  GET /invoice-lines/invoice-line-by-invoice/{id} - РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅС‹С… Р·Р°РєР°Р·РѕРІ РїРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСѓ Р·Р°РєР°Р·Р°
 ```
 
 
