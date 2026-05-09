@@ -15,6 +15,11 @@ spring:
 
   batch.job.enabled: false
 
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init.sql
+
   jpa:
     show-sql: true
     database: postgresql
