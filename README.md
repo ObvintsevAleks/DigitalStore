@@ -1,12 +1,56 @@
-# Rest-api spring boot boilerplate
-- <h4> Небольшой пет-проект rest-api </h4>
-- <h4> Включает: Spring Boot, Spring Data JPA, Spring Validation, Spring Security (используется JWT Token), Mapstruct, Lombok, Swagger. </h4>
+## Project Overview
 
-<hr>
 
-- <h4>Db Name: DigitalStore </h4>
-- <h4> Db Engine: PostgreSQL </h4>
+**DigitalStore** is a Spring Boot REST API for a digital media store that manages artists, albums, tracks, genres, media types, customers, employees, and sales invoices. The project uses PostgreSQL for persistence and JWT tokens for authentication.
 
+**Tech Stack:**
+- Language: Java 17
+- Framework: Spring Boot 3.3.3
+- Build Tool: Maven
+- Database: PostgreSQL
+- Authentication: JWT (java-jwt library)
+- API Documentation: OpenAPI/Swagger (springdoc-openapi)
+- ORM: Spring Data JPA with Hibernate
+- Mapping: MapStruct
+- Annotation Processing: Lombok
+
+**Swagger docs:**  - http://localhost:8181/api/swagger-ui/index.html
+
+#### Build the Project
+```bash
+./mvnw clean package
+```
+
+#### Run Tests
+```bash
+./mvnw test
+```
+
+#### Run Locally (requires PostgreSQL)
+```bash
+./mvnw spring-boot:run
+```
+
+Connection defaults:
+- Database: `DigitalStore`
+- Host: `localhost:5432`
+- User: `postgres`
+- Password: `postgres`
+
+Override via environment variables:
+```bash
+POSTGRES_DB_SERVER_ADDRESS=localhost POSTGRES_DB_SERVER_PORT=5432 POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres ./mvnw spring-boot:run
+```
+
+### Docker
+```bash
+# Dockerfile uses multi-stage build: Maven stage compiles, Java 17 stage runs the JAR.
+# Build and run with Docker Compose
+docker-compose up --build
+
+# Stop and remove containers + volumes (нужно при смене версии postgres или сбросе БД)
+docker-compose down -v
+```
 
 <h3><p style="text-align: center;">ER - diagram</p>
  
@@ -16,89 +60,189 @@
 
 ## Rest-api endpoints
 
-Swagger документация - http://localhost:8181/api/swagger-ui/index.html
-
+All prefixed with `/api`. Swagger UI: `http://localhost:8181/api/swagger-ui/index.html`
 
 ```
-registration-controller
-  POST /register - создать пользователя
+POST   /register                                          - регистрация пользователя
+POST   /login                                             - авторизация
 
-login-controller
-  POST /login - авторизоваться за пользователя
-  
-artist-controller
-  PUT /artists - Обновить артиста
-  POST /artists - Создание артиста
-  GET /artists/{id} - Получить артиста по идентификатору
-  DELETE /artists/{id} - Удаление артиста
-  GET /artists/artists-by-pseudonym/{pseudonym} - Получить список артистов по псевдониму
-  GET /artists/artists-by-name/{name} - Получить список артистов по имени
-  
-genre-controller
-  PUT /genres - Обновить жанр
-  POST /genres - Создать жанр
-  GET /genres/{id} - Получить жанр по идентификатору
-  DELETE /genres/{id} - Удалить жанр
-  GET /genres/all - Получить все жанры
+POST   /artists                                           - создать артиста
+PUT    /artists                                           - обновить артиста
+GET    /artists/{id}                                      - получить артиста по id
+DELETE /artists/{id}                                      - удалить артиста
+GET    /artists/artists-by-pseudonym/{pseudonym}          - поиск по псевдониму
+GET    /artists/artists-by-name/{name}                    - поиск по имени
 
-media-type-controller  
-  PUT /media-types - Обновить медиа-тип
-  POST /media-types - Создать медиа-тип
-  GET /media-types/{id} - Получить медиа-тип по идентификатору
-  DELETE /media-types/{id} - Удалить медиа-тип
-  GET /media-types/all - Получить все медиа-типы
+POST   /genres                                            - создать жанр
+PUT    /genres                                            - обновить жанр
+GET    /genres/{id}                                       - получить жанр по id
+DELETE /genres/{id}                                       - удалить жанр
+GET    /genres/all                                        - все жанры
 
-album-controller
-  PUT /albums - Обновить альбом
-  POST /albums - Создать альбом
-  GET /albums/{id} - Получить альбом по идентификатору
-  DELETE /albums/{id} - Удалить альбом
-  GET /albums/albums-by-title/{title} - Получить список альбомов по заголовку
-  GET /albums/albums-by-artist-pseudonym/{pseudonym} - Получить список альбомов по псевдониму артиста
-  GET /albums/albums-by-artist-id/{artistId} - Получить список альбомов по идентификатору артиста
-  
-track-controller
-  PUT /tracks - Обновить аудиозапись
-  POST /tracks - Создать аудиозапись
-  GET /tracks/{id} - Получить аудиозапись по идентификатору
-  DELETE /tracks/{id} - Удалить аудиозапись
-  GET /tracks/tracks-by-artist-pseudonym/{pseudonym} - Получить все аудиозаписи по псевдониму артиста
-  GET /tracks/tracks-by-artist-id/{id} - Получить все аудиозаписи по идентификатору артиста
-  GET /tracks/all-tracks-by-media-type/{id} - Получить все аудиозаписи по идентификатору медиа-типа
-  GET /tracks/all-tracks-by-genre/{id} - Получить все аудиозаписи по идентификатору жанра
-  GET /tracks/all-tracks-by-album/{id} - Получить все аудиозаписи по идентификатору альбома
-  
-employee-controller  
-  PUT /employees - Обновить работника
-  POST /employees - Создать работника
-  GET /employees/{id} - Получить работника по идентификатору
-  DELETE /employees/{id} - Удалить работника
-  GET /employees/lastname/{name} - Получить список работников по фамилии
-  GET /employees/firstname/{name} - Получить список работников по имени
-  
-customer-controller  
-  PUT /customers - Обновить клиента
-  POST /customers - Создать клиента
-  GET /customers/{id} -Получить клиента по идентификатору
-  DELETE /customers/{id} - Удалить клиента
-  GET /customers/lastname/{name} - Получить список клиентов по фамилии
-  GET /customers/firstname/{name} - Получить список клиентов по имени
-  
-invoice-controller  
-  PUT /invoices - Обновить заказ
-  POST /invoices - Создать заказ
-  GET /invoices/{id} - Получить заказ по идентификатору
-  DELETE /invoices/{id} - Удалить заказ
-  GET /invoices/invoices-by-employee/{id} - Получить заказ по идентификатору сотрудника
-  GET /invoices/invoices-by-customer/{id} - Получить заказ по идентификатору клиента
-  
-invoice-line-controller  
-  PUT /invoice-lines - Обновить сформированный заказ
-  POST /invoice-lines - Создать сформированный заказ
-  GET /invoice-lines/{id} - Получить сформированный заказ по идентификатору
-  DELETE /invoice-lines/{id} - Удалить сформированный заказ
-  GET /invoice-lines/invoice-lines-by-track/{id} - Получить список сформированных заказов по идентификатору аудиозаписи
-  GET /invoice-lines/invoice-line-by-invoice/{id} - Получить список сформированных заказов по идентификатору заказа
+POST   /media-types                                       - создать медиа-тип
+PUT    /media-types                                       - обновить медиа-тип
+GET    /media-types/{id}                                  - получить медиа-тип по id
+DELETE /media-types/{id}                                  - удалить медиа-тип
+GET    /media-types/all                                   - все медиа-типы
+
+POST   /albums                                            - создать альбом
+PUT    /albums                                            - обновить альбом
+GET    /albums/{id}                                       - получить альбом по id
+DELETE /albums/{id}                                       - удалить альбом
+GET    /albums/albums-by-title/{title}                    - поиск по названию
+GET    /albums/albums-by-artist-pseudonym/{pseudonym}     - поиск по псевдониму артиста
+GET    /albums/albums-by-artist-id/{artistId}             - поиск по id артиста
+
+POST   /tracks                                            - создать трек
+PUT    /tracks                                            - обновить трек
+GET    /tracks/{id}                                       - получить трек по id
+DELETE /tracks/{id}                                       - удалить трек
+GET    /tracks/tracks-by-artist-pseudonym/{pseudonym}     - поиск по псевдониму артиста
+GET    /tracks/tracks-by-artist-id/{id}                   - поиск по id артиста
+GET    /tracks/all-tracks-by-media-type/{id}              - поиск по id медиа-типа
+GET    /tracks/all-tracks-by-genre/{id}                   - поиск по id жанра
+GET    /tracks/all-tracks-by-album/{id}                   - поиск по id альбома
+
+POST   /employees                                         - создать сотрудника
+PUT    /employees                                         - обновить сотрудника
+GET    /employees/{id}                                    - получить сотрудника по id
+DELETE /employees/{id}                                    - удалить сотрудника
+GET    /employees/lastname/{name}                         - поиск по фамилии
+GET    /employees/firstname/{name}                        - поиск по имени
+
+POST   /customers                                         - создать клиента
+PUT    /customers                                         - обновить клиента
+GET    /customers/{id}                                    - получить клиента по id
+DELETE /customers/{id}                                    - удалить клиента
+GET    /customers/lastname/{name}                         - поиск по фамилии
+GET    /customers/firstname/{name}                        - поиск по имени
+
+POST   /invoices                                          - создать заказ
+PUT    /invoices                                          - обновить заказ
+GET    /invoices/{id}                                     - получить заказ по id
+DELETE /invoices/{id}                                     - удалить заказ
+GET    /invoices/invoices-by-employee/{id}                - заказы по id сотрудника
+GET    /invoices/invoices-by-customer/{id}                - заказы по id клиента
+
+POST   /invoice-lines                                     - создать позицию заказа
+PUT    /invoice-lines                                     - обновить позицию заказа
+GET    /invoice-lines/{id}                                - получить позицию заказа по id
+DELETE /invoice-lines/{id}                                - удалить позицию заказа
+GET    /invoice-lines/invoice-lines-by-track/{id}         - позиции по id трека
+GET    /invoice-lines/invoice-line-by-invoice/{id}        - позиции по id заказа
 ```
+
+
+
+## Architecture
+
+### Layered Structure
+
+```
+src/main/java/com/personal/DigitalStore/
+├── ChinookApplication.java (entry point)
+├── controllers/                 # REST endpoints
+├── services/                    # Business logic layer
+│   └── security/                # Auth-related services (UserService, UserValidationService)
+├── repositories/                # Spring Data JPA repositories
+├── models/                      # JPA entities
+│   └── enumpack/                # Enums (UserRole, AlbumType, GenreDirection, Position)
+├── dto/                         # DTOs for request/response mapping
+│   └── security/                # Auth DTOs (LoginRequest, etc.)
+├── mappers/                     # MapStruct mappers (entity <-> DTO)
+├── config/                      # Spring configuration
+│   └── jwt/                     # JWT token management
+├── exceptions/                  # Error handling
+│   ├── custom/                  # Custom exceptions
+│   ├── Handler/                 # Exception handlers (@RestControllerAdvice)
+│   └── Payload/                 # Error response payloads
+├── utils/                       # Utilities
+│   └── swagger/                 # Swagger annotation helpers
+└── resources/
+    ├── application.yml          # Main config
+    ├── init.sql                 # Database schema
+    ├── messages/                # i18n property files
+    └── pictures/
+        └── db_er.png            # ER-диаграмма базы данных
+```
+
+### Database Schema
+
+Core entities:
+- **User**: System users with JWT authentication
+- **Artist**: Music artists (name, surname, pseudonym, birth_date)
+- **Album**: Albums with artist reference (title, album_type, created_at)
+- **Track**: Tracks with album/genre/media_type references (name, author, unit_price, milliseconds, bytes)
+- **Genre**: Music genres with direction enum
+- **MediaType**: Track media types (e.g., MP3, WAV)
+- **Employee**: Staff members (position, hire_date, contact info)
+- **Customer**: Customers for invoicing (contact info, address)
+- **Invoice**: Sales invoices with customer/employee references
+- **InvoiceLine**: Line items in invoices linking to tracks
+
+Most entity IDs are UUIDs; User IDs are Long with auto-increment.
+
+
+### Security
+
+**JWT Implementation:**
+1. User registers/logs in → JwtTokenManager generates signed JWT with username and role claim
+2. Client includes token in Authorization header on subsequent requests
+3. JwtAuthenticationFilter validates token on each request
+4. SecurityConfiguration permits only `/register`, `/login`, `/v3/api-docs/**`, `/swagger-ui/**`, `/actuator/**` without auth
+5. All other endpoints require valid token (SessionCreationPolicy.STATELESS)
+
+**Config Class:** JwtProperties reads `jwt.secretKey`, `jwt.issuer`, `jwt.expirationMinute` from application.yml (default: 10 min expiration)
+
+### Service Layer Patterns
+
+- **CRUD Services**: Follow standard patterns (get, create, update, delete)
+- **Exception Handling**: Custom exceptions (NotFoundInDBException, InvalidFieldException, AlreadyExistsException, RegistrationException) thrown and handled by @RestControllerAdvice
+- **DTOs**: Each entity has corresponding DTO and SaveDTO (for creation/update)
+- **MapStruct**: Automatic entity <-> DTO mapping via generated mapper interfaces
+- **Transactional**: Services use @Transactional and @Transactional(readOnly = true) annotations
+
+### Validation & Error Handling
+
+- Input validation via JSR-303 annotations (@Valid, @NotNull, etc.) on DTOs
+- Global exception handlers:
+    - `ApiRequestExceptionHandler`: Custom API exceptions
+    - `ValidationAdvice`: Bean validation errors
+    - `RegistrationControllerAdvice`, `LoginControllerAdvice`: Auth-specific errors
+- Error responses standardized via ErrorResponse, ValidationErrorResponse, ApiExceptionResponse payloads
+- Messages externalized to `.properties` files in `src/main/resources/messages/`
+
+### Key Configuration
+
+**application.yml** settings:
+- Server port: 8181, context-path: /api
+- Jackson: fail-on-empty-beans disabled, ANT_PATH_MATCHER for swagger
+- JPA: PostgreSQL dialect, validate DDL mode (no auto-migration), standard naming strategy
+- Management: Health endpoints exposed, detailed health info enabled
+- Logging: Spring framework at INFO level
+
+**JWT config** (in application.yml):
+- `jwt.secretKey`: Secret for HMAC256 signing
+- `jwt.issuer`: Token issuer claim
+- `jwt.expirationMinute`: Token lifetime in minutes
+
+### Development Notes
+
+- **Swagger Annotations:** Custom annotations (ApiCreate, ApiGet, ApiUpdate, ApiDelete) provide reusable Swagger metadata
+- **Lombok:** @Data, @Builder, @RequiredArgsConstructor, @Slf4j reduce boilerplate
+- **String in Russian:** Many validation messages and comments are in Russian; preserve when editing
+- **UUID for IDs:** Most entities use UUID generation; User entity uses Long with IDENTITY strategy
+- **Eager Data Loading:** Watch for N+1 queries; many relationships use FetchType.LAZY—verify query performance with complex joins
+- **No Test Suite:** Currently contains only ChinookApplicationTests (basic context load test); add tests as you add features
+
+### Environment & Build Details
+
+- Maven wrapper (`mvnw`, `mvnw.cmd`) included for reproducible builds
+- Parent POM: spring-boot-starter-parent 3.3.3
+- Compiler: Java 17 with annotation processor configuration for Lombok → MapStruct ordering
+- Plugins: spring-boot-maven-plugin, asciidoctor-maven-plugin (for API docs generation)
+
+
+
 
 
