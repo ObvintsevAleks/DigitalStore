@@ -7,7 +7,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Этап 2: Запуск
-FROM openjdk:17.0.2-slim
+FROM eclipse-temurin:17-jre-jammy
 
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
