@@ -1,7 +1,11 @@
 package digital.store.api.configs;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.config.ObjectMapperConfig;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
@@ -14,6 +18,17 @@ import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 
 public class Config {
+
+    static {
+        RestAssured.config = RestAssured.config()
+                .objectMapperConfig(ObjectMapperConfig.objectMapperConfig()
+                        .jackson2ObjectMapperFactory((cls, charset) -> {
+                            ObjectMapper om = new ObjectMapper();
+                            om.registerModule(new JavaTimeModule());
+                            om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                            return om;
+                        }));
+    }
 
     public static ResponseSpecification responseSpec = new ResponseSpecBuilder()
             .log(STATUS)
