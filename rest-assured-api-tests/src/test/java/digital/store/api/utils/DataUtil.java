@@ -11,11 +11,9 @@ import io.qameta.allure.Step;
 import org.instancio.Instancio;
 import org.instancio.Select;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Properties;
 
 public class DataUtil {
 
@@ -317,20 +315,11 @@ public class DataUtil {
     }
 
     static class Params {
-        static Properties properties;
-
-        static {
-            properties = new Properties();
-            try (var stream = DataUtil.class.getClassLoader().getResourceAsStream("credential.properties")) {
-                properties.load(stream);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        public static final String userPass = properties.getProperty("userPass");
-        public static final String userName = properties.getProperty("userName");
-        public static final String email = properties.getProperty("email");
-        public static final String name = properties.getProperty("name");
+        private static final String UNIQUE_ID = java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        public static final String userPass = "aBAsdasdasd";
+        public static final String userName = "TestUser_" + UNIQUE_ID;
+        public static final String email = UNIQUE_ID + "@test.com";
+        public static final String name = "TestUser";
     }
 
 }
