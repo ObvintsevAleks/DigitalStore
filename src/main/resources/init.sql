@@ -1,4 +1,4 @@
--- Создание таблицы genre
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ genre
 CREATE TABLE IF NOT EXISTS genre (
     genre_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
@@ -6,14 +6,14 @@ CREATE TABLE IF NOT EXISTS genre (
     genre_direction VARCHAR(50) NOT NULL
     );
 
--- Создание таблицы media_type
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ media_type
 CREATE TABLE IF NOT EXISTS media_type (
     media_type_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     created_at DATE NOT NULL
     );
 
--- Создание таблицы artist
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ artist
 CREATE TABLE IF NOT EXISTS artist (
     artist_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS artist (
     birth_date DATE NOT NULL
     );
 
--- Создание таблицы album
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ album
 CREATE TABLE IF NOT EXISTS album (
     album_id UUID PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS album (
         REFERENCES artist(artist_id) ON DELETE CASCADE
     );
 
--- Создание таблицы track
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ track
 CREATE TABLE IF NOT EXISTS track (
     track_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS track (
     );
 
 
--- Создание таблицы customer
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ customer
 CREATE TABLE IF NOT EXISTS customer (
     customer_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS customer (
     email VARCHAR(255) NOT NULL
     );
 
--- Создание таблицы employee
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ employee
 CREATE TABLE IF NOT EXISTS employee (
     employee_id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS employee (
     email VARCHAR(255) NOT NULL
     );
 
--- Создание таблицы invoice
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ invoice
 CREATE TABLE IF NOT EXISTS invoice (
     invoice_id UUID PRIMARY KEY,
     invoice_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS invoice (
     REFERENCES employee(employee_id) ON DELETE CASCADE
     );
 
--- Создание таблицы invoice_line
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ invoice_line
 CREATE TABLE IF NOT EXISTS invoice_line (
     invoice_line_id UUID PRIMARY KEY,
     unit_price NUMERIC(10,2) NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS invoice_line (
     REFERENCES track(track_id) ON DELETE CASCADE
     );
 
--- Создание таблицы users (обратите внимание на кавычки для сохранения регистра)
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ users (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -129,14 +129,14 @@ CREATE TABLE IF NOT EXISTS users (
     user_role VARCHAR(50)
     );
 
--- Создание индексов для улучшения производительности
-CREATE INDEX idx_album_artist_id ON album(artist_id);
-CREATE INDEX idx_track_album_id ON track(album_id);
-CREATE INDEX idx_track_genre_id ON track(genre_id);
-CREATE INDEX idx_track_media_type_id ON track(media_type_id);
-CREATE INDEX idx_invoice_customer_id ON invoice(customer_id);
-CREATE INDEX idx_invoice_employee_id ON invoice(employee_id);
-CREATE INDEX idx_invoice_line_invoice_id ON invoice_line(invoice_id);
-CREATE INDEX idx_invoice_line_track_id ON invoice_line(track_id);
-CREATE INDEX idx_users_username ON users(user_name);
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+CREATE INDEX IF NOT EXISTS idx_album_artist_id ON album(artist_id);
+CREATE INDEX IF NOT EXISTS idx_track_album_id ON track(album_id);
+CREATE INDEX IF NOT EXISTS idx_track_genre_id ON track(genre_id);
+CREATE INDEX IF NOT EXISTS idx_track_media_type_id ON track(media_type_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_customer_id ON invoice(customer_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_employee_id ON invoice(employee_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_line_invoice_id ON invoice_line(invoice_id);
+CREATE INDEX IF NOT EXISTS idx_invoice_line_track_id ON invoice_line(track_id);
+CREATE INDEX IF NOT EXISTS idx_users_username ON users(user_name);
 
