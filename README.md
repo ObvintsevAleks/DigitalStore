@@ -242,7 +242,59 @@ Most entity IDs are UUIDs; User IDs are Long with auto-increment.
 - Compiler: Java 17 with annotation processor configuration for Lombok → MapStruct ordering
 - Plugins: spring-boot-maven-plugin, asciidoctor-maven-plugin (for API docs generation)
 
+# API Tests (rest-assured-api-tests/)
 
+Отдельный Maven-модуль с end-to-end API тестами, покрывающими все контроллеры DigitalStore.
+
+**Tech Stack:**
+- RestAssured 5.5.0 — HTTP клиент для API запросов
+- JUnit 5 — тест-раннер с поддержкой вложенных классов и упорядочивания
+- AssertJ — soft assertions (не останавливаются на первом упавшем)
+- Allure 2.29.0 — отчётность (результаты в `target/allure-results`)
+- Faker + Instancio — генерация тестовых данных
+- Lombok, Jackson — утилиты
+
+**Запуск тестов:**
+```bash
+cd rest-assured-api-tests
+mvn clean test
+```
+
+Требует запущенного приложения на `http://localhost:8181/`.
+
+**Структура модуля:**
+```
+rest-assured-api-tests/src/test/java/digital/store/api/
+├── configs/Config.java          # RequestSpec/ResponseSpec, EndpointUtil (все URL)
+├── tests/DigitalStoreApiTests.java  # Все тесты (единственный тест-класс)
+├── model/                       # DTO и SaveDTO для десериализации ответов
+│   ├── security/                # LoginPojo, RegistrationPojo
+│   └── enumpack/                # AlbumType, GenreDirection, Position
+├── utils/
+│   ├── DataUtil.java            # Фабрика тестовых данных (Faker + Instancio)
+│   ├── ISendRequest.java        # Интерфейс с методами post/get/put/delete
+│   ├── ICheckResponse.java      # Интерфейс с методами проверки ответов
+│   └── ResponseDto.java         # Обёртка над ответом (статус + тело)
+```
+
+**Организация тестов в DigitalStoreApiTests:**
+- `AuthTest` (`@Order(1)`) — регистрация пользователя, получение JWT токена
+- `ControllerTests` (`@Order(2)`) — тесты всех контроллеров, методы упорядочены по имени (A→L)
+  - `testAArtistController` — artist CRUD + поиск по имени и псевдониму
+  - `testBBAlbumController` — album CRUD + поиск по title, artistId, pseudonym
+  - `testCGenreController` — genre CRUD + getAll
+  - `testDMediaTypeController` — media-type CRUD + getAll
+  - `testFCustomerController` — customer CRUD + поиск по имени/фамилии
+  - `testGEmployeeController` — employee CRUD + поиск по имени/фамилии
+  - `testHInvoiceController` — invoice CRUD + поиск по customer/employee
+  - `testJTrackController` — track CRUD + поиск по album, artist, genre, mediaType
+  - `testLInvoiceLineController` — invoice-line CRUD + поиск по track/invoice
+
+Каждый тест сам создаёт необходимые зависимые сущности через API (без моков и фикстур БД).
+
+**CI интеграция:**
+- Тесты запускаются в GitHub Actions (`.github/workflows/ci.yml`) после старта приложения через Docker Compose
+- Allure отчёт публикуется на GitHub Pages ветки `gh-pages`
 
 
 
