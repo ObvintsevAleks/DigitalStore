@@ -1,5 +1,10 @@
 ## Project Overview
+- [Digital store](#digital-store) - a Spring Boot REST API boilerplate
+- [Rest assured api autotests](#rest-assured-api-autotests) - api autotest with usage Rest Assured
+- [Retrofit api autotest](#retrofit-api-autotest) - api autotest with usage Retrofit2
 
+---
+# Digital store
 
 **DigitalStore** is a Spring Boot REST API for a digital media store that manages artists, albums, tracks, genres, media types, customers, employees, and sales invoices. The project uses PostgreSQL for persistence and JWT tokens for authentication.
 
@@ -242,7 +247,9 @@ Most entity IDs are UUIDs; User IDs are Long with auto-increment.
 - Compiler: Java 17 with annotation processor configuration for Lombok → MapStruct ordering
 - Plugins: spring-boot-maven-plugin, asciidoctor-maven-plugin (for API docs generation)
 
-# API Tests (rest-assured-api-tests/)
+---
+
+# Rest assured api autotests
 
 Отдельный Maven-модуль с end-to-end API тестами, покрывающими все контроллеры DigitalStore.
 
@@ -291,6 +298,63 @@ rest-assured-api-tests/src/test/java/digital/store/api/
   - `testLInvoiceLineController` — invoice-line CRUD + поиск по track/invoice
 
 Каждый тест сам создаёт необходимые зависимые сущности через API (без моков и фикстур БД).
+
+---
+# Retrofit api autotest
+
+Второй Maven-модуль с end-to-end API тестами, покрывающими те же контроллеры что и `rest-assured-api-tests/`, но с использованием Retrofit2 вместо RestAssured.
+
+**Tech Stack:**
+- Retrofit2 2.11.0 + OkHttp 4.11.0 — типизированный HTTP клиент
+- Jackson 2.18.0 (converter-jackson) — сериализация/десериализация JSON
+- JUnit 5 — тест-раннер с поддержкой вложенных классов и упорядочивания
+- AssertJ — soft assertions
+- Allure 2.29.0 — отчётность (результаты в `target/allure-results`)
+- Faker + Instancio — генерация тестовых данных
+- Lombok — утилиты
+
+**Запуск тестов:**
+```bash
+cd retrofit-api-test
+mvn clean test
+```
+
+Требует запущенного приложения на `http://localhost:8181/`.
+
+**Структура модуля:**
+```
+retrofit-api-test/src/test/java/digital/store/api/retrofit/
+├── tests/
+│   ├── BaseTest.java            # Retrofit setup: создание клиентов без/с JWT через OkHttp interceptor
+│   └── DigitalStoreTests.java   # Все тесты (единственный тест-класс)
+├── interfaces/                  # Retrofit-интерфейсы контроллеров (I*Controller.java)
+├── model/                       # DTO и SaveDTO для десериализации ответов
+│   ├── security/                # LoginPojo, RegistrationPojo, Token, SuccessRegisterMessage
+│   └── enumpack/                # AlbumType, GenreDirection, Position
+└── util/
+    ├── DataUtil.java            # Фабрика тестовых данных (Faker + Instancio)
+    └── ICheckResponse.java      # Интерфейс с методами проверки ответов
+```
+
+**Организация тестов в DigitalStoreTests:**
+- `AuthTest` (`@Order(1)`) — регистрация пользователя, получение JWT токена
+- `ControllerTests` (`@Order(2)`) — тесты всех контроллеров, `@BeforeEach` пересоздаёт авторизованные клиенты
+  - `testAArtistController` — artist CRUD + поиск по имени и псевдониму
+  - `testBBAlbumController` — album CRUD + поиск по title, artistId, pseudonym
+  - `testCGenreController` — genre CRUD + getAll
+  - `testDMediaTypeController` — media-type CRUD + getAll
+  - `testFCustomerController` — customer CRUD + поиск по имени/фамилии
+  - `testGEmployeeController` — employee CRUD + поиск по имени/фамилии
+  - `testHInvoiceController` — invoice CRUD + поиск по customer/employee
+  - `testJTrackController` — track CRUD + поиск по album, artist, genre, mediaType
+  - `testLInvoiceLineController` — invoice-line CRUD + поиск по track/invoice
+
+**Отличие от rest-assured-api-tests:**
+- HTTP-клиент — Retrofit2 с типизированными интерфейсами (`IAlbumController`, `IArtistController` и т.д.) вместо DSL RestAssured
+- JWT передаётся через OkHttp interceptor в `BaseTest.retrofitAuth(token)`
+- Шаги Allure оборачиваются через `step("описание", () -> ...)` вместо аннотаций `@Step`
+- `@BeforeEach` (а не `@BeforeAll`) — каждый тест-метод получает свежие авторизованные клиенты
+
 
 **CI интеграция:**
 - Тесты запускаются в GitHub Actions (`.github/workflows/ci.yml`) после старта приложения через Docker Compose
