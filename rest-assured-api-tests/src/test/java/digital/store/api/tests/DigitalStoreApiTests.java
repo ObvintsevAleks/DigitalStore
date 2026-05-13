@@ -74,8 +74,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             installSpecification(Config.requestSpecAuth(URL, token), Config.responseSpec);
         }
 
-        @DisplayName("Проверка artist-controller")
-        @Description("Проверка artist-controller")
+        @DisplayName("Тест на rest-assured - проверка artist-controller")
+        @Description("Тест на rest-assured - проверка artist-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testAArtistController() {
@@ -93,8 +93,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(artistId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка album-controller")
-        @Description("Проверка album-controller")
+        @DisplayName("Тест на rest-assured - проверка album-controller")
+        @Description("Тест на rest-assured - проверка album-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testBBAlbumController() {
@@ -115,8 +115,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(albumsId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка genre-controller")
-        @Description("Проверка genre-controller")
+        @DisplayName("Тест на rest-assured - проверка genre-controller")
+        @Description("Тест на rest-assured - проверка genre-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testCGenreController() {
@@ -133,8 +133,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(genreId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка media-type-controller")
-        @Description("Проверка media-type-controller")
+        @DisplayName("Тест на rest-assured - проверка media-type-controller")
+        @Description("Тест на rest-assured - проверка media-type-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testDMediaTypeController() {
@@ -151,8 +151,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(mediaTypeId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка customer-controller")
-        @Description("Проверка customer-controller")
+        @DisplayName("Тест на rest-assured - проверка customer-controller")
+        @Description("Тест на rest-assured - проверка customer-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testFCustomerController() {
@@ -170,8 +170,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(customerId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка employee-controller")
-        @Description("Проверка employee-controller")
+        @DisplayName("Тест на rest-assured - проверка employee-controller")
+        @Description("Тест на rest-assured - проверка employee-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testGEmployeeController() {
@@ -189,8 +189,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(employeeId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка invoice-controller")
-        @Description("Проверка invoice-controller")
+        @DisplayName("Тест на rest-assured - проверка invoice-controller")
+        @Description("Тест на rest-assured - проверка invoice-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testHInvoiceController() {
@@ -212,8 +212,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(invoiceId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка track-controller")
-        @Description("Проверка track-controller")
+        @DisplayName("Тест на rest-assured - проверка track-controller")
+        @Description("Тест на rest-assured - проверка track-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testJTrackController() {
@@ -242,8 +242,8 @@ public class DigitalStoreApiTests implements ISendRequest, ICheckResponse {
             softly.assertThat(delete(trackId(actualDto.getBody().getId())).statusCode()).isEqualTo(204);
         }
 
-        @DisplayName("Проверка invoice-line-controller")
-        @Description("Проверка invoice-line-controller")
+        @DisplayName("Тест на rest-assured - проверка invoice-line-controller")
+        @Description("Тест на rest-assured - проверка invoice-line-controller")
         @Owner("ObvintcevAE")
         @Test
         public void testLInvoiceLineController() {
