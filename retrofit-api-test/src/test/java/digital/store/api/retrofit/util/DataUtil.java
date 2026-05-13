@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class DataUtil {
 
-    @Step("Подготовка LoginPojo")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° LoginPojo")
     public static LoginPojo getLoginPojo() {
         return LoginPojo.builder()
                 .username(Params.userName)
@@ -28,7 +28,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка RegistrationPojo")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° RegistrationPojo")
     public static RegistrationPojo getRegistrationPojo() {
         return RegistrationPojo.builder()
                 .email(Params.email)
@@ -38,7 +38,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка ArtistSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° ArtistSaveDTO")
     public static ArtistSaveDTO getArtistSaveDto() {
         return ArtistSaveDTO.builder()
                 .name(Faker.instance().artist().name())
@@ -52,7 +52,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка AlbumSaveDto")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° AlbumSaveDto")
     public static AlbumSaveDto getAlbumSaveDto(ArtistDTO artist) {
         return AlbumSaveDto.builder()
                 .title(Faker.instance().elderScrolls().creature())
@@ -68,7 +68,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка GenreSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° GenreSaveDTO")
     public static GenreSaveDTO getGenreSaveDTO() {
         return GenreSaveDTO.builder()
                 .name(Faker.instance().music().genre())
@@ -83,7 +83,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка MediaTypeSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° MediaTypeSaveDTO")
     public static MediaTypeSaveDTO getMediaTypeSaveDTO() {
         return MediaTypeSaveDTO.builder()
                 .name(Faker.instance().company().buzzword())
@@ -95,7 +95,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка CustomerSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° CustomerSaveDTO")
     public static CustomerSaveDTO getCustomerSaveDTO() {
         return CustomerSaveDTO.builder()
                 .firstName(Faker.instance().name().firstName())
@@ -116,7 +116,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка EmployeeSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° EmployeeSaveDTO")
     public static EmployeeSaveDTO getEmployeeSaveDTO() {
         return EmployeeSaveDTO.builder()
                 .firstName(Faker.instance().name().firstName())
@@ -145,7 +145,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка InvoiceSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° InvoiceSaveDTO")
     public static InvoiceSaveDTO getInvoiceSaveDTO(CustomerDTO customer, EmployeeDTO employee) {
         return InvoiceSaveDTO.builder()
                 .invoiceDate(ZonedDateTime.now())
@@ -160,7 +160,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка TrackSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° TrackSaveDTO")
     public static TrackSaveDTO getTrackSaveDTO(AlbumDTO album,
                                                MediaTypeDTO mediaType,
                                                GenreDTO genre
@@ -182,7 +182,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Подготовка InvoiceLineSaveDTO")
+    @Step("РџРѕРґРіРѕС‚РѕРІРєР° InvoiceLineSaveDTO")
     public static InvoiceLineSaveDTO getInvoiceLineSaveDTO(TrackDTO track, InvoiceDTO invoice) {
         return InvoiceLineSaveDTO.builder()
                 .unitPrice(BigDecimal.TEN)
@@ -192,7 +192,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные ArtistDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ ArtistDTO")
     public static ArtistDTO getArtistDTO(ArtistDTO dtoBeforeChange) {
         return  ArtistDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -203,7 +203,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные AlbumDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ AlbumDTO")
     public static AlbumDTO getAlbumDTO(AlbumDTO dtoBeforeChange) {
         return  AlbumDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -214,7 +214,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные GenreDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ GenreDTO")
     public static GenreDTO getGenreDTO(GenreDTO dtoBeforeChange) {
         return GenreDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -224,7 +224,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные MediaTypeDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ MediaTypeDTO")
     public static MediaTypeDTO getMediaTypeDTO(MediaTypeDTO dtoBeforeChange) {
         return MediaTypeDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -232,7 +232,7 @@ public class DataUtil {
                 .createdAt(getMediaTypeSaveDTO().getCreatedAt()).build();
     }
 
-    @Step("Обновляем данные CustomerDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ CustomerDTO")
     public static CustomerDTO getCustomerDTO(CustomerDTO dtoBeforeChange) {
         return  CustomerDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -250,7 +250,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные EmployeeDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ EmployeeDTO")
     public static EmployeeDTO getEmployeeDto(EmployeeDTO dtoBeforeChange) {
         return EmployeeDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -270,7 +270,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные InvoiceDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ InvoiceDTO")
     public static InvoiceDTO getInvoiceDTO(InvoiceDTO dtoBeforeChange) {
         return InvoiceDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -286,7 +286,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные TrackDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ TrackDTO")
     public static TrackDTO getTrackDto(TrackDTO dtoBeforeChange) {
         return TrackDTO.builder()
                 .id(dtoBeforeChange.getId())
@@ -306,7 +306,7 @@ public class DataUtil {
                 .build();
     }
 
-    @Step("Обновляем данные InvoiceLineDTO")
+    @Step("РћР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ InvoiceLineDTO")
     public static InvoiceLineDTO getInvoiceLineDto(InvoiceLineDTO dtoBeforeChange) {
         return InvoiceLineDTO.builder()
                 .id(dtoBeforeChange.getId())

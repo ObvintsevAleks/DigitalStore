@@ -10,29 +10,29 @@ import java.util.List;
 public interface ICheckResponse {
 
     private String notEqualCode(String methodName) {
-        return "Неправильный статус-код для " + methodName + " метода!";
+        return "РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ СЃС‚Р°С‚СѓСЃ-РєРѕРґ РґР»СЏ " + methodName + " РјРµС‚РѕРґР°!";
     }
 
-    @Step("Выполняем проверки после post и get запросов")
+    @Step("Р’С‹РїРѕР»РЅСЏРµРј РїСЂРѕРІРµСЂРєРё РїРѕСЃР»Рµ post Рё get Р·Р°РїСЂРѕСЃРѕРІ")
     default <D> void checkPostGetResponse(Response<D> postResponse, Response<D> getResponse, SoftAssertions softly) {
-        softly.assertThat(getResponse.body()).withFailMessage("Полученный через get метод по id объект не соответствует ранее созданному объекту!")
+        softly.assertThat(getResponse.body()).withFailMessage("РџРѕР»СѓС‡РµРЅРЅС‹Р№ С‡РµСЂРµР· get РјРµС‚РѕРґ РїРѕ id РѕР±СЉРµРєС‚ РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ СЂР°РЅРµРµ СЃРѕР·РґР°РЅРЅРѕРјСѓ РѕР±СЉРµРєС‚Сѓ!")
                 .isEqualTo(postResponse.body());
         softly.assertThat(getResponse.code()).withFailMessage(notEqualCode("get")).isEqualTo(200);
         softly.assertThat(postResponse.code()).withFailMessage(notEqualCode("post")).isEqualTo(201);
     }
 
-    @Step("Выполняем проверки после put запроса")
+    @Step("Р’С‹РїРѕР»РЅСЏРµРј РїСЂРѕРІРµСЂРєРё РїРѕСЃР»Рµ put Р·Р°РїСЂРѕСЃР°")
     default <D> void checkPutResponse(D preparedForPutRequestBody, Response<D> putResponse, SoftAssertions softly) {
-        softly.assertThat(preparedForPutRequestBody).withFailMessage("Dto после использования put-метода не соответствует ранее переданой для этого метода dto!")
+        softly.assertThat(preparedForPutRequestBody).withFailMessage("Dto РїРѕСЃР»Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ put-РјРµС‚РѕРґР° РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ СЂР°РЅРµРµ РїРµСЂРµРґР°РЅРѕР№ РґР»СЏ СЌС‚РѕРіРѕ РјРµС‚РѕРґР° dto!")
                 .isEqualTo(putResponse.body());
         softly.assertThat(putResponse.code()).withFailMessage(notEqualCode("put")).isEqualTo(200);
     }
 
-    @Step("Выполняем проверки для get запроса, возвращающего коллекцию объектов")
+    @Step("Р’С‹РїРѕР»РЅСЏРµРј РїСЂРѕРІРµСЂРєРё РґР»СЏ get Р·Р°РїСЂРѕСЃР°, РІРѕР·РІСЂР°С‰Р°СЋС‰РµРіРѕ РєРѕР»Р»РµРєС†РёСЋ РѕР±СЉРµРєС‚РѕРІ")
     default <D extends SomeObjectWithId> void checkGetListMethods(D actualObject, List<Response<List<D>>> getListMethodsResponse, SoftAssertions softly) {
         getListMethodsResponse.forEach(response -> {
             softly.assertThat(response.body().stream().anyMatch(object -> object.getId().equals(actualObject.getId())))
-                    .withFailMessage("Сущность не найдена после создания в методах, возвращающих списки объектов!")
+                    .withFailMessage("РЎСѓС‰РЅРѕСЃС‚СЊ РЅРµ РЅР°Р№РґРµРЅР° РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ РІ РјРµС‚РѕРґР°С…, РІРѕР·РІСЂР°С‰Р°СЋС‰РёС… СЃРїРёСЃРєРё РѕР±СЉРµРєС‚РѕРІ!")
                     .isEqualTo(true);
             softly.assertThat(response.code()).withFailMessage(notEqualCode("get")).isEqualTo(200);
         });
