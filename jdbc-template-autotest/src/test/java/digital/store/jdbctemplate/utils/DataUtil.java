@@ -1,10 +1,10 @@
-package digital.store.jdbc.utils;
+package digital.store.jdbctemplate.utils;
 
 import com.github.javafaker.Faker;
-import digital.store.jdbc.model.*;
-import digital.store.jdbc.model.enumpack.AlbumType;
-import digital.store.jdbc.model.enumpack.GenreDirection;
-import digital.store.jdbc.model.enumpack.Position;
+import digital.store.jdbctemplate.model.*;
+import digital.store.jdbctemplate.model.enumpack.AlbumType;
+import digital.store.jdbctemplate.model.enumpack.GenreDirection;
+import digital.store.jdbctemplate.model.enumpack.Position;
 import io.qameta.allure.Step;
 import org.instancio.Instancio;
 import org.instancio.Select;
@@ -175,5 +175,4 @@ public class DataUtil {
                 .trackId(trackId)
                 .build();
     }
-
 }

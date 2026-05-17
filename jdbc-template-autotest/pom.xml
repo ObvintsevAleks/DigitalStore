@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>digital.store</groupId>
-    <artifactId>jdbc-autotest</artifactId>
+    <artifactId>jdbc-template-autotest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -16,6 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+        <spring.version>6.1.14</spring.version>
         <postgresql.version>42.7.4</postgresql.version>
         <lombok.version>1.18.34</lombok.version>
         <junit5.version>5.11.2</junit5.version>
@@ -26,6 +27,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

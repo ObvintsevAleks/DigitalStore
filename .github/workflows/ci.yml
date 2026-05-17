@@ -57,6 +57,10 @@ jobs:
         working-directory: jdbc-autotest
         run: mvn test -B
 
+      - name: Run JdbcTemplate autotests
+        working-directory: jdbc-template-autotest
+        run: mvn test -B
+
       - name: Merge Allure results
         if: always()
         run: |
@@ -64,6 +68,7 @@ jobs:
           cp -r rest-assured-api-tests/target/allure-results/. allure-results-merged/ || true
           cp -r retrofit-api-test/target/allure-results/. allure-results-merged/ || true
           cp -r jdbc-autotest/target/allure-results/. allure-results-merged/ || true
+          cp -r jdbc-template-autotest/target/allure-results/. allure-results-merged/ || true
 
       - name: Get Allure history from gh-pages
         uses: actions/checkout@v4
