@@ -14,7 +14,7 @@ public class ArtistSteps {
         this.db = db;
     }
 
-    @Step("Вставляем артиста в БД: name={artist.name}, pseudonym={artist.pseudonym}")
+    @Step("[JDBC шаг] Вставляем артиста в БД: name={artist.name}, pseudonym={artist.pseudonym}")
     public ArtistDto insertArtist(ArtistDto artist) {
         db.executeUpdate(
                 "INSERT INTO artist (artist_id, name, surname, pseudonym, birth_date) VALUES (?, ?, ?, ?, ?)",
@@ -27,7 +27,7 @@ public class ArtistSteps {
         return artist;
     }
 
-    @Step("Получаем артиста из БД по id={id}")
+    @Step("[JDBC шаг] Получаем артиста из БД по id={id}")
     public ArtistDto selectArtistById(UUID id) {
         return db.executeQuery(
                 "SELECT artist_id, name, surname, pseudonym, birth_date FROM artist WHERE artist_id = ?",
@@ -47,7 +47,7 @@ public class ArtistSteps {
         );
     }
 
-    @Step("Обновляем артиста в БД: name={artist.name}, pseudonym={artist.pseudonym}")
+    @Step("[JDBC шаг] Обновляем артиста в БД: name={artist.name}, pseudonym={artist.pseudonym}")
     public ArtistDto updateArtist(ArtistDto artist) {
         db.executeUpdate(
                 "UPDATE artist SET name = ?, surname = ?, pseudonym = ?, birth_date = ? WHERE artist_id = ?",

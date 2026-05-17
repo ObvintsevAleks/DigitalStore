@@ -14,7 +14,7 @@ public class InvoiceLineSteps {
         this.db = db;
     }
 
-    @Step("Вставляем позицию заказа в БД: invoiceId={invoiceLine.invoiceId}, trackId={invoiceLine.trackId}")
+    @Step("[JDBC шаг] Вставляем позицию заказа в БД: invoiceId={invoiceLine.invoiceId}, trackId={invoiceLine.trackId}")
     public InvoiceLineDto insertInvoiceLine(InvoiceLineDto invoiceLine) {
         db.executeUpdate(
                 "INSERT INTO invoice_line (invoice_line_id, unit_price, quantity, invoice_id, track_id) VALUES (?, ?, ?, ?, ?)",
@@ -27,7 +27,7 @@ public class InvoiceLineSteps {
         return invoiceLine;
     }
 
-    @Step("Получаем позицию заказа из БД по id={id}")
+    @Step("[JDBC шаг] Получаем позицию заказа из БД по id={id}")
     public InvoiceLineDto selectInvoiceLineById(UUID id) {
         return db.executeQuery(
                 "SELECT invoice_line_id, unit_price, quantity, invoice_id, track_id FROM invoice_line WHERE invoice_line_id = ?",
@@ -47,7 +47,7 @@ public class InvoiceLineSteps {
         );
     }
 
-    @Step("Обновляем позицию заказа в БД: quantity={invoiceLine.quantity}, unitPrice={invoiceLine.unitPrice}")
+    @Step("[JDBC шаг] Обновляем позицию заказа в БД: quantity={invoiceLine.quantity}, unitPrice={invoiceLine.unitPrice}")
     public InvoiceLineDto updateInvoiceLine(InvoiceLineDto invoiceLine) {
         db.executeUpdate(
                 "UPDATE invoice_line SET unit_price = ?, quantity = ?, invoice_id = ?, track_id = ? WHERE invoice_line_id = ?",

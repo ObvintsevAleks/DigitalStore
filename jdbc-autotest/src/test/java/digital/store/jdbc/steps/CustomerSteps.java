@@ -14,7 +14,7 @@ public class CustomerSteps {
         this.db = db;
     }
 
-    @Step("Вставляем клиента в БД: name={customer.name}, email={customer.email}")
+    @Step("[JDBC шаг] Вставляем клиента в БД: name={customer.name}, email={customer.email}")
     public CustomerDto insertCustomer(CustomerDto customer) {
         db.executeUpdate(
                 "INSERT INTO customer (customer_id, name, surname, birth_date, address, city, state, country, postal_code, phone, fax, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -34,7 +34,7 @@ public class CustomerSteps {
         return customer;
     }
 
-    @Step("Получаем клиента из БД по id={id}")
+    @Step("[JDBC шаг] Получаем клиента из БД по id={id}")
     public CustomerDto selectCustomerById(UUID id) {
         return db.executeQuery(
                 "SELECT customer_id, name, surname, birth_date, address, city, state, country, postal_code, phone, fax, email FROM customer WHERE customer_id = ?",
@@ -61,7 +61,7 @@ public class CustomerSteps {
         );
     }
 
-    @Step("Обновляем клиента в БД: name={customer.name}, email={customer.email}")
+    @Step("[JDBC шаг] Обновляем клиента в БД: name={customer.name}, email={customer.email}")
     public CustomerDto updateCustomer(CustomerDto customer) {
         db.executeUpdate(
                 "UPDATE customer SET name = ?, surname = ?, birth_date = ?, address = ?, city = ?, state = ?, country = ?, postal_code = ?, phone = ?, fax = ?, email = ? WHERE customer_id = ?",

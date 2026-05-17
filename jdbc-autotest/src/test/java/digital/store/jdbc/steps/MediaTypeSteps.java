@@ -14,7 +14,7 @@ public class MediaTypeSteps {
         this.db = db;
     }
 
-    @Step("Вставляем медиа-тип в БД: name={mediaType.name}")
+    @Step("[JDBC шаг] Вставляем медиа-тип в БД: name={mediaType.name}")
     public MediaTypeDto insertMediaType(MediaTypeDto mediaType) {
         db.executeUpdate(
                 "INSERT INTO media_type (media_type_id, name, created_at) VALUES (?, ?, ?)",
@@ -25,7 +25,7 @@ public class MediaTypeSteps {
         return mediaType;
     }
 
-    @Step("Получаем медиа-тип из БД по id={id}")
+    @Step("[JDBC шаг] Получаем медиа-тип из БД по id={id}")
     public MediaTypeDto selectMediaTypeById(UUID id) {
         return db.executeQuery(
                 "SELECT media_type_id, name, created_at FROM media_type WHERE media_type_id = ?",
@@ -43,7 +43,7 @@ public class MediaTypeSteps {
         );
     }
 
-    @Step("Обновляем медиа-тип в БД: name={mediaType.name}")
+    @Step("[JDBC шаг] Обновляем медиа-тип в БД: name={mediaType.name}")
     public MediaTypeDto updateMediaType(MediaTypeDto mediaType) {
         db.executeUpdate(
                 "UPDATE media_type SET name = ?, created_at = ? WHERE media_type_id = ?",

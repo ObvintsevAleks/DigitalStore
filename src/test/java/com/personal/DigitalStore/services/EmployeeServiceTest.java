@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@DisplayName("Unit тест — EmployeeService")
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceTest {
 

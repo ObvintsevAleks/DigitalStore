@@ -14,7 +14,7 @@ public class InvoiceSteps {
         this.db = db;
     }
 
-    @Step("Вставляем заказ в БД: customerId={invoice.customerId}, total={invoice.total}")
+    @Step("[JDBC шаг] Вставляем заказ в БД: customerId={invoice.customerId}, total={invoice.total}")
     public InvoiceDto insertInvoice(InvoiceDto invoice) {
         db.executeUpdate(
                 "INSERT INTO invoice (invoice_id, invoice_date, billing_address, billing_city, billing_state, billing_country, billing_postal_code, total, customer_id, employee_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -32,7 +32,7 @@ public class InvoiceSteps {
         return invoice;
     }
 
-    @Step("Получаем заказ из БД по id={id}")
+    @Step("[JDBC шаг] Получаем заказ из БД по id={id}")
     public InvoiceDto selectInvoiceById(UUID id) {
         return db.executeQuery(
                 "SELECT invoice_id, invoice_date, billing_address, billing_city, billing_state, billing_country, billing_postal_code, total, customer_id, employee_id FROM invoice WHERE invoice_id = ?",
@@ -57,7 +57,7 @@ public class InvoiceSteps {
         );
     }
 
-    @Step("Обновляем заказ в БД: total={invoice.total}, billingAddress={invoice.billingAddress}")
+    @Step("[JDBC шаг] Обновляем заказ в БД: total={invoice.total}, billingAddress={invoice.billingAddress}")
     public InvoiceDto updateInvoice(InvoiceDto invoice) {
         db.executeUpdate(
                 "UPDATE invoice SET invoice_date = ?, billing_address = ?, billing_city = ?, billing_state = ?, billing_country = ?, billing_postal_code = ?, total = ?, customer_id = ?, employee_id = ? WHERE invoice_id = ?",

@@ -15,7 +15,7 @@ public class GenreSteps {
         this.db = db;
     }
 
-    @Step("Вставляем жанр в БД: name={genre.name}, direction={genre.genreDirection}")
+    @Step("[JDBC шаг] Вставляем жанр в БД: name={genre.name}, direction={genre.genreDirection}")
     public GenreDto insertGenre(GenreDto genre) {
         db.executeUpdate(
                 "INSERT INTO genre (genre_id, name, created_at, genre_direction) VALUES (?, ?, ?, ?)",
@@ -27,7 +27,7 @@ public class GenreSteps {
         return genre;
     }
 
-    @Step("Получаем жанр из БД по id={id}")
+    @Step("[JDBC шаг] Получаем жанр из БД по id={id}")
     public GenreDto selectGenreById(UUID id) {
         return db.executeQuery(
                 "SELECT genre_id, name, created_at, genre_direction FROM genre WHERE genre_id = ?",
@@ -46,7 +46,7 @@ public class GenreSteps {
         );
     }
 
-    @Step("Обновляем жанр в БД: name={genre.name}, direction={genre.genreDirection}")
+    @Step("[JDBC шаг] Обновляем жанр в БД: name={genre.name}, direction={genre.genreDirection}")
     public GenreDto updateGenre(GenreDto genre) {
         db.executeUpdate(
                 "UPDATE genre SET name = ?, created_at = ?, genre_direction = ? WHERE genre_id = ?",

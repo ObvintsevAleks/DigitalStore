@@ -14,7 +14,7 @@ public class TrackSteps {
         this.db = db;
     }
 
-    @Step("Вставляем трек в БД: name={track.name}, albumId={track.albumId}")
+    @Step("[JDBC шаг] Вставляем трек в БД: name={track.name}, albumId={track.albumId}")
     public TrackDto insertTrack(TrackDto track) {
         db.executeUpdate(
                 "INSERT INTO track (track_id, name, author, created_at, milliseconds, bytes, unit_price, album_id, genre_id, media_type_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -32,7 +32,7 @@ public class TrackSteps {
         return track;
     }
 
-    @Step("Получаем трек из БД по id={id}")
+    @Step("[JDBC шаг] Получаем трек из БД по id={id}")
     public TrackDto selectTrackById(UUID id) {
         return db.executeQuery(
                 "SELECT track_id, name, author, created_at, milliseconds, bytes, unit_price, album_id, genre_id, media_type_id FROM track WHERE track_id = ?",
@@ -57,7 +57,7 @@ public class TrackSteps {
         );
     }
 
-    @Step("Обновляем трек в БД: name={track.name}")
+    @Step("[JDBC шаг] Обновляем трек в БД: name={track.name}")
     public TrackDto updateTrack(TrackDto track) {
         db.executeUpdate(
                 "UPDATE track SET name = ?, author = ?, created_at = ?, milliseconds = ?, bytes = ?, unit_price = ?, album_id = ?, genre_id = ?, media_type_id = ? WHERE track_id = ?",

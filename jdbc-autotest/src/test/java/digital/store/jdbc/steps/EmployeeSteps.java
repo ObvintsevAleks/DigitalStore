@@ -15,7 +15,7 @@ public class EmployeeSteps {
         this.db = db;
     }
 
-    @Step("Вставляем сотрудника в БД: name={employee.name}, position={employee.position}")
+    @Step("[JDBC шаг] Вставляем сотрудника в БД: name={employee.name}, position={employee.position}")
     public EmployeeDto insertEmployee(EmployeeDto employee) {
         db.executeUpdate(
                 "INSERT INTO employee (employee_id, name, surname, position, birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -37,7 +37,7 @@ public class EmployeeSteps {
         return employee;
     }
 
-    @Step("Получаем сотрудника из БД по id={id}")
+    @Step("[JDBC шаг] Получаем сотрудника из БД по id={id}")
     public EmployeeDto selectEmployeeById(UUID id) {
         return db.executeQuery(
                 "SELECT employee_id, name, surname, position, birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email FROM employee WHERE employee_id = ?",
@@ -66,7 +66,7 @@ public class EmployeeSteps {
         );
     }
 
-    @Step("Обновляем сотрудника в БД: name={employee.name}, position={employee.position}")
+    @Step("[JDBC шаг] Обновляем сотрудника в БД: name={employee.name}, position={employee.position}")
     public EmployeeDto updateEmployee(EmployeeDto employee) {
         db.executeUpdate(
                 "UPDATE employee SET name = ?, surname = ?, position = ?, birth_date = ?, hire_date = ?, address = ?, city = ?, state = ?, country = ?, postal_code = ?, phone = ?, fax = ?, email = ? WHERE employee_id = ?",

@@ -15,7 +15,7 @@ public class AlbumSteps {
         this.db = db;
     }
 
-    @Step("Вставляем альбом в БД: title={album.title}, artistId={album.artistId}")
+    @Step("[JDBC шаг] Вставляем альбом в БД: title={album.title}, artistId={album.artistId}")
     public AlbumDto insertAlbum(AlbumDto album) {
         db.executeUpdate(
                 "INSERT INTO album (album_id, title, album_type, created_at, artist_id) VALUES (?, ?, ?, ?, ?)",
@@ -28,7 +28,7 @@ public class AlbumSteps {
         return album;
     }
 
-    @Step("Получаем альбом из БД по id={id}")
+    @Step("[JDBC шаг] Получаем альбом из БД по id={id}")
     public AlbumDto selectAlbumById(UUID id) {
         return db.executeQuery(
                 "SELECT album_id, title, album_type, created_at, artist_id FROM album WHERE album_id = ?",
@@ -48,7 +48,7 @@ public class AlbumSteps {
         );
     }
 
-    @Step("Обновляем альбом в БД: title={album.title}, artistId={album.artistId}")
+    @Step("[JDBC шаг] Обновляем альбом в БД: title={album.title}, artistId={album.artistId}")
     public AlbumDto updateAlbum(AlbumDto album) {
         db.executeUpdate(
                 "UPDATE album SET title = ?, album_type = ?, created_at = ?, artist_id = ? WHERE album_id = ?",
