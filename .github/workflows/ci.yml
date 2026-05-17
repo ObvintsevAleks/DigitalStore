@@ -42,6 +42,9 @@ jobs:
           docker compose logs
           exit 1
 
+      - name: Run unit tests
+        run: ./mvnw test -B
+
       - name: Run REST Assured API tests
         working-directory: rest-assured-api-tests
         run: mvn test -B
